@@ -2,7 +2,6 @@
 import { ArrowLeft, Menu } from 'lucide-react';
 import React from 'react';
 import ProductionStatusCards from '../productionUi/ProductionStatusCard';
-
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div 
@@ -13,13 +12,13 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="mr-4 md:hidden"
-          >
+          > 
             <Menu/>
           </button>
           <button className="hidden md:block hover:bg-gray-200 p-1 rounded-md" onClick={() => window.history.back()}>
             <ArrowLeft className="w-5 h-5 text-gray-600" />
           </button>
-          <h1 className="text-xs md:text-2xl font-medium">Overall Production Performance Status</h1>
+          <h1 className="text-md md:text-2xl font-medium">Overall Production Performance Status</h1>
         </div>
         
         <div className="flex items-center gap-2">

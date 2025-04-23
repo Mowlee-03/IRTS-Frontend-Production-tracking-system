@@ -6,9 +6,7 @@ import ProductioLineProgressOverviewTable from '../../components/productionUi/Pr
 import ProductionLineProgressOverviewTable from '../../components/productionUi/ProductioLineProgressOverviewTable';
 import AssignedLineChart from '../../components/productionUi/AssignedLineChart';
 const ProductionOverview = () => {
-    const [viewMode, setViewMode] = useState('tiles');
-
-    
+    const [viewMode, setViewMode] = useState('tiles'); 
     return (
       <div className="mt-2  py-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 ">

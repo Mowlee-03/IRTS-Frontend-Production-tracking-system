@@ -1,6 +1,5 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-
 const ProductionMain = () => {
   return (
     <div>
@@ -8,5 +7,4 @@ const ProductionMain = () => {
     </div>
   )
 }
-
 export default ProductionMain

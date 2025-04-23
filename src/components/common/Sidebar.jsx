@@ -7,12 +7,10 @@ import SettingMsgIcon from '../../assets/sidebarIcons/SettingMsgIcon.png'
 import logoutIcon from '../../assets/sidebarIcons/logoutIcon.png'
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-
 const Sidebar = ({ isOpen, setIsOpen }) => {
     const location = useLocation();
     // New state for sidebar collapse on large screens
     const [isCollapsed, setIsCollapsed] = useState(false);
-    
     const menuItems = [
         { icon: PersonIcon, label: "Production manager", to: "" },
         { icon: PaperIcon, label: "Total production", to: "" },

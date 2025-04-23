@@ -1,6 +1,5 @@
 import { BarChart } from '@mui/x-charts/BarChart'
 import React, { useState } from "react"
-
 const AssignedLineChart = () => {
     const [activeTab, setActiveTab] = useState("In Progress")
     const data = {

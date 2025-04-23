@@ -1,8 +1,6 @@
 import React from "react"
 import ArrowIcon from "../common/ArrowIconImage"
 import StatusBadge from "../common/StatusBadge"
-
-
 const ProductionDeliveryStatusList= () => {
     const mockData = [
         {
@@ -36,7 +34,6 @@ const ProductionDeliveryStatusList= () => {
           status: "On Track",
         },
       ]
-      
   return (
     <div className="overflow-x-auto px-4 lg:px-8 py-7">
       <table className="w-full border-separate border-spacing-y-3">
@@ -55,7 +52,6 @@ const ProductionDeliveryStatusList= () => {
           {mockData.map((row, index) => (
             <tr
               key={index}
-              
             >
               <td className={`py-6 px-6 flex items-center gap-2 border-2 rounded-l-xl border-r-0
                 ${

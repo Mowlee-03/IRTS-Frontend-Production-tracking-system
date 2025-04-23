@@ -37,7 +37,7 @@ const ProductionLineProgressOverviewTable = () => {
   }
 
   const lines = ["Total Orders", "Line 1", "Line 2", "Line 3", "Line 4"]
-
+ 
   return (
     <div className="flex-1 overflow-x-auto shadow-bg-shadow-1 rounded-xl bg-white">
 

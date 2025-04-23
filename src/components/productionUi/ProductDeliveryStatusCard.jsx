@@ -1,7 +1,6 @@
 import React from 'react'
 import { TrendingUp, Warning, CheckCircle } from '@mui/icons-material';
 import StatusTile from '../common/StatusTile';
-
 const mockData = [
   {
     title: 'Overdue Orders',
