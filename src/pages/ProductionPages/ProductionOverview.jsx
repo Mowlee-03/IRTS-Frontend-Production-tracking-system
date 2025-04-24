@@ -5,14 +5,26 @@ import OrderTable from '../../components/productionUi/ProductDeliveryStatusList'
 import ProductioLineProgressOverviewTable from '../../components/productionUi/ProductioLineProgressOverviewTable';
 import ProductionLineProgressOverviewTable from '../../components/productionUi/ProductioLineProgressOverviewTable';
 import AssignedLineChart from '../../components/productionUi/AssignedLineChart';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 const ProductionOverview = () => {
     const [viewMode, setViewMode] = useState('tiles'); 
     return (
       <div className="mt-2  py-2">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 ">
-          <h2 className="text-lg md:text-3xl font-medium text-gray-800 pl-2">Pending Delivery Status</h2>
+        
+
+        <div
+        className='bg-main-background rounded-2xl shadow-bg-shadow-2 min-h-[430px]'
+        >
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 px-8 pt-4">
           
-          <div  style={{ backgroundImage: `url(${rectangel})` }} className="bg-contain bg-bottom bg-no-repeat px-4 pt-4 mr-3">
+          <div className="flex items-center gap-2 text-gray-700 font-medium">
+          <div className="p-2 xl:p-3 rounded-lg bg-[#F0F3FF] flex items-center justify-center text-[#4F46E5]">
+           <AccessTimeIcon sx={{fontSize:{xs:20 ,md:23,xl:25}}}/>
+          </div>
+          <span className="text-lg">Pending Delivery Status</span>
+        </div>
+          
+          <div className="">
             <div className="bg-gray-100 rounded-lg p-1 flex mt-1">
                 <button 
                 className={`px-3 md:px-4 py-1 rounded-md text-sm transition-colors ${viewMode === 'tiles' ? 'bg-white shadow-sm' : ''}`}
@@ -30,10 +42,6 @@ const ProductionOverview = () => {
           </div>
           
         </div> 
-
-        <div
-        className='bg-main-background  rounded-2xl shadow-bg-shadow-2'
-        >
           {
             viewMode==='tiles'&&(
               <ProductDeliveryStatusCard/>

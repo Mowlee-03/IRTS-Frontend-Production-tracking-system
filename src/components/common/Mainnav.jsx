@@ -18,7 +18,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <button className="hidden md:block hover:bg-gray-200 p-1 rounded-md" onClick={() => window.history.back()}>
             <ArrowLeft className="w-5 h-5 text-gray-600" />
           </button>
-          <h1 className="text-md md:text-2xl font-medium">Overall Production Performance Status</h1>
+          <h2 className="text-md md:text-xl font-medium">Overall Production Performance Status</h2>
         </div>
         
         <div className="flex items-center gap-2">
