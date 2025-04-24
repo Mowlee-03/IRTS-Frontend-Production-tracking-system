@@ -33,7 +33,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </div>
         </div>
       </div>
-      <div className='md:px-3 pt-5'>
+      <div className=''>
        <ProductionStatusCards/>
       </div>
       
