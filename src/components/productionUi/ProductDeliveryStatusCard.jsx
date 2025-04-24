@@ -46,8 +46,8 @@ const mockData = [
 
 const ProductDeliveryStatusCard = () => {
   return (
-    <div className="max-w-[1440px] mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 xl:gap-10 px-4 sm:px-6 lg:px-8 xl:px-8 pt-8 pb-8">
+    <div className="max-w-[2200px] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 xl:gap-10 px-4 sm:px-6 lg:px-8 xl:px-8 pt-1 pb-3">
         {mockData.map((item, idx) => (
           <StatusTile key={idx} {...item} />
         ))}

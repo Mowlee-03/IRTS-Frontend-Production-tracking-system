@@ -35,17 +35,17 @@ const ProductionDeliveryStatusList= () => {
         },
       ]
   return (
-    <div className="max-w-[1440px] mx-auto overflow-x-auto px-4 lg:px-8 pt-1">
-      <table className="w-full border-separate border-spacing-y-3">
+    <div className=" mx-auto overflow-x-auto px-4 lg:px-8">
+      <table className="w-full border-separate border-spacing-y-2">
         <thead>
           <tr className="text-gray-600 text-left">
-            <th className="py-3 px-4 font-medium">Category</th>
-            <th className="py-3 pr-8 font-medium">Total Orders</th>
-            <th className="py-3 pr-8 font-medium">Material Ready</th>
-            <th className="py-3 pr-8 font-medium">Material Not Ready</th>
-            <th className="py-3 pr-8 font-medium">In Progress</th>
-            <th className="py-3 px-4 font-medium">Not Started</th>
-            <th className="py-3 px-4 font-medium">Status</th>
+            <th className="py-2 px-4 font-medium">Category</th>
+            <th className="py-2 pr-8 font-medium">Total Orders</th>
+            <th className="py-2 pr-8 font-medium">Material Ready</th>
+            <th className="py-2 pr-8 font-medium">Material Not Ready</th>
+            <th className="py-2 pr-8 font-medium">In Progress</th>
+            <th className="py-2 px-4 font-medium">Not Started</th>
+            <th className="py-2 px-4 font-medium">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@ const ProductionDeliveryStatusList= () => {
             <tr
               key={index}
             >
-              <td className={`py-6 px-6 flex items-center gap-2 border-2 rounded-l-xl border-r-0
+              <td className={`py-5 px-6 flex items-center gap-2 border-2 rounded-l-xl border-r-0
                 ${
                   row.type === "overdue" ? "border-red-500" : row.type === "deadline" ? "border-yellow-500" : "border-green-500"
                 }

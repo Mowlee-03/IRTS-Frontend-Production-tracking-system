@@ -23,9 +23,9 @@ const StatusBadge = ({ type }) => {
     }
   
     return (
-      <span className={`inline-flex items-center gap-2 md:gap-5 px-3 py-1 rounded-full text-[8px] md:text-xs 2xl:text-sm font-normal ${bgColor} ${textColor}`}>
-        <img src={iconUrl} alt={text} className="w-3 h-3 md:w-4 md:h-4" />
-        {text}
+      <span className={`inline-flex items-center gap-2 md:gap-5 px-3 py-1 rounded-full ${bgColor} ${textColor}`}>
+        <img src={iconUrl} alt={text} className="w-3 h-3 md:w-3 md:h-3" />
+        <span className=' text-[8px] md:text-[10px] 2xl:text-sm font-normal'>{text}</span>
       </span>
     )
   }

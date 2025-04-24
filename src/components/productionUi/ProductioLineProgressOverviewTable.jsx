@@ -43,14 +43,14 @@ const ProductionLineProgressOverviewTable = () => {
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center pl-8 pt-4">
         <div className="flex items-center gap-2 text-gray-700 font-medium">
-          <div className="p-4  rounded-lg bg-[#F0F3FF] flex items-center justify-center text-[#4F46E5]">
-           <AccessTimeIcon/>
+        <div className="p-2 xl:p-3  rounded-lg bg-[#F0F3FF] flex items-center justify-center text-[#4F46E5]">
+           <AccessTimeIcon sx={{fontSize:{xs:20 ,md:23,xl:25}}}/>
           </div>
           <span className="text-lg">In Progress Production Lines</span>
         </div>
       </div>
       <div className="md:pl-14 pr-4">
-      <table className="w-full min-w-[600px] ">
+      <table className="w-full min-w-[400px] ">
         <thead>
           <tr>
             <th className="p-3 text-left text-gray-500 font-medium">Production Line</th>

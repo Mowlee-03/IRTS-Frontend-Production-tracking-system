@@ -7,7 +7,7 @@ import React from "react";
 import ErrorIcon from '@mui/icons-material/Error';
 const ProductionStatusCards = () => {
     return (
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-14 xl:mb-1 2xl:mb-3 px-10 pt-2 xl:px-14 xl:pt-2 2xl:px-20 2xl:pt-4">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-14 px-10 pt-2 xl:px-14 xl:pt-2">
 
         <div 
         style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}

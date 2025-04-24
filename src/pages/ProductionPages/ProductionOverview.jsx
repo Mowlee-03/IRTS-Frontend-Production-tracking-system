@@ -13,7 +13,7 @@ const ProductionOverview = () => {
         
 
         <div
-        className='bg-main-background rounded-2xl shadow-bg-shadow-2 min-h-[430px]'
+        className='bg-main-background rounded-2xl shadow-bg-shadow-2 min-h-[350px]'
         >
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 px-8 pt-4">
           
@@ -59,6 +59,7 @@ const ProductionOverview = () => {
         className='  rounded-2xl  mt-5'
         >
          <div className="flex flex-col lg:flex-row gap-8">
+          
             <ProductionLineProgressOverviewTable/>
             <AssignedLineChart/>
         </div>

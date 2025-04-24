@@ -14,7 +14,7 @@ const StatusTile = ({ title, count, icon, progressData, color, gradient }) => {
         p: { xs: 4, sm: 1.5, md: 2 },
         position: 'relative',
         minWidth: 0,
-        maxWidth: { xs: '100%', sm: 360, md: 400 }, 
+        maxWidth: { xs: '100%', sm: 360, md: 400,xl:'100%' }, 
         
       }}
     >
