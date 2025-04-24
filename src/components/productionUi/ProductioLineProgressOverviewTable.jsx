@@ -39,9 +39,9 @@ const ProductionLineProgressOverviewTable = () => {
   const lines = ["Total Orders", "Line 1", "Line 2", "Line 3", "Line 4"]
  
   return (
-    <div className="flex-1 overflow-x-auto shadow-bg-shadow-1 rounded-xl bg-white">
+    <div className="flex-1 overflow-x-auto shadow-bg-shadow-1 rounded-xl bg-white pl-6">
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center pl-8 pt-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center  pt-4">
         <div className="flex items-center gap-2 text-gray-700 font-medium">
         <div className="p-2 xl:p-3  rounded-lg bg-[#F0F3FF] flex items-center justify-center text-[#4F46E5]">
            <AccessTimeIcon sx={{fontSize:{xs:20 ,md:23,xl:25}}}/>
@@ -49,8 +49,8 @@ const ProductionLineProgressOverviewTable = () => {
           <span className="text-lg">In Progress Production Lines</span>
         </div>
       </div>
-      <div className="md:pl-14 pr-4">
-      <table className="w-full min-w-[400px] ">
+      <div className="md:pl-9 pr-4">
+      <table className="w-full min-w-[400px] xl:mt-5 ">
         <thead>
           <tr>
             <th className="p-3 text-left text-gray-500 font-medium">Production Line</th>
@@ -64,7 +64,7 @@ const ProductionLineProgressOverviewTable = () => {
         <tbody>
           {Object.entries(mockData).map(([key, row]) => (
             <tr key={key} className="border-t border-gray-200">
-              <td className={`p-3 py-5 ${row.className} font-medium`}>{row.label}</td>
+              <td className={`p-3 py-3 ${row.className} font-medium`}>{row.label}</td>
               {row.values.map((value, index) => (
                 <td key={index} className="p-3">
                   <div className="flex items-center justify-center gap-2">

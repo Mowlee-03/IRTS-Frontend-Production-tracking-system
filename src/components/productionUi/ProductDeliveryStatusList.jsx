@@ -35,7 +35,7 @@ const ProductionDeliveryStatusList= () => {
         },
       ]
   return (
-    <div className=" mx-auto overflow-x-auto px-4 lg:px-8">
+    <div className=" mx-auto overflow-x-auto">
       <table className="w-full border-separate border-spacing-y-2">
         <thead>
           <tr className="text-gray-600 text-left">

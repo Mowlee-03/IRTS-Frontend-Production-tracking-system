@@ -31,4 +31,4 @@ const StatusBadge = ({ type }) => {
   }
 
 
-  export default StatusBadge
+export default StatusBadge
