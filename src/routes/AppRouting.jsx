@@ -5,6 +5,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Layout from '../layout/Layout'
 import ProductionMain from '../layout/ProductionMain'
 import ProductionOverview from '../pages/ProductionPages/ProductionOverview'
+import TotalProductionOrder from '../pages/ProductionPages/TotalProductionOrder'
 
 
 const AppRouting = () => {
@@ -16,8 +17,10 @@ const AppRouting = () => {
           <Route path='production' element={<ProductionMain/>} >
             <Route index element={<Navigate to="overview" replace />} />
             <Route path='overview' element={<ProductionOverview/>} />
+            <Route path='total_orders'element={<TotalProductionOrder/>} />
           </Route>
         </Route>
+        <Route path="*" element={<Navigate to="/production/overview" />} />
     </Routes>
   )
 }

@@ -13,7 +13,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const menuItems = [
         { icon: PersonIcon, label: "Production manager", to: "/production/overview" },
-        { icon: PaperIcon, label: "Total production", to: "/po" },
+        { icon: PaperIcon, label: "Total production", to: "/production/total_orders" },
         { icon: SettingMsgIcon, label: "Production in progress", to: "o" },
         { icon: SettingHintIcon, label: "Production NOT Started", to: "o" },
     ];
