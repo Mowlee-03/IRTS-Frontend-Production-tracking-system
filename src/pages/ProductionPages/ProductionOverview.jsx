@@ -9,7 +9,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 const ProductionOverview = () => {
     const [viewMode, setViewMode] = useState('tiles'); 
     return (
-      <div className="mt-3  pt-2">
+      <div className="mt-3 mb-3  pt-2">
         <div
         className='bg-main-background rounded-2xl shadow-bg-shadow-2 min-h-[380px] px-4 sm:px-6 pt-4'
         >
