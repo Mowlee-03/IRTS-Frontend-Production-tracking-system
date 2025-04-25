@@ -6,7 +6,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div 
     className="flex flex-col bg-white shadow-bg-shadow-1 
-    px-5 py-4 rounded-2xl">
+    px-5 py-4 rounded-2xl mt-4">
       <div className='w-full flex items-center justify-between'>
         <div className="flex items-center gap-1">
           <button 
