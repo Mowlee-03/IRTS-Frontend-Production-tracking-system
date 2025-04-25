@@ -65,21 +65,22 @@ const StatusTile = ({ title, count, icon, progressData, color, gradient }) => {
           fontWeight="medium"
           flexGrow={1}
           sx={{
-            fontSize: { xs: '0.85rem', sm: '0.975rem', md: '1.02rem' },
+            fontSize: { xs: '0.85rem', sm: '0.975rem', md: '1.07rem' },
           }}
         >
           {title}
         </Typography>
       </Stack>
 
-      <Stack spacing={{ xs: 1, sm: 1, md: 2.5 }} sx={{ px: { xs: 0.75, sm: 1.5 } ,}}>
+      <Stack spacing={{ xs: 1, sm: 1, md: 2.5, }} sx={{ px: { xs: 0.75, sm: 1.5 } ,}}>
         {progressData.map((item, index) => (
           <Box key={index}>
             <Stack direction="row" justifyContent="space-between" mb={{ xs: 0.5, sm: 0.8 }}>
               <Typography
                 variant="body2"
                 sx={{
-                  fontSize: { xs: '0.825rem', sm: '0.75rem' },
+                  fontSize: { xs: '0.825rem', sm: '0.75rem',xl:'0.95rem' },
+                  color:"#64748B"
                 }}
               >
                 {item.label}
@@ -98,7 +99,7 @@ const StatusTile = ({ title, count, icon, progressData, color, gradient }) => {
               variant="determinate"
               value={Math.min(100, (item.value / 30) * 100)}
               sx={{
-                height: { xs: 4, sm: 6 },
+                height: { xs: 4, sm: 6 ,xl:8 },
                 borderRadius: 4,
                 '& .MuiLinearProgress-bar': {
                   backgroundColor: item.color,

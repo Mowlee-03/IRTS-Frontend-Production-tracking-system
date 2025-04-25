@@ -48,7 +48,7 @@ const AssignedLineChart = () => {
             xAxis={[{ label: 'Assigned Value', min: 0 }]}
             yAxis={[{ scaleType: 'band', data: yLabels }]}
             series={[{ data: xValues, label: "Assigned", color: "#3B82F6" }]}
-            height={200}
+            height={260}
             
           />
         </div>

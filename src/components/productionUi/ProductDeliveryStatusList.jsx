@@ -36,7 +36,7 @@ const ProductionDeliveryStatusList= () => {
       ]
   return (
     <div className=" mx-auto overflow-x-auto">
-      <table className="w-full border-separate border-spacing-y-2">
+      <table className="w-full border-separate border-spacing-y-3">
         <thead>
           <tr className="text-gray-600 text-left">
             <th className="py-2 px-4 font-medium">Category</th>
