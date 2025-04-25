@@ -20,7 +20,7 @@ const StatusBadge = ({ type }) => {
       textColor = "text-green-600"
       text = "On Track"
       iconUrl = CheckIcon
-    }
+    } 
   
     return (
       <span className={`inline-flex items-center gap-2 md:gap-5 px-3 py-1 rounded-full ${bgColor} ${textColor}`}>

@@ -12,10 +12,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     // New state for sidebar collapse on large screens
     const [isCollapsed, setIsCollapsed] = useState(false);
     const menuItems = [
-        { icon: PersonIcon, label: "Production manager", to: "" },
-        { icon: PaperIcon, label: "Total production", to: "" },
-        { icon: SettingMsgIcon, label: "Production in progress", to: "" },
-        { icon: SettingHintIcon, label: "Production NOT Started", to: "" },
+        { icon: PersonIcon, label: "Production manager", to: "/production/overview" },
+        { icon: PaperIcon, label: "Total production", to: "/po" },
+        { icon: SettingMsgIcon, label: "Production in progress", to: "o" },
+        { icon: SettingHintIcon, label: "Production NOT Started", to: "o" },
     ];
     
     return (
@@ -47,8 +47,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           
           <div className={`relative px-4 py-6 border-b flex items-center justify-between  ${isCollapsed ? 'justify-center' : ''}`}>
             <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-start gap-4'} w-full`}>
-              <img src={HeadIcon} alt="" className="h-9 w-9" />
-              {!isCollapsed && <span className="font-medium text-text-primary-clr text-[18px]">Production Hub</span>}
+              <img src={HeadIcon} alt="" className="h-6 w-6" />
+              {!isCollapsed && <span className="font-medium text-text-primary-clr text-[15px]">Production Hub</span>}
             </div>
             
             <button 
@@ -66,28 +66,28 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             </button>
           </div>
           
-          <nav className="flex-1 overflow-y-auto py-4 px-3">
+          <nav className="flex-1 overflow-y-auto py-2 px-3">
             {menuItems.map((item, index) => {
                 const isActive = location.pathname.startsWith(item.to);
                 return (
                 <Link
                     key={index}
                     to={item.to}
-                    className={`flex items-center p-3 md:p-4 my-5 rounded-xl cursor-pointer ${
+                    className={`flex items-center p-3 md:p-4 my-2 rounded-xl cursor-pointer ${
                       isCollapsed ? 'justify-center' : ''
                     } ${
                       isActive ? "bg-active-bg-clr text-black" : "hover:bg-hover-bg-clr"
                     }`}
                 >
-                    <img src={item.icon} className={`w-5 h-5 ${isCollapsed ? '' : 'mr-1 lg:mr-3'}`} />
-                    {!isCollapsed && <span className="text-text-secondary-clr font-medium text-xs lg:text-[14px]">{item.label}</span>}
+                    <img src={item.icon} className={`w-4 h-4 ${isCollapsed ? '' : 'mr-1 lg:mr-3'}`} />
+                    {!isCollapsed && <span className="text-text-secondary-clr font-medium text-xs lg:text-[13px]">{item.label}</span>}
                 </Link>
                 );
             })}
           </nav>
           
           <div className={`w-full flex items-center ${isCollapsed ? 'justify-center px-0' : 'justify-center pr-8'} pb-10`}>
-            <button className={`p-4 hover:bg-gray-50 flex items-center text-gray-700 font-medium rounded-xl ${isCollapsed ? 'justify-center' : ''}`}>
+            <button className={`p-4 hover:bg-gray-50 flex items-center text-gray-700 text-[14px] font-medium rounded-xl ${isCollapsed ? 'justify-center' : ''}`}>
               <img src={logoutIcon} className={`h-5 w-5 ${isCollapsed ? '' : 'mr-3'} text-gray-500`}/>
               {!isCollapsed && 'Logout'}
             </button>

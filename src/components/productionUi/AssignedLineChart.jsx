@@ -21,7 +21,7 @@ const AssignedLineChart = () => {
       const yLabels = chartData.map(item => item.line)
       const xValues = chartData.map(item => item.value)
   return (
-    <div className="w-full flex flex-col gap-2 items-end lg:w-[400px] border-blue-100 px-6 py-3 shadow-bg-shadow-1 rounded-xl bg-white">
+    <div className="w-full flex flex-col gap-2 items-end lg:w-[500px] border-blue-100 px-6 py-3 shadow-bg-shadow-1 rounded-xl bg-white">
       
       <div className="flex bg-[#F5F6F8] p-2 rounded-md">
         <button
@@ -38,8 +38,8 @@ const AssignedLineChart = () => {
         </button>
       </div>
 
-        <div className="w-full bg-[#F8FAFC] rounded-xl shadow-bg-shadow-3 p-3">
-          <h3 className="text-gray-700 font-medium mb-4">
+        <div className="w-full bg-[#F8FAFC] rounded-xl shadow-bg-shadow-3 ">
+          <h3 className="text-gray-700 font-medium mb-1 mt-3 ml-3">
             Assigned Line ({activeTab.toLowerCase()})
           </h3>
 
@@ -47,8 +47,8 @@ const AssignedLineChart = () => {
             layout="horizontal"
             xAxis={[{ label: 'Assigned Value', min: 0 }]}
             yAxis={[{ scaleType: 'band', data: yLabels }]}
-            series={[{ data: xValues, label: "Assigned", color: "#3B82F6" }]}
-            height={260}
+            series={[{ data: xValues, color: "#3B82F6" }]}
+            height={300}
             
           />
         </div>
