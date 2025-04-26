@@ -5,7 +5,7 @@ import ExportDropdownButton from '../../components/common/ExportDropdownBtn';
 import { CircularProgress, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 const TotalProductionOrder = () => {
-  const [expandedRowId, setExpandedRowId] = useState(null);
+  
    const rows = [
   {
     id: 1,
@@ -152,7 +152,6 @@ const TotalProductionOrder = () => {
             <IconButton
               onClick={() => {
                 console.log('View clicked for ID:', params.row.id);
-                setExpandedRowId(prev => prev === params.row.id ? null : params.row.id);
               }}
               sx={{
                 border:1,
@@ -170,32 +169,7 @@ const TotalProductionOrder = () => {
         }
         
       ];
-
-
-        // ✅ Custom Expanded Content
-  const getDetailPanelContent = (row) => {
-    if (row.id !== expandedRowId) return null;
-
-    return (
-      <div style={{ padding: '16px' }}>
-        <Stepper alternativeLabel activeStep={row.steps.findIndex(step => !step.completed)}>
-          {row.steps.map((step, index) => (
-            <Step key={index} completed={step.completed}>
-              <StepLabel>{step.label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
-    );
-  };
-
-  // ✅ Dynamically set row height
-  const getRowHeight = (params) => {
-    if (params.id === expandedRowId) {
-      return 200; // bigger height for expanded row
-    }
-    return 65; // normal height
-  };
+      
       
 
       
@@ -224,13 +198,7 @@ const TotalProductionOrder = () => {
                 Add new order</button>
             </div>
         </div>
-        <MainDataTable 
-        columns={columns} 
-        rows={rows} 
-        expandedRowId={expandedRowId}
-        getRowHeight={getRowHeight}
-        getDetailPanelContent={getDetailPanelContent}
-        />
+      <MainDataTable columns={columns} rows={rows} />
     </div>
   )
 }
