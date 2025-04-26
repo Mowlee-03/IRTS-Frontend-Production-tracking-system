@@ -35,14 +35,14 @@ export default function ExportDropdown({ onExport }) {
           onClick={() => {
             if (selected && onExport) onExport(selected.value);
           }}
-          className="flex items-center px-3 py-2 text-white text-md hover:bg-[#3925CC] hover:rounded-l-md min-w-[90px]"
+          className="flex items-center p-1 2xl:px-3 2xl:py-2 text-white text-xs xl:text-md 2xl:text-[15px] font-medium hover:bg-[#3925CC] hover:rounded-l-md 2xl:min-w-[80px]"
         >
           {selected?.icon && <span className="mr-2">{selected.icon}</span>}
           {selected ? selected.label : 'Export'}
         </button>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="px-2 py-2 text-white hover:bg-[#3925CC] hover:rounded-r-md"
+          className="p-1 2xl:px-2 2xl:py-2 text-white hover:bg-[#3925CC] hover:rounded-r-md"
         >
           <ChevronDown className="w-4 h-4" />
         </button>
