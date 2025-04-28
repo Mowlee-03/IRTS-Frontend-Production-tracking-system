@@ -3,7 +3,7 @@ import { Stepper, Step, StepLabel } from '@mui/material';
 
 const ProductionStepper = ({ steps }) => {
   return (
-    <div className="stepper-container p-4 rounded-xl shadow-bg-shadow-1 w-full">
+    <div className="stepper-container p-4 z-50 rounded-xl shadow-bg-shadow-1 w-full">
       <Stepper
         activeStep={steps.findIndex((step) => !step.completed)}
         alternativeLabel

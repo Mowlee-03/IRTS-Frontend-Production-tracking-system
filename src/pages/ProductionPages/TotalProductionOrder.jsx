@@ -78,7 +78,6 @@ const TotalProductionOrder = () => {
             <div
               className="stepper-container"
               style={{
-                // padding: '16px',
                 width:"100%",
                 backgroundColor: '#f5f5f5',
                 borderRadius: '8px',

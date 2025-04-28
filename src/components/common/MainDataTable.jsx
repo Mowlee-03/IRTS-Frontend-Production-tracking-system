@@ -2,8 +2,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import React from 'react';
 
 const MainDataTable = ({ columns, rows, totalWidth }) => {
-  console.log(totalWidth);
-  
+
   return (
     <div
       style={{ height: 773, width: '100%' }}
@@ -16,7 +15,7 @@ const MainDataTable = ({ columns, rows, totalWidth }) => {
         initialState={{
           pagination: { paginationModel: { pageSize: 10 } },
         }}
-        // disableVirtualization={true}
+        disableVirtualization={true}
         columnHeaderHeight={65}
         rowHeight={65}
         getRowHeight={(params) => (params.model.isStepperRow ? 150 : 65)} // Taller height for stepper rows
@@ -70,6 +69,10 @@ const MainDataTable = ({ columns, rows, totalWidth }) => {
             '&[data-rowindex="1"]': {
               backgroundColor: '#f5f5f5', // Light background for stepper rows
             },
+          },
+          '& .MuiDataGrid-virtualScroller': {
+       
+            maxWidth: `${totalWidth}px`, // Constrain to the sum of column widths
           },
         }}
       />
