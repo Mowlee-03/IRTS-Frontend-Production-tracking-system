@@ -3,11 +3,11 @@ import { Stepper, Step, StepLabel } from '@mui/material';
 
 const ProductionStepper = ({ steps }) => {
   return (
-    <div className="p-4 bg-white rounded-xl shadow-bg-shadow-1">
+    <div className="stepper-container p-4 rounded-xl shadow-bg-shadow-1 w-full">
       <Stepper
         activeStep={steps.findIndex((step) => !step.completed)}
         alternativeLabel
-        sx={{ padding: '16px 0' }}
+        sx={{ padding: '16px 0', width: '100%' }}
       >
         {steps.map((step, index) => (
           <Step key={index} completed={step.completed}>

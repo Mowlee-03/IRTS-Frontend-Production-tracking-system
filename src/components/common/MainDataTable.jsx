@@ -1,68 +1,80 @@
-import { DataGrid } from '@mui/x-data-grid'
-import React from 'react'
+import { DataGrid } from '@mui/x-data-grid';
+import React from 'react';
 
-const MainDataTable = ({ columns, rows }) => {
+const MainDataTable = ({ columns, rows, totalWidth }) => {
+  console.log(totalWidth);
+  
   return (
-    <div style={{ height: 773, width: '100%' }} className='rounded-xl overflow-hidden shadow-bg-shadow-1 bg-main-background'>
+    <div
+      style={{ height: 773, width: '100%' }}
+      className="rounded-xl overflow-hidden shadow-bg-shadow-1 bg-main-background"
+    >
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[5, 10, 20]}
+        pageSizeOptions={[5, 10, 20]}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 10 } },
+        }}
+        // disableVirtualization={true}
         columnHeaderHeight={65}
         rowHeight={65}
+        getRowHeight={(params) => (params.model.isStepperRow ? 150 : 65)} // Taller height for stepper rows
         sx={{
-          textAlign:"center",
-          border: "none",
-          // Disable the row selection background highlight color
+          textAlign: 'center',
+          border: 'none',
           '& .MuiDataGrid-row.Mui-selected': {
-            backgroundColor: 'transparent !important',  // Remove blue highlight
+            backgroundColor: 'transparent !important',
           },
           '& .MuiDataGrid-checkboxInput.Mui-checked': {
-            color: 'transparent',  // Disable the checkbox tick color if you have checkboxes
+            color: 'transparent',
           },
           '& .MuiDataGrid-checkboxInput': {
-            visibility: 'hidden',  // Hides the checkbox column (if it's there)
+            visibility: 'hidden',
           },
           '& .MuiDataGrid-columnHeader': {
-            padding: '0px 30px', // Adjust padding to remove unnecessary spaces
+            padding: '0px 30px',
             backgroundColor: '#E9F4FF',
-            // fontSize:15
           },
           '& .MuiDataGrid-cell': {
             textOverflow: 'ellipsis',
-            textAlign:"center"
+            textAlign: 'center',
+            '&[data-field="id"]': {
+              '&:has(.stepper-container)': {
+                padding: 0,
+                width: `${totalWidth}px !important`, // Use total width of all columns
+                maxWidth: 'none !important',
+                boxSizing: 'border-box',
+                position: 'relative',
+                left: 0,
+              },
+            },
           },
           '& .MuiDataGrid-columnSeparator': {
-            color: '#949494',   // Light blue/grey color
+            color: '#949494',
             opacity: 1,
           },
-         '& .MuiDataGrid-menuIconButton': {
-            color: '#6e6e6e', // ✅ your custom color
-            ":hover":{
-             
-            }
+          '& .MuiDataGrid-menuIconButton': {
+            color: '#6e6e6e',
           },
           '& .MuiDataGrid-sortIconButton': {
-            color: '#6e6e6e', // your custom color for ascending/descending arrows
-            ":hover":{
-              backgroundColor:"white",
-            }
+            color: '#6e6e6e',
+            ':hover': {
+              backgroundColor: 'white',
+            },
           },
           '& .MuiDataGrid-footerContainer': {
-            backgroundColor: '#E9F4FF', // or any color you want
+            backgroundColor: '#E9F4FF',
           },
-
-
-
-
+          '& .MuiDataGrid-row': {
+            '&[data-rowindex="1"]': {
+              backgroundColor: '#f5f5f5', // Light background for stepper rows
+            },
+          },
         }}
-        checkboxSelection={false} // Disable checkbox selection
-        onSelectionModelChange={() => {}} // Ignore any selection model change
-
       />
     </div>
-  )
-}
+  );
+};
 
-export default MainDataTable
+export default MainDataTable;
