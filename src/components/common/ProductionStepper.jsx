@@ -1,26 +1,89 @@
+
+
 import React from 'react';
-import { Stepper, Step, StepLabel } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+
+const ColorlibStepIconRoot = styled('div')(({ ownerState }) => ({
+  display: 'flex',
+  height: 22,
+  alignItems: 'center',
+  ...(ownerState.completed && {
+    color: '#4caf50',
+  }),
+  ...(ownerState.active && {
+    color: '#1976d2',
+  }),
+  '& .ColorlibStepIcon-completedIcon': {
+    color: '#4caf50',
+    zIndex: 1,
+    fontSize: 24,
+  },
+  '& .ColorlibStepIcon-circle': {
+    color: '#9e9e9e',
+    fontSize: 24,
+  },
+  '& .ColorlibStepIcon-pending': {
+    color: '#ff9800',
+    fontSize: 24,
+  },
+}));
+
+function ColorlibStepIcon(props) {
+  const { active, completed, className } = props;
+
+  return (
+    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+      {completed ? (
+        <CheckCircleIcon className="ColorlibStepIcon-completedIcon" />
+      ) : active ? (
+        <ScheduleIcon className="ColorlibStepIcon-pending" />
+      ) : (
+        <RadioButtonUncheckedIcon className="ColorlibStepIcon-circle" />
+      )}
+    </ColorlibStepIconRoot>
+  );
+}
 
 const ProductionStepper = ({ steps }) => {
+  const activeStep = steps.findIndex(step => step.status === 'pending');
+
   return (
-    <div className="stepper-container p-4 z-50 rounded-xl shadow-bg-shadow-1 w-full">
-      <Stepper
-        activeStep={steps.findIndex((step) => !step.completed)}
-        alternativeLabel
-        sx={{ padding: '16px 0', width: '100%' }}
-      >
-        {steps.map((step, index) => (
-          <Step key={index} completed={step.completed}>
-            <StepLabel>
-              <div className="flex flex-col items-center">
-                <span>{step.label}</span>
-                <span className="text-xs text-gray-500">{step.date}</span>
-              </div>
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </div>
+    <Stepper 
+      activeStep={activeStep} 
+      alternativeLabel
+      sx={{ 
+        width: '100%',
+        '& .MuiStepLabel-label': {
+          fontSize: '12px',
+          fontWeight: 600,
+        }
+      }}
+    >
+      {steps.map((step, index) => (
+        <Step key={step.label}>
+          <StepLabel 
+            StepIconComponent={ColorlibStepIcon}
+            optional={
+              <span style={{ 
+                fontSize: '11px', 
+                color: '#666',
+                marginTop: '4px'
+              }}>
+                {step.date}
+              </span>
+            }
+          >
+            {step.label}
+          </StepLabel>
+        </Step>
+      ))}
+    </Stepper>
   );
 };
 

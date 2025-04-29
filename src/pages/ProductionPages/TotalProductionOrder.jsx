@@ -3,11 +3,17 @@ import MainDataTable from '../../components/common/MainDataTable';
 import { CopyIcon, Plus } from 'lucide-react';
 import ExportDropdownButton from '../../components/common/ExportDropdownBtn';
 import { CircularProgress, IconButton } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';import ProductionStepper from '../../components/common/ProductionStepper';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const TotalProductionOrder = () => {
-  const [expandedRowIds, setExpandedRowIds] = useState([]); // Track expanded rows
+  const [expandedRowId, setExpandedRowId] = useState(null);
+
+
+  const toggleRowExpansion = (id) => {
+    setExpandedRowId(prev => (prev === id ? null : id));
+  };
+  
 
   const rows = [
     {
@@ -27,13 +33,13 @@ const TotalProductionOrder = () => {
       total: '₹175000',
       deliveryDate: '25-Apr-2025',
       steps: [
-        { label: 'KIT Init', date: '27-Mar-2024', completed: true },
-        { label: 'PO', date: '13-May-2024', completed: true },
-        { label: 'Inward', date: '14-May-2024', completed: true },
-        { label: 'KIT', date: '15-May-2024', completed: true },
-        { label: 'BOM', date: '16-May-2024', completed: true },
-        { label: 'Production', date: '25-May-2024', completed: false },
-        { label: 'FG', date: '26-May-2024', completed: false },
+        { label: 'KIT Init', date: '27-Mar-2024', status: 'completed' },
+        { label: 'PO', date: '13-May-2024', status: 'completed' },
+        { label: 'Inward', date: '14-May-2024', status: 'completed' },
+        { label: 'KIT', date: '15-May-2024', status: 'completed' },
+        { label: 'BOM', date: '16-May-2024', status: 'completed' },
+        { label: 'Production', date: '25-May-2024', status: 'pending' },
+        { label: 'FG', date: '26-May-2024', status: 'pending' },
       ],
     },
     {
@@ -53,18 +59,16 @@ const TotalProductionOrder = () => {
       total: '₹118800',
       deliveryDate: '25-Apr-2025',
       steps: [
-        { label: 'KIT Init', date: '15-Mar-2024', completed: true },
-        { label: 'PO', date: '16-Mar-2024', completed: true },
-        { label: 'Inward', date: '17-Mar-2024', completed: true },
-        { label: 'KIT', date: '18-Mar-2024', completed: false },
-        { label: 'BOM', date: '19-Mar-2024', completed: false },
-        { label: 'Production', date: '20-Mar-2024', completed: false },
-        { label: 'FG', date: '21-Mar-2024', completed: false },
+        { label: 'KIT Init', date: '15-Mar-2024', status: 'completed' },
+        { label: 'PO', date: '16-Mar-2024', status: 'completed' },
+        { label: 'Inward', date: '17-Mar-2024', status: 'completed' },
+        { label: 'KIT', date: '18-Mar-2024', status: 'pending' },
+        { label: 'BOM', date: '19-Mar-2024', status: 'pending' },
+        { label: 'Production', date: '20-Mar-2024', status: 'pending' },
+        { label: 'FG', date: '21-Mar-2024', status: 'pending' },
       ],
     },
   ];
-
-
 
   const columns = [
     {
@@ -72,22 +76,6 @@ const TotalProductionOrder = () => {
       headerName: 'KIT NO',
       width: 120,
       renderCell: (params) => {
-        if (params.row.isStepperRow) {
-          // Render the stepper in the first column and span the full width
-          return (
-            <div
-              className="stepper-container"
-              style={{
-                width:"100%",
-                backgroundColor: '#f5f5f5',
-                borderRadius: '8px',
-                
-              }}
-            >
-              <ProductionStepper steps={params.row.steps} />
-            </div>
-          );
-        }
         return <div style={{ paddingLeft: '20px' }}>{params.value}</div>;
       },
     },
@@ -95,62 +83,61 @@ const TotalProductionOrder = () => {
       field: 'poNumber',
       headerName: 'PO Number',
       width: 130,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell: (params) =>  params.value
     },
     {
       field: 'poDate',
       headerName: 'PO Date',
       width: 120,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'soNumber',
       headerName: 'S/O NUM',
       width: 130,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell: (params) =>  params.value
     },
     {
       field: 'proNumber',
       headerName: 'PRO NUM',
       width: 130,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'customer',
       headerName: 'Customer',
       width: 120,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'itemName',
       headerName: 'Item Name',
       width: 200,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'orderQty',
       headerName: 'Order Qty',
       width: 120,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'pendingQty',
       headerName: 'Pending Qty',
       width: 140,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'materialRequiredDate',
       headerName: 'Material Required Date',
       width: 180,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'bom',
       headerName: 'BOM %',
       width: 130,
       renderCell: (params) => {
-        if (params.row.isStepperRow) return null;
         const value = Number(params.value.replace('%', ''));
 
         let color = '';
@@ -205,25 +192,25 @@ const TotalProductionOrder = () => {
       field: 'days',
       headerName: 'Days',
       width: 100,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'value',
       headerName: 'Value',
       width: 100,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell:  (params) =>  params.value
     },
     {
       field: 'total',
       headerName: 'Total',
       width: 120,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell: (params) =>  params.value
     },
     {
       field: 'deliveryDate',
       headerName: 'Delivery Date',
       width: 140,
-      renderCell: (params) => (params.row.isStepperRow ? null : params.value),
+      renderCell: (params) =>  params.value
     },
     {
       field: 'actions',
@@ -232,49 +219,31 @@ const TotalProductionOrder = () => {
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
-      renderCell: (params) =>
-        params.row.isStepperRow ? null : (
-          <IconButton
-            onClick={() => {
-              setExpandedRowIds((prev) =>
-                prev.includes(params.row.id)
-                  ? prev.filter((id) => id !== params.row.id)
-                  : [...prev, params.row.id]
-              );
-            }}
-            sx={{
-              border: 1,
-              borderColor: '#edf0f0',
-              borderRadius: '8px',
-              padding: '12px',
-              '&:hover': {
-                backgroundColor: '#e0e0e0',
-              },
-            }}
-          >
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => toggleRowExpansion(params.id)}
+          sx={{
+            border: 1,
+            borderColor: '#edf0f0',
+            borderRadius: '8px',
+            padding: '12px',
+            '&:hover': {
+              backgroundColor: '#e0e0e0',
+            },
+          }}
+        >
+          {expandedRowId === params.id ? (
+            <KeyboardArrowUpIcon fontSize="small" />
+          ) : (
             <VisibilityIcon fontSize="small" />
-          </IconButton>
-        ),
+          )}
+        </IconButton>
+      )
+      
     },
   ];
 
-  // Calculate the total width of all columns
-  const totalWidth = columns.reduce((sum, column) => sum + (column.width || 0), 0);
-  // Create a new rows array with stepper rows for expanded rows
-  const processedRows = rows.reduce((acc, row) => {
-    acc.push(row); // Add the original row
-    if (expandedRowIds.includes(row.id)) {
-      // Add a dummy row for the stepper
-      acc.push({
-        id: `${row.id}-stepper`, // Unique ID for the stepper row
-        isStepperRow: true, // Flag to identify stepper rows
-        steps: row.steps, // Pass steps to the stepper
-      });
-    }
-    return acc;
-  }, []);
 
-  
   return (
     <div className="w-full my-4">
       <div className="flex justify-between gap-3 lg:items-center mb-3 flex-col lg:flex-row">
@@ -302,7 +271,10 @@ const TotalProductionOrder = () => {
           </button>
         </div>
       </div>
-      <MainDataTable columns={columns} rows={processedRows} totalWidth={totalWidth} />
+      <div>
+          <MainDataTable columns={columns} rows={rows} expandedRowId={expandedRowId} />
+      </div>
+      
     </div>
   );
 };

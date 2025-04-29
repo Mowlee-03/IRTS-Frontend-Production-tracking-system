@@ -17,8 +17,6 @@
     "@mui/x-charts": "^8.0.0",
     "@mui/x-data-grid": "^8.0.0-beta.3",
     "@reduxjs/toolkit": "^2.6.1",
-    "ag-grid-community": "^33.2.4",
-    "ag-grid-react": "^33.2.4",
     "axios": "^1.8.4",
     "lucide-react": "^0.483.0",
     "react": "^19.0.0",
