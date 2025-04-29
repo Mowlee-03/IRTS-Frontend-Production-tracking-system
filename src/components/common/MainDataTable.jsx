@@ -38,7 +38,8 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
                 backgroundColor: 'white', 
                 borderRadius: '8px', 
                 padding: isSmallScreen ? '12px' : '20px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                overflowX:"auto"
               }}>
                 <ProductionStepper steps={row.steps} />
               </Box>

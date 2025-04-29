@@ -58,7 +58,7 @@ const ProductionStepper = ({ steps }) => {
       activeStep={activeStep} 
       alternativeLabel
       sx={{ 
-        width: '100%',
+        width:{xs:"700px",sm:"100%"},
         '& .MuiStepLabel-label': {
           fontSize: '12px',
           fontWeight: 600,
