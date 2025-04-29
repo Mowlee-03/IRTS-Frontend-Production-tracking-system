@@ -21,19 +21,17 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
               display: 'flex',
               justifyContent: 'center'
             }}
-          >
+          >              
+          {/* <h4 style={{ 
+            marginBottom: '16px', 
+            color: '#333',
+            fontSize: isSmallScreen ? '1rem' : '1.25rem'
+          }}>
+            Production Progress
+          </h4> */}
             <Box sx={{ 
-              width: '100%', 
-              maxWidth: '1200px',
               padding: isSmallScreen ? '8px' : '16px'
             }}>
-              <h4 style={{ 
-                marginBottom: '16px', 
-                color: '#333',
-                fontSize: isSmallScreen ? '1rem' : '1.25rem'
-              }}>
-                Production Progress
-              </h4>
               <Box sx={{ 
                 backgroundColor: 'white', 
                 borderRadius: '8px', 
@@ -43,7 +41,9 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
               }}>
                 <ProductionStepper steps={row.steps} />
               </Box>
-              <Box sx={{ 
+            </Box>
+
+            {/* <Box sx={{ 
                 display: 'flex', 
                 flexDirection: isSmallScreen ? 'column' : 'row',
                 flexWrap: 'wrap',
@@ -56,8 +56,7 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
                 <span><strong>Item:</strong> {row.itemName}</span>
                 <span><strong>Order Qty:</strong> {row.orderQty}</span>
                 <span><strong>Delivery Date:</strong> {row.deliveryDate}</span>
-              </Box>
-            </Box>
+            </Box> */}
           </Box>
         </Collapse>
       ))}
