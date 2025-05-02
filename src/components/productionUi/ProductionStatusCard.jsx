@@ -73,25 +73,7 @@ const ProductionStatusCards = () => {
           ></div>
         </div>
         
-        {/* <div className="bg-success rounded-lg shadow-lg p-4 md:p-6 text-white">
-          <div className="flex items-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            <h3 className="text-base md:text-lg font-medium">Delivered Orders</h3>
-          </div>
-          <div className="text-4xl md:text-5xl font-bold text-center">150</div>
-        </div>
-        
-        <div className="bg-danger rounded-lg shadow-lg p-4 md:p-6 text-white sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 className="text-base md:text-lg font-medium">Pending Orders</h3>
-          </div>
-          <div className="text-4xl md:text-5xl font-bold text-center">50</div>
-        </div> */}
+
       </div>
     );
   };

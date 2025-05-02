@@ -9,17 +9,18 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
   
   return (
     <div
-      className="w-full h-auto "
+      className="w-full h-full  flex"
     >
-     <div>
+     <div className=''>
       {rows.map(row => (
-        <Collapse key={`collapse-${row.id}`} in={expandedRowId === row.id}>
+        <Collapse orientation='horizontal' key={`collapse-${row.id}`} in={expandedRowId === row.id}>
           <Box 
             sx={{
-              p: isSmallScreen ? 1 : 3,
-              backgroundColor: '#f9f9f9',
-              display: 'flex',
-              justifyContent: 'center'
+              width:"100%",
+              // p: isSmallScreen ? 1 : 3,
+              // backgroundColor: '#f9f9f9',
+              // display: 'flex',
+              // justifyContent: 'center'
             }}
           >              
           {/* <h4 style={{ 
@@ -29,11 +30,10 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
           }}>
             Production Progress
           </h4> */}
-            <Box sx={{ 
-              padding: isSmallScreen ? '8px' : '16px'
-            }}>
+        
               <Box sx={{ 
-                backgroundColor: 'white', 
+                width:"100%",
+                // backgroundColor: 'white', 
                 borderRadius: '8px', 
                 padding: isSmallScreen ? '12px' : '20px',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
@@ -41,7 +41,7 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
               }}>
                 <ProductionStepper steps={row.steps} />
               </Box>
-            </Box>
+          
 
             {/* <Box sx={{ 
                 display: 'flex', 
@@ -63,7 +63,7 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
     </div>
 
 
-      <div className='rounded-xl overflow-hidden bg-main-background shadow-bg-shadow-1'>
+      <div className='rounded-xl w-full h-full overflow-hidden bg-main-background shadow-bg-shadow-1'>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -74,7 +74,7 @@ const MainDataTable = ({ columns, rows,expandedRowId }) => {
           columnHeaderHeight={65}
           rowHeight={65}
           sx={{
-            height:"773px",
+            height:{xs:"600px",md:"100%"},
             textAlign: 'center',
             border: 'none',
             backgroundColor:"white",

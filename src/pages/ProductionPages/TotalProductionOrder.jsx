@@ -245,8 +245,8 @@ const TotalProductionOrder = () => {
 
 
   return (
-    <div className="w-full my-4">
-      <div className="flex justify-between gap-3 lg:items-center mb-3 flex-col lg:flex-row">
+    <div className="w-full h-auto md:h-[74vh] my-4 md:my-0">
+      <div className="flex h-[10%] justify-between gap-3 lg:items-center mb-3 flex-col lg:flex-row">
         <div className="flex gap-3">
           <p className="bg-[#78FAD5] text-xs lg:text-[13px] 2xl:text-lg rounded-md p-1 xl:p-2 text-center">
             Total Value: ₹<span>00000</span>
@@ -271,7 +271,7 @@ const TotalProductionOrder = () => {
           </button>
         </div>
       </div>
-      <div>
+      <div className='h-[90%]'>
           <MainDataTable columns={columns} rows={rows} expandedRowId={expandedRowId} />
       </div>
       
