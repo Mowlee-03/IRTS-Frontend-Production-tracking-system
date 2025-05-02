@@ -9,7 +9,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 
 const ProductionStepper = ({ steps }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery('(max-width:1200px)');
+  const isSmallScreen = useMediaQuery('(max-width:1024px)');
   const activeStep = steps.findIndex(step => step.status === 'in-progress');
 
   const getProgressProps = (status) => {
@@ -65,7 +65,7 @@ const ProductionStepper = ({ steps }) => {
       orientation={isSmallScreen ? 'horizontal' : 'vertical'}
       alternativeLabel={isSmallScreen}
       sx={{
-        width: {xs:"800px",lg:'100%'},
+        width: {xs:"800px",lg:'0%'},
         '& .MuiStepLabel-label': {
           fontSize: '15px',
           fontWeight: 600,
@@ -162,4 +162,25 @@ export default ProductionStepper;
 
 
 
+          {/* <h4 style={{ 
+            marginBottom: '16px', 
+            color: '#333',
+            fontSize: isSmallScreen ? '1rem' : '1.25rem'
+          }}>
+            Production Progress
+          </h4> */}
 
+            {/* <Box sx={{ 
+                display: 'flex', 
+                flexDirection: isSmallScreen ? 'column' : 'row',
+                flexWrap: 'wrap',
+                gap: isSmallScreen ? '8px' : '16px',
+                marginTop: '16px',
+                color: '#666',
+                fontSize: isSmallScreen ? '0.75rem' : '0.875rem'
+              }}>
+                <span><strong>PO Number:</strong> {row.poNumber}</span>
+                <span><strong>Item:</strong> {row.itemName}</span>
+                <span><strong>Order Qty:</strong> {row.orderQty}</span>
+                <span><strong>Delivery Date:</strong> {row.deliveryDate}</span>
+            </Box> */}
