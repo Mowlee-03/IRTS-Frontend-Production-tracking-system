@@ -5,7 +5,7 @@ import ExportDropdownButton from '../../components/common/ExportDropdownBtn';
 import { CircularProgress, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const TotalProductionOrder = () => {
   const [expandedRowId, setExpandedRowId] = useState(null);
 
@@ -71,6 +71,36 @@ const TotalProductionOrder = () => {
   ];
 
   const columns = [
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 120,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => (
+        <IconButton
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleRowExpansion(params.id)}}
+          sx={{
+            border: 1,
+            borderColor: '#edf0f0',
+            borderRadius: '8px',
+            padding: '12px',
+            '&:hover': {
+              backgroundColor: '#e0e0e0',
+            },
+          }}
+        >
+          {expandedRowId === params.id ? (
+            <VisibilityOffIcon fontSize="small" />
+          ) : (
+            <VisibilityIcon fontSize="small" />
+          )}
+        </IconButton>
+      )
+    },
     {
       field: 'id',
       headerName: 'KIT NO',
@@ -212,40 +242,12 @@ const TotalProductionOrder = () => {
       width: 140,
       renderCell: (params) =>  params.value
     },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      width: 120,
-      sortable: false,
-      filterable: false,
-      disableColumnMenu: true,
-      renderCell: (params) => (
-        <IconButton
-          onClick={() => toggleRowExpansion(params.id)}
-          sx={{
-            border: 1,
-            borderColor: '#edf0f0',
-            borderRadius: '8px',
-            padding: '12px',
-            '&:hover': {
-              backgroundColor: '#e0e0e0',
-            },
-          }}
-        >
-          {expandedRowId === params.id ? (
-            <KeyboardArrowUpIcon fontSize="small" />
-          ) : (
-            <VisibilityIcon fontSize="small" />
-          )}
-        </IconButton>
-      )
-      
-    },
+
   ];
 
 
   return (
-    <div className="w-full h-auto md:h-[74vh] my-4 md:my-0">
+    <div className="w-full h-auto lg:h-[74vh] mb-3">
       <div className="flex h-[10%] justify-between gap-3 lg:items-center mb-3 flex-col lg:flex-row">
         <div className="flex gap-3">
           <p className="bg-[#78FAD5] text-xs lg:text-[13px] 2xl:text-lg rounded-md p-1 xl:p-2 text-center">
@@ -272,7 +274,12 @@ const TotalProductionOrder = () => {
         </div>
       </div>
       <div className='h-[90%]'>
-          <MainDataTable columns={columns} rows={rows} expandedRowId={expandedRowId} />
+          <MainDataTable 
+          columns={columns} 
+          rows={rows} 
+          expandedRowId={expandedRowId} 
+          setExpandedRowId={setExpandedRowId}
+          />
       </div>
       
     </div>

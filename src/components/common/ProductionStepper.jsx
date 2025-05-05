@@ -8,7 +8,6 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 const ProductionStepper = ({ steps }) => {
-  const theme = useTheme();
   const isSmallScreen = useMediaQuery('(max-width:1024px)');
   const activeStep = steps.findIndex(step => step.status === 'in-progress');
 
@@ -65,13 +64,10 @@ const ProductionStepper = ({ steps }) => {
       orientation={isSmallScreen ? 'horizontal' : 'vertical'}
       alternativeLabel={isSmallScreen}
       sx={{
-        width: {xs:"800px",lg:'0%'},
+       
         '& .MuiStepLabel-label': {
           fontSize: '15px',
           fontWeight: 600,
-          // backgroundColor:"#e8e8e8",
-          // borderRadius:2,
-          // padding:,
           marginLeft:'10px',
           display: 'flex',
           flexDirection: 'column',
