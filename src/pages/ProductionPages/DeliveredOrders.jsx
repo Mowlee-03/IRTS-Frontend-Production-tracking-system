@@ -1,22 +1,33 @@
 import React, { useState } from 'react'
 import SimpleDataTable from '../../components/common/SimpleDataTable';
-import { Button, Chip, IconButton, useMediaQuery } from '@mui/material';
+import { Button, Chip, IconButton, Stack, useMediaQuery } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { GridToolbarContainer, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import { IconButtonColors } from '../../../Style';
+import OrderDetailsCard from '../../components/productionUi/OrderDetailCard';
 const DeliveredOrders = () => {
   const isSmallScreen = useMediaQuery('(max-width:1024px)');
   const [filterStatus, setFilterStatus] = useState('All Orders');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
+  const handleView = (order) => {
+    setSelectedOrder(order);
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedOrder(null);
+  };
+
   const columns = [
-    { field: 'kitNo', headerName: 'KIT NO', width: 100, ...(isSmallScreen ? {} : { flex: 1 }) },
-    { field: 'customer', headerName: 'Customer', width: 150, ...(isSmallScreen ? {} : { flex: 1 }) },
-    { field: 'itemName', headerName: 'Item Name', width: 150, ...(isSmallScreen ? {} : { flex: 1 }) },
-    { field: 'orderQty', headerName: 'Order Qty', width: 120, ...(isSmallScreen ? {} : { flex: 1 }) },
-    { field: 'deliveryQty', headerName: 'Delivery Qty', width: 130, ...(isSmallScreen ? {} : { flex: 1 }) },
+    { field: 'kitNo', headerName: 'KIT NO', width: 300, ...(isSmallScreen ? {} : { flex: 1 }) },
+    { field: 'customer', headerName: 'Customer', width: 250, ...(isSmallScreen ? {} : { flex: 1 }) },
+    { field: 'itemName', headerName: 'Item Name', width: 250, ...(isSmallScreen ? {} : { flex: 1 }) },
+    { field: 'orderQty', headerName: 'Order Qty', width: 220, ...(isSmallScreen ? {} : { flex: 1 }) },
+    { field: 'deliveredQty', headerName: 'Delivery Qty', width: 230, ...(isSmallScreen ? {} : { flex: 1 }) },
     {
       field: 'status',
       headerName: 'Delivered Status',
-      width: 160,
+      width: 200,
       ...(isSmallScreen ? {} : { flex: 1 }),
       renderCell: (params) => {
         let data;
@@ -37,9 +48,10 @@ const DeliveredOrders = () => {
       headerName: 'Actions',
       width: 100,
       ...(isSmallScreen ? {} : { flex: 1 }),
-      renderCell: () => (
+      renderCell: (params) => (
         <IconButton
         sx={IconButtonColors}
+        onClick={() => handleView(params.row)}
         >
           <VisibilityIcon fontSize="small"/>
         </IconButton>
@@ -55,7 +67,14 @@ const DeliveredOrders = () => {
       customer: 'RTGPS',
       itemName: 'AWS-MICRO',
       orderQty: 50,
-      deliveryQty: 40,
+      deliveredQty: 40,
+      poNumber: '4700064991',
+      soNumber: 'SO/0001/25-26',
+      proNumber: 'PROD/0001/25-26',
+      pendingQty: 50,
+      materialRequiredDate: '25-Apr-2025',
+      bom: '100%',
+      days: 23,
       status: 'Overdue',
       deliveryDate: '10-Apr-2025',
     },
@@ -65,7 +84,14 @@ const DeliveredOrders = () => {
       customer: 'RTGPS',
       itemName: 'AWS-MICRO',
       orderQty: 50,
-      deliveryQty: 40,
+      deliveredQty: 40,
+      poNumber: '4700064991',
+      soNumber: 'SO/0001/25-26',
+      proNumber: 'PROD/0001/25-26',
+      pendingQty: 50,
+      materialRequiredDate: '25-Apr-2025',
+      bom: '100%',
+      days: 23,
       status: 'Near Deadline',
       deliveryDate: '10-Apr-2025',
     },
@@ -75,7 +101,14 @@ const DeliveredOrders = () => {
       customer: 'RTGPS',
       itemName: 'AWS-MICRO',
       orderQty: 50,
-      deliveryQty: 40,
+      deliveredQty: 40,
+      poNumber: '4700064991',
+      soNumber: 'SO/0001/25-26',
+      proNumber: 'PROD/0001/25-26',
+      pendingQty: 50,
+      materialRequiredDate: '25-Apr-2025',
+      bom: '100%',
+      days: 23,
       status: 'On Schedule',
       deliveryDate: '10-Apr-2025',
     },
@@ -126,18 +159,24 @@ const CustomToolbar = () => {
     <GridToolbarContainer
       sx={{ justifyContent: 'space-between', display: 'flex', padding: '16px' }}
     >
-      <div>
-      {['All Orders', 'Overdue', 'Near Deadline', 'On Schedule'].map((status) => (
-            <Button
-              key={status}
-              onClick={() => setFilterStatus(status)}
-              sx={getButtonStyles(status)}
-              variant="contained"
-            >
-              {status}
-            </Button>
-          ))}
-      </div>
+       <Stack
+        direction="row"
+        flexWrap="wrap"
+        justifyContent="flex-start"
+        alignItems="center"
+        sx={{ gap: 1 }}
+      >
+        {['All Orders', 'Overdue', 'Near Deadline', 'On Schedule'].map((status) => (
+          <Button
+            key={status}
+            onClick={() => setFilterStatus(status)}
+            sx={getButtonStyles(status)}
+            variant="contained"
+          >
+            {status}
+          </Button>
+        ))}
+      </Stack>
 
         <div >
           <GridToolbarQuickFilter
@@ -161,14 +200,16 @@ const CustomToolbar = () => {
             }}
           />
         </div>
-
-      
     </GridToolbarContainer>
   );
 };
   return (
-    <div className='pt-4 h-[75vh]'>
-      <SimpleDataTable columns={columns} rows={filteredRows} CustomToolbar={CustomToolbar} />
+    <div className='pt-4 h-[75vh] '>
+     {!selectedOrder ? (
+        <SimpleDataTable columns={columns} rows={filteredRows} CustomToolbar={CustomToolbar} />
+      ) : (
+        <OrderDetailsCard order={selectedOrder} onClose={handleCloseDetails} />
+      )}
     </div>
   )
 }

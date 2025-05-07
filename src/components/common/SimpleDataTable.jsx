@@ -10,7 +10,6 @@ const SimpleDataTable = ({columns,rows,CustomToolbar}) => {
             showToolbar
             slots={{ toolbar: CustomToolbar }}
             pageSizeOptions={[5, 10, 20]}
-            // onRowClick={handleRowClick}
             initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
             }}

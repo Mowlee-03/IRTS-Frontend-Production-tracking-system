@@ -7,3 +7,5 @@ export const IconButtonColors={
       backgroundColor: '#e0e0e0',
     },
 }
+
+export const grayBg={ bgcolor: '#F8FAFC', p: 2, borderRadius: 2,mt:1 }
