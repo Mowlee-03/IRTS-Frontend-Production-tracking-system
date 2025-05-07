@@ -6,6 +6,7 @@ import { CircularProgress, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { IconButtonColors } from '../../../Style';
 const TotalProductionOrder = () => {
   const [expandedRowId, setExpandedRowId] = useState(null);
 
@@ -83,15 +84,7 @@ const TotalProductionOrder = () => {
           onClick={(e) => {
             e.stopPropagation()
             toggleRowExpansion(params.id)}}
-          sx={{
-            border: 1,
-            borderColor: '#edf0f0',
-            borderRadius: '8px',
-            padding: '12px',
-            '&:hover': {
-              backgroundColor: '#e0e0e0',
-            },
-          }}
+          sx={IconButtonColors}
         >
           {expandedRowId === params.id ? (
             <VisibilityOffIcon fontSize="small" />

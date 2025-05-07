@@ -2,7 +2,21 @@
 import { ArrowLeft, Menu } from 'lucide-react';
 import React from 'react';
 import ProductionStatusCards from '../productionUi/ProductionStatusCard';
+import { useLocation } from 'react-router-dom';
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
+  const location = useLocation();
+  
+  const headings = [
+    { path: '/production/overview', title: 'Overall Production Performance Status' },
+    { path: '/production/total_orders', title: 'Total Production Orders' },
+  ];
+  
+  const getHeading = () => {
+    const match = headings.find(item => location.pathname.startsWith(item.path));
+    return match ? match.title : 'Production Dashboard';
+  };
+  
+
   return (
     <div 
     className="flex flex-col  bg-white shadow-bg-shadow-1 
@@ -18,7 +32,11 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <button className="hidden md:block hover:bg-gray-200 p-1 rounded-md" onClick={() => window.history.back()}>
             <ArrowLeft className="w-5 h-5 text-gray-600" />
           </button>
-          <h2 className="text-md md:text-xl font-medium">Overall Production Performance Status</h2>
+
+          <h2 className="text-md md:text-xl font-medium">
+            {getHeading()}
+            </h2>
+
         </div>
         
         <div className="flex items-center gap-2">

@@ -1,52 +1,56 @@
 import { 
   Menu,
   Check
-
  } from "lucide-react";
 import React from "react";
 import ErrorIcon from '@mui/icons-material/Error';
+import { Link } from "react-router-dom";
 const ProductionStatusCards = () => {
     return (
       <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-14 px-10 pt-2 xl:px-0 xl:pt-2">
-
-        <div 
-        style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
-        className="h-24 xl:h-28 2xl:h-32 bg-blue-purple-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4  text-white relative">
-          <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
-            <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
-              <Menu className="block lg:hidden" size={18} />
-              <Menu className="hidden lg:block xl:hidden" size={15} />
-              <Menu className="hidden xl:block 2xl:hidden" size={18} />
-              <Menu className="hidden 2xl:block" size={27} />
-            </span>
-            <h3 className="text-[12px] xl:text-[14px] 2xl:text-[18px] font-medium ">Total Production Orders</h3>
+        <Link to="/production/total_orders">
+          <div 
+          style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
+          className="h-24 xl:h-28 2xl:h-32 bg-blue-purple-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4  text-white relative">
+            <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
+              <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
+                <Menu className="block lg:hidden" size={18} />
+                <Menu className="hidden lg:block xl:hidden" size={15} />
+                <Menu className="hidden xl:block 2xl:hidden" size={18} />
+                <Menu className="hidden 2xl:block" size={27} />
+              </span>
+              <h3 className="text-[12px] xl:text-[14px] 2xl:text-[18px] font-medium ">Total Production Orders</h3>
+            </div>
+            <div className="xl:text-2xl 2xl:text-3xl font-bold text-start ml-11 xl:ml-20">200</div>
+            <div
+            className="bg-[#FFFFFF1A] absolute top-0 right-0 xl:w-[90px] xl:h-[90px] 2xl:w-[100px] 2xl:h-[100px] rounded-3xl"
+            ></div>
           </div>
-          <div className="xl:text-2xl 2xl:text-3xl font-bold text-start ml-11 xl:ml-20">200</div>
-          <div
-          className="bg-[#FFFFFF1A] absolute top-0 right-0 xl:w-[90px] xl:h-[90px] 2xl:w-[100px] 2xl:h-[100px] rounded-3xl"
-          ></div>
-        </div>
-
-        <div 
-        style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
-        className="h-24 xl:h-28 2xl:h-32 bg-green-lightgreen-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative">
-          <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
-            <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
-              <Check className="block lg:hidden" size={18}/>
-              <Check className="hidden lg:block xl:hidden" size={15}/>
-              <Check className="hidden xl:block 2xl:hidden" size={18}/>
-              <Check className="hidden 2xl:block" size={27}/>
-            </span>
-            <h3 className="text-[12px] xl:text-[14px] 2xl:text-[18px] font-medium">Delivered Orders</h3>
+        </Link>
+      
+        <Link to='/production/delivered_orders'>
+          <div 
+          style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
+          className="h-24 xl:h-28 2xl:h-32 bg-green-lightgreen-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative">
+            <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
+              <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
+                <Check className="block lg:hidden" size={18}/>
+                <Check className="hidden lg:block xl:hidden" size={15}/>
+                <Check className="hidden xl:block 2xl:hidden" size={18}/>
+                <Check className="hidden 2xl:block" size={27}/>
+              </span>
+              <h3 className="text-[12px] xl:text-[14px] 2xl:text-[18px] font-medium">Delivered Orders</h3>
+            </div>
+            <div className="xl:text-2xl 2xl:text-3xl font-bold text-start  ml-11 xl:ml-20">150</div>
+            <div
+            className="bg-[#FFFFFF1A] absolute -top-4 -right-4 w-[60px] h-[60px] 2xl:w-[60px] 2xl:h-[60px] rounded-3xl "
+            ></div>
+            <div
+            className="bg-[#FFFFFF1A] absolute bottom-0 left-0 w-[68px] h-[42px] 2xl:w-[68px] 2xl:h-[42px] rounded-2xl "
+            ></div>
           </div>
-          <div className="xl:text-2xl 2xl:text-3xl font-bold text-start  ml-11 xl:ml-20">150</div>
-          <div
-          className="bg-[#FFFFFF1A] absolute -top-4 -right-4 w-[60px] h-[60px] 2xl:w-[60px] 2xl:h-[60px] rounded-3xl "
-          ></div>
-          <div
-          className="bg-[#FFFFFF1A] absolute bottom-0 left-0 w-[68px] h-[42px] 2xl:w-[68px] 2xl:h-[42px] rounded-2xl "
-          ></div>
-        </div>
+        </Link>
+        
 
         <div 
         style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
