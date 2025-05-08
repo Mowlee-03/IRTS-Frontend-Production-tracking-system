@@ -51,33 +51,32 @@ const ProductionStatusCards = () => {
           </div>
         </Link>
         
-
-        <div 
-        style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
-        className="h-24 xl:h-28 2xl:h-32 bg-red-lightred-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative sm:col-span-2 lg:col-span-1">
-          <div className="flex justify-start gap-2 2xl:gap-4 items-center xl:mb-1 2xl:mb-2">
-            <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
-              <ErrorIcon
-                sx={{
-                  fontSize: {
-                    sm: 18,
-                    md:16,
-                    lg:20, // small devices (≥600px)
-                    xl: 27,
-                    
-                  }
-                }}
-              />
-            </span>
-            <h3 className="text-[12px] xl:text-[14px] 2xl:text-[18px] font-medium">Pending Orders</h3>
+        <Link to='/production/pending_orders'>
+          <div 
+          style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
+          className="h-24 xl:h-28 2xl:h-32 bg-red-lightred-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative sm:col-span-2 lg:col-span-1">
+            <div className="flex justify-start gap-2 2xl:gap-4 items-center xl:mb-1 2xl:mb-2">
+              <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
+                <ErrorIcon
+                  sx={{
+                    fontSize: {
+                      sm: 18,
+                      md:16,
+                      lg:20, // small devices (≥600px)
+                      xl: 27,
+                      
+                    }
+                  }}
+                />
+              </span>
+              <h3 className="text-[12px] xl:text-[14px] 2xl:text-[18px] font-medium">Pending Orders</h3>
+            </div>
+            <div className="xl:text-2xl 2xl:text-3xl font-bold text-start ml-11 xl:ml-20">50</div>
+            <div
+            className="bg-[#FFFFFF1A] absolute top-0 left-0 xl:w-[90px] xl:h-[90px] 2xl:w-[100px] h-[100px] rounded-3xl"
+            ></div>
           </div>
-          <div className="xl:text-2xl 2xl:text-3xl font-bold text-start ml-11 xl:ml-20">50</div>
-          <div
-          className="bg-[#FFFFFF1A] absolute top-0 left-0 xl:w-[90px] xl:h-[90px] 2xl:w-[100px] h-[100px] rounded-3xl"
-          ></div>
-        </div>
-        
-
+        </Link>
       </div>
     );
   };

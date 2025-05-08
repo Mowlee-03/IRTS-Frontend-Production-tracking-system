@@ -7,6 +7,7 @@ import ProductionMain from '../layout/ProductionMain'
 import ProductionOverview from '../pages/ProductionPages/ProductionOverview'
 import TotalProductionOrder from '../pages/ProductionPages/TotalProductionOrder'
 import DeliveredOrders from '../pages/ProductionPages/DeliveredOrders'
+import PendingOrders from '../pages/ProductionPages/PendingOrders'
 
 
 const AppRouting = () => {
@@ -20,6 +21,7 @@ const AppRouting = () => {
             <Route path='overview' element={<ProductionOverview/>} />
             <Route path='total_orders'element={<TotalProductionOrder/>} />
             <Route path='delivered_orders' element={<DeliveredOrders/>} />
+            <Route path='pending_orders' element={<PendingOrders/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/production/overview" />} />

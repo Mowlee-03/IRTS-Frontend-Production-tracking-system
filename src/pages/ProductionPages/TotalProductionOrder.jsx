@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import MainDataTable from '../../components/common/MainDataTable';
-import { CopyIcon, Plus } from 'lucide-react';
-import ExportDropdownButton from '../../components/common/ExportDropdownBtn';
-import { CircularProgress, IconButton } from '@mui/material';
+import { Button, CircularProgress, IconButton, Stack } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { IconButtonColors } from '../../../Style';
+import AddIcon from '@mui/icons-material/Add';
+import { buttonstyle1, IconButtonColors, SearchQuickFilter } from '../../../Style';
+import { GridToolbarContainer, GridToolbarQuickFilter ,GridToolbarExport} from '@mui/x-data-grid';
+import GetAppIcon from '@mui/icons-material/GetApp';
 const TotalProductionOrder = () => {
   const [expandedRowId, setExpandedRowId] = useState(null);
 
@@ -238,40 +238,57 @@ const TotalProductionOrder = () => {
 
   ];
 
+  const CustomToolbar = () => {
+    return (
+      <GridToolbarContainer
+        sx={{ justifyContent: 'space-between', display: 'flex', padding: '16px' }}
+      >
+         <Stack
+          direction="row"
+          flexWrap="wrap"
+          justifyContent="flex-start"
+          alignItems="center"
+          sx={{ gap: 1 }}
+        >
+          <p className='bg-[#78FAD5] p-2 rounded-md'>Total Value:$57878</p>
+        </Stack>
+
+          <div className='flex gap-3' >
+            <GridToolbarExport
+              slotProps={{
+                button: { 
+                  sx: {
+                    color:"gray",
+                    padding: '6px',
+                    minWidth: 'unset',
+                    minHeight: 'unset'
+                },
+                },
+              }}
+            />
+            <GridToolbarQuickFilter
+              sx={SearchQuickFilter}
+            />
+            <Button
+            sx={buttonstyle1}
+            >
+              <AddIcon/>Add New Order
+            </Button>
+          </div>
+      </GridToolbarContainer>
+    );
+  };
 
   return (
-    <div className="w-full h-auto lg:h-[74vh] mb-3">
-      <div className="flex h-[10%] justify-between gap-3 lg:items-center mb-3 flex-col lg:flex-row">
-        <div className="flex gap-3">
-          <p className="bg-[#78FAD5] text-xs lg:text-[13px] 2xl:text-lg rounded-md p-1 xl:p-2 text-center">
-            Total Value: ₹<span>00000</span>
-          </p>
-          <ExportDropdownButton />
-          <button className="flex items-center justify-center gap-2 text-xs 2xl:text-sm font-medium rounded-md bg-[#4530FF] hover:bg-[#3925CC] text-white px-3">
-            <CopyIcon className="block 2xl:hidden" size={17} />
-            <CopyIcon className="hidden 2xl:block" size={20} />
-            Copy
-          </button>
-        </div>
-        <div className="flex items-center gap-3">
-          <input
-            className="p-2 h-8 2xl:h-11 border-2 2xl:w-[280px]"
-            type="text"
-            placeholder="Search"
-          />
-          <button className="flex items-center justify-center gap-2 text-xs 2xl:text-lg font-medium rounded-md bg-[#4530FF] hover:bg-[#3925CC] text-white px-2 2xl:px-3 py-2">
-            <Plus className="block 2xl:hidden" strokeWidth={2} size={17} />
-            <Plus className="hidden 2xl:block" strokeWidth={2} size={20} />
-            Add new order
-          </button>
-        </div>
-      </div>
-      <div className='h-[90%]'>
+    <div className="w-full h-auto lg:h-[75vh] pt-4">
+      
+      <div className='h-full'>
           <MainDataTable 
           columns={columns} 
           rows={rows} 
           expandedRowId={expandedRowId} 
           setExpandedRowId={setExpandedRowId}
+          CustomToolbar={CustomToolbar}
           />
       </div>
       

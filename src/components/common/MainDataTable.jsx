@@ -4,7 +4,7 @@ import ProductionStepper from './ProductionStepper';
 import { Chip, LinearProgress, Tooltip } from '@mui/material';
 import { Calendar, Package } from 'lucide-react';
 
-const MainDataTable = ({ columns, rows, expandedRowId ,setExpandedRowId}) => {
+const MainDataTable = ({ columns, rows, expandedRowId ,setExpandedRowId,CustomToolbar}) => {
   const handleRowClick = (params) => {
     setExpandedRowId((prevId) => (prevId === params.id ? null : params.id));
   };
@@ -92,11 +92,13 @@ const MainDataTable = ({ columns, rows, expandedRowId ,setExpandedRowId}) => {
         ))}
 
 
-      <div className="rounded-xl w-full h-full overflow-x-hidden bg-main-background shadow-bg-shadow-1 flex-1">
+      <div className="rounded-xl w-full h-full overflow-x-hidden  shadow-bg-shadow-1 flex-1">
         <DataGrid
           rows={rows}
           columns={columns}
           pageSizeOptions={[5, 10, 20]}
+          slots={{toolbar:CustomToolbar}}
+          showToolbar
           onRowClick={handleRowClick}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
@@ -108,6 +110,10 @@ const MainDataTable = ({ columns, rows, expandedRowId ,setExpandedRowId}) => {
             textAlign: 'center',
             border: 'none',
             backgroundColor: 'white',
+            '& .MuiDataGrid-toolbarContainer': {
+                backgroundColor: 'none', // 👈 Your custom toolbar color
+                borderRadius: 0, // 👈 Ensures toolbar has no rounded corners
+              },
             '& .MuiDataGrid-columnHeader': {
               padding: '0px 30px',
               backgroundColor: '#E9F4FF',

@@ -3,7 +3,7 @@ import SimpleDataTable from '../../components/common/SimpleDataTable';
 import { Button, Chip, IconButton, Stack, useMediaQuery } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { GridToolbarContainer, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
-import { IconButtonColors } from '../../../Style';
+import { IconButtonColors, SearchQuickFilter } from '../../../Style';
 import OrderDetailsCard from '../../components/productionUi/OrderDetailCard';
 const DeliveredOrders = () => {
   const isSmallScreen = useMediaQuery('(max-width:1024px)');
@@ -126,7 +126,7 @@ const CustomToolbar = () => {
       textTransform: 'none',
       fontWeight: 400,
       borderRadius: '8px',
-      py:1,
+      py:'5px',
       px:2,
       mx: 0.5,
       boxShadow:"none",
@@ -180,24 +180,7 @@ const CustomToolbar = () => {
 
         <div >
           <GridToolbarQuickFilter
-            sx={{
-              '& .MuiInputBase-root': {
-                borderRadius: '8px',
-                backgroundColor: '#F9FAFB',
-                paddingLeft: '8px',
-                paddingRight: '8px',
-                height: '40px',
-              },
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#E2E8F0', // default border
-              },
-              '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#E2E8F0', // focus border color
-              },
-              '& input': {
-                fontSize: '14px',
-              },
-            }}
+            sx={SearchQuickFilter}
           />
         </div>
     </GridToolbarContainer>

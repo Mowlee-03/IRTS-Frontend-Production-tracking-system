@@ -9,6 +9,8 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const headings = [
     { path: '/production/overview', title: 'Overall Production Performance Status' },
     { path: '/production/total_orders', title: 'Total Production Orders' },
+    { path: '/production/delivered_orders', title: 'Delivered Orders' },
+    { path: '/production/pending_orders', title: 'Pending Orders' },
   ];
   
   const getHeading = () => {
