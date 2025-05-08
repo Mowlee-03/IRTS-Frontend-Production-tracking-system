@@ -56,4 +56,4 @@ const ProductDeliveryStatusCard = () => {
   );
 };
 
-export default ProductDeliveryStatusCard;
+export default React.memo(ProductDeliveryStatusCard);

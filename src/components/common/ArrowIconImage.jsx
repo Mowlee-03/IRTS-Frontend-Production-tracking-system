@@ -23,4 +23,4 @@ const ArrowIcon = ({ type }) => {
     )
   }
   
-export default ArrowIcon
+export default React.memo(ArrowIcon)

@@ -57,4 +57,4 @@ const AssignedLineChart = () => {
   )
 }
 
-export default AssignedLineChart;
+export default React.memo(AssignedLineChart)

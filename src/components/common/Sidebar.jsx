@@ -97,4 +97,4 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

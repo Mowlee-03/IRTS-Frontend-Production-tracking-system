@@ -11,7 +11,8 @@ const MainDataTable = ({ columns, rows, expandedRowId ,setExpandedRowId,CustomTo
   return (
     <div className="w-full h-full flex flex-col  lg:flex lg:flex-row gap-3">
      
-        {rows.map((row) => (
+        {rows.filter((row) => row.id === expandedRowId)
+              .map((row) => (
             <div
             key={`custom-collapse-${row.id}`}
             className={`bg-main-background px-2 py-3 flex flex-col gap-4 lg:items-center justify-center transition-all duration-300 rounded-xl  shadow-bg-shadow-1 h-auto lg:h-full lg:w-1/5 ${
@@ -145,4 +146,4 @@ const MainDataTable = ({ columns, rows, expandedRowId ,setExpandedRowId,CustomTo
   );
 };
 
-export default MainDataTable;
+export default React.memo(MainDataTable);

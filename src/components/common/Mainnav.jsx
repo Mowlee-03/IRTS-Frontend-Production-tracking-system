@@ -61,4 +61,4 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   );
 };
 
-export default MainNav;
+export default React.memo(MainNav)

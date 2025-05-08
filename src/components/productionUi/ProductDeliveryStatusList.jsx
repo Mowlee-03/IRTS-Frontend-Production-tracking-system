@@ -131,7 +131,4 @@ const ProductionDeliveryStatusList= () => {
 }
 
 
-
-
-
-export default ProductionDeliveryStatusList
+export default React.memo(ProductionDeliveryStatusList)

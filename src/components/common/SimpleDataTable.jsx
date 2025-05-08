@@ -53,4 +53,4 @@ const SimpleDataTable = ({columns,rows,CustomToolbar}) => {
   )
 }
 
-export default SimpleDataTable
+export default React.memo(SimpleDataTable)

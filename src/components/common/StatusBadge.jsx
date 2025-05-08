@@ -1,6 +1,7 @@
 import CriticalIcon from '../../assets/Commonicons/🛑.png'
 import WarningIcon from '../../assets/Commonicons/⚠️.png'
 import CheckIcon from '../../assets/Commonicons/✅.png'
+import React from 'react'
 
 const StatusBadge = ({ type }) => {
     let bgColor, textColor, text, iconUrl
@@ -31,4 +32,4 @@ const StatusBadge = ({ type }) => {
   }
 
 
-export default StatusBadge
+export default React.memo(StatusBadge)

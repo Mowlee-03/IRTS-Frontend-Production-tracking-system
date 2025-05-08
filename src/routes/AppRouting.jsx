@@ -1,7 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from '../pages/Login'
-import ProtectedRoute from './ProtectedRoute'
 import Layout from '../layout/Layout'
 import ProductionMain from '../layout/ProductionMain'
 import ProductionOverview from '../pages/ProductionPages/ProductionOverview'

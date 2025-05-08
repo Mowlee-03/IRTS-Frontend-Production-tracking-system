@@ -114,4 +114,4 @@ const StatusTile = ({ title, count, icon, progressData, color, gradient }) => {
   );
 };
 
-export default StatusTile;
+export default React.memo(StatusTile);

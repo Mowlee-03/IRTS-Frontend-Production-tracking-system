@@ -43,12 +43,12 @@ const ProductionStatusCards = () => {
             ...(isActive("/production/delivered_orders") 
             ? { 
               scale:1.02,
-              boxShadow: '0px 0px 15px 0px #1e7716de' } 
+              boxShadow: '0px 0px 15px 0px #059669' } 
             :
             {
             boxShadow: '0px 8px 24px 0px #4318D140'
             }) }}
-          className="transition-all duration-100  h-24 xl:h-28 2xl:h-32  bg-green-lightgreen-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative">
+          className="transition-all duration-100 bg-[#059669]  h-24 xl:h-28 2xl:h-32  bg-green-lightgreen-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative">
             <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
               <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
                 <Check className="block lg:hidden" size={18}/>
@@ -105,4 +105,4 @@ const ProductionStatusCards = () => {
     );
   };
   
-  export default ProductionStatusCards;
+export default React.memo(ProductionStatusCards);

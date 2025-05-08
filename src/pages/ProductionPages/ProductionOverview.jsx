@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import ProductDeliveryStatusCard from '../../components/productionUi/ProductDeliveryStatusCard';
-import rectangel from '../../assets/sidebarIcons/Bg-rectangel.png'
 import OrderTable from '../../components/productionUi/ProductDeliveryStatusList';
-import ProductioLineProgressOverviewTable from '../../components/productionUi/ProductioLineProgressOverviewTable';
 import ProductionLineProgressOverviewTable from '../../components/productionUi/ProductioLineProgressOverviewTable';
 import AssignedLineChart from '../../components/productionUi/AssignedLineChart';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';

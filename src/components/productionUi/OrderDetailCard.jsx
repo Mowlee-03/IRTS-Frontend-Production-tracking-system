@@ -199,4 +199,4 @@ const OrderDetailsCard = ({ order,onClose }) => {
   );
 };
 
-export default OrderDetailsCard;
+export default React.memo(OrderDetailsCard)

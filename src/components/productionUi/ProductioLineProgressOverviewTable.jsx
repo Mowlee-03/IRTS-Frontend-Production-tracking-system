@@ -85,4 +85,4 @@ const ProductionLineProgressOverviewTable = () => {
   )
 }
 
-export default ProductionLineProgressOverviewTable;
+export default React.memo(ProductionLineProgressOverviewTable)
