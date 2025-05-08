@@ -4,14 +4,23 @@ import {
  } from "lucide-react";
 import React from "react";
 import ErrorIcon from '@mui/icons-material/Error';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const ProductionStatusCards = () => {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
     return (
       <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-14 px-10 pt-2 xl:px-0 xl:pt-2">
         <Link to="/production/total_orders">
           <div 
-          style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
-          className="h-24 xl:h-28 2xl:h-32 bg-blue-purple-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4  text-white relative">
+          style={{ 
+            ...(isActive("/production/total_orders") 
+              ? { 
+                scale:1.02,
+                boxShadow: '0px 0px 15px 0px #5a0cf7bb' } 
+              : { boxShadow: '0px 8px 24px 0px #4318D140' })
+          }}
+          className="transition-all duration-100 h-24 xl:h-28 2xl:h-32 bg-blue-purple-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4  text-white relative">
             <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
               <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
                 <Menu className="block lg:hidden" size={18} />
@@ -30,8 +39,16 @@ const ProductionStatusCards = () => {
       
         <Link to='/production/delivered_orders'>
           <div 
-          style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
-          className="h-24 xl:h-28 2xl:h-32 bg-green-lightgreen-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative">
+          style={{ 
+            ...(isActive("/production/delivered_orders") 
+            ? { 
+              scale:1.02,
+              boxShadow: '0px 0px 15px 0px #1e7716de' } 
+            :
+            {
+            boxShadow: '0px 8px 24px 0px #4318D140'
+            }) }}
+          className="transition-all duration-100  h-24 xl:h-28 2xl:h-32  bg-green-lightgreen-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative">
             <div className="flex  justify-start gap-2 2xl:gap-4 items-center mb-2">
               <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
                 <Check className="block lg:hidden" size={18}/>
@@ -53,8 +70,15 @@ const ProductionStatusCards = () => {
         
         <Link to='/production/pending_orders'>
           <div 
-          style={{ boxShadow: '0px 8px 24px 0px #4318D140' }}
-          className="h-24 xl:h-28 2xl:h-32 bg-red-lightred-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative sm:col-span-2 lg:col-span-1">
+          style={{ 
+            ...(isActive("/production/pending_orders") 
+            ? { 
+              scale:1.02,
+              boxShadow: '0px 0px 15px 0px #8f1929de' } 
+            :
+            {
+            boxShadow: '0px 8px 24px 0px #4318D140' })}}
+          className="transition-all duration-100  h-24 xl:h-28 2xl:h-32 bg-[#8f1929de] bg-red-lightred-gradient rounded-xl xl:rounded-3xl shadow-lg pt-4 ps-4 text-white relative sm:col-span-2 lg:col-span-1">
             <div className="flex justify-start gap-2 2xl:gap-4 items-center xl:mb-1 2xl:mb-2">
               <span className="bg-[#FFFFFF33] rounded-md xl:rounded-2xl p-2 xl:p-3">
                 <ErrorIcon

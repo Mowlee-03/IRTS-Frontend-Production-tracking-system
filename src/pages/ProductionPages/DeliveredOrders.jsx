@@ -3,7 +3,7 @@ import SimpleDataTable from '../../components/common/SimpleDataTable';
 import { Button, Chip, IconButton, Stack, useMediaQuery } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { GridToolbarContainer, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
-import { IconButtonColors, SearchQuickFilter } from '../../../Style';
+import { ExportDataBtn, IconButtonColors, SearchQuickFilter } from '../../../Style';
 import OrderDetailsCard from '../../components/productionUi/OrderDetailCard';
 const DeliveredOrders = () => {
   const isSmallScreen = useMediaQuery('(max-width:1024px)');
@@ -178,7 +178,14 @@ const CustomToolbar = () => {
         ))}
       </Stack>
 
-        <div >
+        <div className='flex gap-3'>
+          <GridToolbarExport
+            slotProps={{
+              button: { 
+                sx: ExportDataBtn,
+              },
+            }}
+          />
           <GridToolbarQuickFilter
             sx={SearchQuickFilter}
           />
