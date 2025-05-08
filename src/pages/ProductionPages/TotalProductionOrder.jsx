@@ -1,19 +1,30 @@
+"use client"
+
 import React, { useState } from 'react';
 import MainDataTable from '../../components/common/MainDataTable';
-import { Button, CircularProgress, IconButton, Stack } from '@mui/material';
+import { Button, CircularProgress, IconButton, Stack, Dialog, DialogContent } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AddIcon from '@mui/icons-material/Add';
 import { buttonstyle1, IconButtonColors, SearchQuickFilter } from '../../../Style';
-import { GridToolbarContainer, GridToolbarQuickFilter ,GridToolbarExport} from '@mui/x-data-grid';
+import { GridToolbarContainer, GridToolbarQuickFilter, GridToolbarExport } from '@mui/x-data-grid';
+import AddOrderPanel from '../../components/productionUi/AddOrderPanel';
+
 const TotalProductionOrder = () => {
   const [expandedRowId, setExpandedRowId] = useState(null);
-
+  const [isOrderPanelOpen, setIsOrderPanelOpen] = useState(false);
 
   const toggleRowExpansion = (id) => {
     setExpandedRowId(prev => (prev === id ? null : id));
   };
-  
+
+  const handleOpenOrderPanel = () => {
+    setIsOrderPanelOpen(true);
+  };
+
+  const handleCloseOrderPanel = () => {
+    setIsOrderPanelOpen(false);
+  };
 
   const rows = [
     {
@@ -81,8 +92,9 @@ const TotalProductionOrder = () => {
       renderCell: (params) => (
         <IconButton
           onClick={(e) => {
-            e.stopPropagation()
-            toggleRowExpansion(params.id)}}
+            e.stopPropagation();
+            toggleRowExpansion(params.id);
+          }}
           sx={IconButtonColors}
         >
           {expandedRowId === params.id ? (
@@ -91,69 +103,69 @@ const TotalProductionOrder = () => {
             <VisibilityIcon fontSize="small" />
           )}
         </IconButton>
-      )
+      ),
     },
     {
       field: 'id',
       headerName: 'KIT NO',
       width: 120,
-      renderCell: (params) => {
-        return <div style={{ paddingLeft: '20px' }}>{params.value}</div>;
-      },
+      renderCell: (params) => (
+        <div style={{ paddingLeft: '20px' }}>{params.value}</div>
+      ),
     },
     {
-      field: 'poNumber',
+      field: 'po WNumber',
       headerName: 'PO Number',
       width: 130,
-      renderCell: (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'poDate',
       headerName: 'PO Date',
       width: 120,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'soNumber',
       headerName: 'S/O NUM',
       width: 130,
-      renderCell: (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'proNumber',
       headerName: 'PRO NUM',
       width: 130,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'customer',
       headerName: 'Customer',
       width: 120,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'itemName',
       headerName: 'Item Name',
       width: 200,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'orderQty',
       headerName: 'Order Qty',
       width: 120,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'pendingQty',
       headerName: 'Pending Qty',
       width: 140,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'materialRequiredDate',
       headerName: 'Material Required Date',
       width: 180,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'bom',
@@ -214,27 +226,26 @@ const TotalProductionOrder = () => {
       field: 'days',
       headerName: 'Days',
       width: 100,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'value',
       headerName: 'Value',
       width: 100,
-      renderCell:  (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'total',
       headerName: 'Total',
       width: 120,
-      renderCell: (params) =>  params.value
+      renderCell: (params) => params.value,
     },
     {
       field: 'deliveryDate',
       headerName: 'Delivery Date',
       width: 140,
-      renderCell: (params) =>  params.value
+      renderCell: (params) => params.value,
     },
-
   ];
 
   const CustomToolbar = () => {
@@ -242,55 +253,62 @@ const TotalProductionOrder = () => {
       <GridToolbarContainer
         sx={{ justifyContent: 'space-between', display: 'flex', padding: '16px' }}
       >
-         <Stack
+        <Stack
           direction="row"
           flexWrap="wrap"
           justifyContent="flex-start"
           alignItems="center"
           sx={{ gap: 1 }}
         >
-          <p className='bg-[#78FAD5] p-2 rounded-md'>Total Value:$57878</p>
+          <p className="bg-[#78FAD5] p-2 rounded-md">Total Value: $57878</p>
         </Stack>
 
-          <div className='flex gap-3' >
-            <GridToolbarExport
-              slotProps={{
-                button: { 
-                  sx: {
-                    color:"gray",
-                    padding: '6px',
-                    minWidth: 'unset',
-                    minHeight: 'unset'
+        <div className="flex gap-3">
+          <GridToolbarExport
+            slotProps={{
+              button: {
+                sx: {
+                  color: "gray",
+                  padding: '6px',
+                  minWidth: 'unset',
+                  minHeight: 'unset',
                 },
-                },
-              }}
-            />
-            <GridToolbarQuickFilter
-              sx={SearchQuickFilter}
-            />
-            <Button
+              },
+            }}
+          />
+          <GridToolbarQuickFilter sx={SearchQuickFilter} />
+          <Button
             sx={buttonstyle1}
-            >
-              <AddIcon/>Add New Order
-            </Button>
-          </div>
+            onClick={handleOpenOrderPanel}
+          >
+            <AddIcon /> Add New Order
+          </Button>
+        </div>
       </GridToolbarContainer>
     );
   };
 
   return (
     <div className="w-full h-auto lg:h-[75vh] pt-4">
-      
-      <div className='h-full'>
-          <MainDataTable 
-          columns={columns} 
-          rows={rows} 
-          expandedRowId={expandedRowId} 
+      <div className="h-full">
+        <MainDataTable
+          columns={columns}
+          rows={rows}
+          expandedRowId={expandedRowId}
           setExpandedRowId={setExpandedRowId}
           CustomToolbar={CustomToolbar}
-          />
+        />
       </div>
-      
+      <Dialog
+        open={isOrderPanelOpen}
+        onClose={handleCloseOrderPanel}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogContent sx={{ padding: 0 ,height:"100%"}}>
+          <AddOrderPanel isOpen={isOrderPanelOpen} onClose={handleCloseOrderPanel} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
