@@ -302,7 +302,13 @@ const TotalProductionOrder = () => {
       <Dialog
         open={isOrderPanelOpen}
         onClose={handleCloseOrderPanel}
-        maxWidth="lg"
+        maxWidth={false}
+        sx={{
+          '& .MuiDialog-paper': {
+
+            maxWidth: '1000px',
+          },
+        }}
         fullWidth
         PaperProps={{
           sx:{
