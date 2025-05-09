@@ -13,7 +13,8 @@ export default {
         "text-secondary-clr":"#000000",
         "active-bg-clr":"#F1F5F9",
         "hover-bg-clr":"#F1F5F9",
-        "main-background":"#ffffff"
+        "main-background":"#ffffff",
+        "gray-background-1":"#F1F5F9"
       },
       boxShadow:{
         "bg-shadow-1":'0px 4px 4px 0px #00000040',

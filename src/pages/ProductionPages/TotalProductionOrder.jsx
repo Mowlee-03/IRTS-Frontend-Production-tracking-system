@@ -302,10 +302,27 @@ const TotalProductionOrder = () => {
       <Dialog
         open={isOrderPanelOpen}
         onClose={handleCloseOrderPanel}
-        maxWidth="md"
+        maxWidth="lg"
         fullWidth
+        PaperProps={{
+          sx:{
+            // backgroundColor: 'transparent',
+            boxShadow:"-5px 5px 30px 0px #ffffff40",
+            borderRadius:"20px"
+          }
+        }}
+        BackdropProps={{
+          sx: {
+            backdropFilter:"blur(2.5px)",
+            // backgroundColor: 'gray', 
+          },
+        }}
       >
-        <DialogContent sx={{ padding: 0 ,height:"100%"}}>
+        <DialogContent 
+          sx={{
+            padding: 0,
+          }}
+        >
           <AddOrderPanel isOpen={isOrderPanelOpen} onClose={handleCloseOrderPanel} />
         </DialogContent>
       </Dialog>
