@@ -8,7 +8,7 @@ import { Tooltip } from "@mui/material";
 import FileUpload from "../common/ExcelFIleUpload";
 import { useProductionDialog } from "../../context/ProductionDialogContext";
 const AddOrderPanel = ({ isOpen, onClose}) => {
-  const {entryMethod, setEntryMethod,showFileUpload, setShowFileUpload}=useProductionDialog()
+  const {entryMethod, setEntryMethod,showFileUpload, setShowFileUpload,closeDialog}=useProductionDialog()
   const [showTip,hideTip]=useState(true)
   if (!isOpen) return null
   const templateData=[
@@ -181,6 +181,7 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
               exportname={"Order Template"} 
               templateData={templateData}
               navigateTo={"/production/new_orders/via_excel"}
+              closeDialog={closeDialog}
               />
             </>
           )

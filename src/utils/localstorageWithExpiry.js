@@ -19,6 +19,6 @@ export const getWithExpiry = (key) => {
       return null;
     }
   
-    return item.value;
+    return item;
   };
   

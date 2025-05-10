@@ -1,10 +1,11 @@
 import { DataGrid, } from '@mui/x-data-grid'
 import React from 'react'
 
-const SimpleDataTable = ({columns,rows,CustomToolbar}) => {
+const SimpleDataTable = ({columns,rows,CustomToolbar,...props}) => {
   return (
     <>  
         <DataGrid
+        
             rows={rows}
             columns={columns}
             showToolbar
@@ -46,6 +47,8 @@ const SimpleDataTable = ({columns,rows,CustomToolbar}) => {
                 backgroundColor: '#E9F4FF',
             },
             }}
+            
+            {...props} 
         />
     </>
        

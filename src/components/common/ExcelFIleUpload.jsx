@@ -5,7 +5,7 @@ import ExcelTemplateGenerator from './ExcellTemplateGenartor';
 import { parseExcelData } from '../../utils/excelparser';
 import { storeWithExpiry } from '../../utils/localstorageWithExpiry';
 
-const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo }) => {
+const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo ,closeDialog}) => {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -50,7 +50,8 @@ const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo }) => {
   
       setTimeout(() => {
         setUploading(false);
-        navigate(navigateTo, { state: { file } });
+        navigate(`${navigateTo}?refresh=`+ Date.now());
+        closeDialog()
       }, 500);
     } catch (err) {
       setUploading(false);
