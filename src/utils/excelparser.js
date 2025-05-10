@@ -33,8 +33,11 @@ export const parseExcelData = (file, templateData) => {
             )
           );
         }
-
-        return resolve(jsonData);
+        const dataWithIds = jsonData.map((row, index) => ({
+          id: index + 1,
+          ...row,
+        }));
+        return resolve(dataWithIds);
       } catch (err) {
         return reject(new Error('Failed to parse the file.'));
       }
