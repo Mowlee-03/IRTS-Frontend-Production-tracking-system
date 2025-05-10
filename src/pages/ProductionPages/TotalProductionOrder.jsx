@@ -1,30 +1,23 @@
-"use client"
-
 import React, { useState } from 'react';
 import MainDataTable from '../../components/common/MainDataTable';
-import { Button, CircularProgress, IconButton, Stack, Dialog, DialogContent } from '@mui/material';
+import { Button, CircularProgress, IconButton, Stack, } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AddIcon from '@mui/icons-material/Add';
 import { buttonstyle1, IconButtonColors, SearchQuickFilter } from '../../../Style';
 import { GridToolbarContainer, GridToolbarQuickFilter, GridToolbarExport } from '@mui/x-data-grid';
-import AddOrderPanel from '../../components/productionUi/AddOrderPanel';
+import { useProductionDialog } from '../../context/ProductionDialogContext';
+
 
 const TotalProductionOrder = () => {
   const [expandedRowId, setExpandedRowId] = useState(null);
-  const [isOrderPanelOpen, setIsOrderPanelOpen] = useState(false);
+  const {openDialog}=useProductionDialog()
 
   const toggleRowExpansion = (id) => {
     setExpandedRowId(prev => (prev === id ? null : id));
   };
 
-  const handleOpenOrderPanel = () => {
-    setIsOrderPanelOpen(true);
-  };
 
-  const handleCloseOrderPanel = () => {
-    setIsOrderPanelOpen(false);
-  };
 
   const rows = [
     {
@@ -279,7 +272,7 @@ const TotalProductionOrder = () => {
           <GridToolbarQuickFilter sx={SearchQuickFilter} />
           <Button
             sx={buttonstyle1}
-            onClick={handleOpenOrderPanel}
+            onClick={openDialog}
           >
             <AddIcon /> Add New Order
           </Button>
@@ -299,39 +292,6 @@ const TotalProductionOrder = () => {
           CustomToolbar={CustomToolbar}
         />
       </div>
-      <Dialog
-        open={isOrderPanelOpen}
-        onClose={handleCloseOrderPanel}
-        maxWidth={false}
-        sx={{
-          '& .MuiDialog-paper': {
-
-            maxWidth: '1000px',
-          },
-        }}
-        fullWidth
-        PaperProps={{
-          sx:{
-            // backgroundColor: 'transparent',
-            boxShadow:"-5px 5px 30px 0px #ffffff40",
-            borderRadius:"20px"
-          }
-        }}
-        BackdropProps={{
-          sx: {
-            backdropFilter:"blur(2.5px)",
-            // backgroundColor: 'gray', 
-          },
-        }}
-      >
-        <DialogContent 
-          sx={{
-            padding: 0,
-          }}
-        >
-          <AddOrderPanel isOpen={isOrderPanelOpen} onClose={handleCloseOrderPanel} />
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

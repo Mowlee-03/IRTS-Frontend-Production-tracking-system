@@ -53,8 +53,11 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </div>
         </div>
       </div>
-      <div className=''>
-       <ProductionStatusCards/>
+
+      <div >
+         {['/production/total_orders', '/production/delivered_orders', '/production/pending_orders'].includes(location.pathname) && (
+            <ProductionStatusCards/>
+         )}
       </div>
       
     </div>

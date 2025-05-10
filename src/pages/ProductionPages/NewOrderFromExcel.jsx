@@ -2,7 +2,7 @@ import React from 'react'
 
 const NewOrderFromExcel = () => {
   return (
-    <div>NewOrderFromExcel</div>
+    <div></div>
   )
 }
 
