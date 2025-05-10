@@ -4,7 +4,7 @@ import AddOrderPanel from './AddOrderPanel';
 import { useProductionDialog } from '../../context/ProductionDialogContext';
 
 const ProductionOrderEntryPanelDialogue = () => {
-  const { isOrderPanelOpen, closeDialog } = useProductionDialog();
+  const { isOrderPanelOpen, closeDialog, } = useProductionDialog();
 
   return (
     <Dialog

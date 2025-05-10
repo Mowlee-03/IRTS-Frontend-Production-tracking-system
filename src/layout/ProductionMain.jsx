@@ -8,8 +8,6 @@ const ProductionMain = () => {
         <Outlet/>
         <ProductionOrderEntryPanelDialogue/>
     </ProductionDialogProvider>
-        
-   
   )
 }
 export default ProductionMain

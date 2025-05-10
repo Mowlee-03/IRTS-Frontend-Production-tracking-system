@@ -6,9 +6,9 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import { Tooltip } from "@mui/material";
 import FileUpload from "../common/ExcelFIleUpload";
-const AddOrderPanel = ({ isOpen, onClose }) => {
-  const [entryMethod, setEntryMethod] = useState("manual")
-  const [showFileUpload, setShowFileUpload] = useState(false)
+import { useProductionDialog } from "../../context/ProductionDialogContext";
+const AddOrderPanel = ({ isOpen, onClose}) => {
+  const {entryMethod, setEntryMethod,showFileUpload, setShowFileUpload}=useProductionDialog()
   const [showTip,hideTip]=useState(true)
   if (!isOpen) return null
   const templateData=[
