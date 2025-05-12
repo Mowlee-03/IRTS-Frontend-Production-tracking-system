@@ -20,7 +20,7 @@ const Layout = () => {
       </div>
       
       
-      <div className="flex-1 flex flex-col overflow-auto  px-2 lg:pr-3 h-full">
+      <div className="flex-1 flex flex-col overflow-auto  px-2 lg:pr-3  ">
         {/* <div className=""> */}
           <MainNav 
             isSidebarOpen={isSidebarOpen} 

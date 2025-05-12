@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 const NewOrderAdding = () => {
   return (
-    <div className='min-h-[90%] pt-4'>
+    <div className='flex-1  py-4'>
       <Outlet/>
     </div>
   )
