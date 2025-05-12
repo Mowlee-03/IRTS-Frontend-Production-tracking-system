@@ -12,17 +12,79 @@ import {
   TextField,
   Grid,
   Button,
-  Divider
+  Divider,
+  Chip,
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableRow,
+  TableBody,
+  Collapse,
+  Autocomplete
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButtonColors } from '../../../Style';
-
+import { Plus } from 'lucide-react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ExcelPreviewPage = () => {
   const navigate = useNavigate();
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editableOrder, setEditableOrder] = useState(null);
+  const [rawMaterials, setRawMaterials] = useState([]);
+  const itemOptions = [
+  { id: 1, name: "Product A" },
+  { id: 2, name: "Product B" },
+];
+
+const productOptions = [
+  { id: 1, name: "Steel Rod" },
+  { id: 2, name: "Copper Wire" },
+];
+
+const uomOptions = [
+  { id: 1, name: "Kg" },
+  { id: 2, name: "Meter" },
+];
+
+const warehouseOptions = [
+  { id: 1, name: "Central Warehouse" },
+  { id: 2, name: "Secondary Storage" },
+];
+
+const handleAddRawMaterial = () => {
+  setRawMaterials(prev => [
+    ...prev,
+    {
+      rawMaterialName: null,
+      quantity: "",
+      uom: null,
+      warehouse: null,
+      remarks: "",
+      expanded: true,
+    }
+  ]);
+};
+
+const handleRawMaterialChange = (index, field, value) => {
+  const updated = [...rawMaterials];
+  updated[index][field] = value;
+  setRawMaterials(updated);
+};
+
+const handleDeleteRawMaterial = (index) => {
+  const updated = rawMaterials.filter((_, i) => i !== index);
+  setRawMaterials(updated);
+};
+
+const toggleRawMaterialExpand = (index) => {
+  const updated = [...rawMaterials];
+  updated[index].expanded = !updated[index].expanded;
+  setRawMaterials(updated);
+};
 
   useEffect(() => {
     const selectedIdsData = getWithExpiry('SelectedOrderIds');
@@ -44,15 +106,20 @@ const ExcelPreviewPage = () => {
     }
   }, [navigate]);
 
-  const handleTabChange = (_, newValue) => {
-    setTabIndex(newValue);
-  };
-
-
-  const handleEdit = (order) => {
-  setIsEditMode(true);
-  setEditableOrder({ ...order }); // clone to avoid mutation
+ const handleTabChange = (event, newValue) => {
+  setTabIndex(newValue);
+  setEditableOrder(null); // ✅ This resets the form to the current tab's data
+  setIsEditMode(false);   // 🔒 Optional: exit edit mode if needed
 };
+
+
+
+const handleEdit = (order) => {
+  const clonedOrder = JSON.parse(JSON.stringify(order));
+  setEditableOrder(clonedOrder);
+  setIsEditMode(true);
+};
+
 const handleSave = () => {
   const updatedOrders = [...selectedOrders];
   updatedOrders[tabIndex] = editableOrder;
@@ -60,7 +127,7 @@ const handleSave = () => {
   setIsEditMode(false);
 };
 
-console.log(selectedOrders);
+
 
 
 const renderOrderDetails = () => {
@@ -127,7 +194,7 @@ const renderOrderDetails = () => {
   return (
     <Box mt={3} >
       <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>Production Order Details</Typography>
-      <Grid container spacing={4} >
+      <Grid container columnSpacing={3} rowSpacing={2}>
         {renderInput('Order Type', 'orderType')}
         {renderInput('Customer', 'customer')}
         {renderInput('Delivery Date', 'deliveryDate')}
@@ -141,10 +208,10 @@ const renderOrderDetails = () => {
        
       </Grid>
 
-      <Divider sx={{ my: 3 }} />
+      <Divider sx={{ my: 2 }} />
 
       <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>Finished Product Details</Typography>
-      <Grid container spacing={2}>
+      <Grid container columnSpacing={3} rowSpacing={2}>
         {renderInput('Item Name', 'itemName',12,4)}
         {renderInput('Quantity', 'orderQty', 12,4)}
         {renderInput('UOM', 'uom', 12, 4)}
@@ -152,16 +219,103 @@ const renderOrderDetails = () => {
         {renderInput('Total', 'total')}
       </Grid>
 
-      <Divider sx={{ my: 3 }} />
+      <Divider sx={{ my: 2}} />
 
       <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>Raw Material Details</Typography>
-      <Grid container spacing={2}>
-        {renderInput('Item Name', 'rmItemName')}
-        {renderInput('Quantity', 'rmQty', 3)}
-        {renderInput('UOM', 'rmUom', 3)}
-      </Grid>
+      
+      <Box component="section" sx={{ mt: 4, display: "flex", flexDirection: "column", gap: 2 }}>
 
-      <Divider sx={{ my: 3 }} />
+        <TableContainer component={Paper} sx={{ boxShadow: '0px 3px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+          <Table>
+            <TableHead>
+              <TableRow sx={{ backgroundColor: "rgba(96, 165, 250, 0.1)" }}>
+                <TableCell sx={{ fontWeight: 'bold' }}>Material Name</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>UOM</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rawMaterials.map((rm, index) => (
+                <React.Fragment key={index}>
+                  <TableRow sx={{ backgroundColor: rm.expanded ? "rgba(96, 165, 250, 0.05)" : "white" }}>
+                    
+                    <TableCell>{rm.rawMaterialName ? (typeof rm.rawMaterialName === 'object' ? rm.rawMaterialName.name : rm.rawMaterialName) : "Select"}</TableCell>
+                    <TableCell>{rm.quantity || "-"}</TableCell>
+                    <TableCell>{rm.uom ? (typeof rm.uom === 'object' ? rm.uom.name : rm.uom) : "-"}</TableCell>
+                    <TableCell>
+                      <IconButton color="error" onClick={() => handleDeleteRawMaterial(index)} sx={{ '&:hover': { backgroundColor: 'rgba(211, 47, 47, 0.1)' } }}>
+                        <DeleteIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => toggleRawMaterialExpand(index)}
+                        sx={{ transform: rm.expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }}
+                      >
+                        <ExpandMoreIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+
+                  <TableRow>
+                    <TableCell colSpan={6} style={{ padding: 0 }}>
+                      <Collapse in={rm.expanded} timeout="auto" unmountOnExit>
+                        <Box sx={{ padding: 2, backgroundColor: "#f9f9f9", borderRadius: "4px" }}>
+                          <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'bold', color: '#374151' }}>Raw Material Details</Typography>
+                          <Grid container spacing={2}>
+                            
+                            <Grid item size={{xs:12 ,md:4}}>
+                              <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>Material Name</Typography>
+                              <Autocomplete
+                                size='small'
+                                options={productOptions}
+                                getOptionLabel={(option) => (typeof option === 'object' ? option.name : option)}
+                                value={rm.rawMaterialName}
+                                onChange={(_, val) => handleRawMaterialChange(index, 'rawMaterialName', val)}
+                                renderInput={(params) => <TextField {...params} />}
+                              />
+                            </Grid>
+                            <Grid item size={{xs:12 ,md:4}}>
+                              <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>Quantity</Typography>
+                              <TextField
+                                size='small'
+                                type="number"
+                                variant="outlined"
+                                fullWidth
+                                value={rm.quantity}
+                                onChange={(e) => handleRawMaterialChange(index, 'quantity', Number(e.target.value))}
+                                
+                              />
+                            </Grid>
+                            <Grid item size={{xs:12 ,md:4}}>
+                              <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>UOM</Typography>
+                              <Autocomplete
+                                size='small'
+                                options={uomOptions}
+                                getOptionLabel={(option) => (typeof option === 'object' ? option.name : option)}
+                                value={rm.uom}
+                                onChange={(_, val) => handleRawMaterialChange(index, 'uom', val)}
+                                renderInput={(params) => <TextField {...params} />}
+                              />
+                            </Grid>
+                           
+                          </Grid>
+                        </Box>
+                      </Collapse>
+                    </TableCell>
+                  </TableRow>
+                </React.Fragment>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Button variant="outlined" onClick={handleAddRawMaterial} sx={{ alignSelf: "center", display: 'flex', gap: 1 }}>
+          <Plus /> Add Raw Material
+        </Button>
+      </Box>
+
+
+      <Divider sx={{ my: 2 }} />
 
       <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>Scheduling Details</Typography>
       <Grid container spacing={2}>
