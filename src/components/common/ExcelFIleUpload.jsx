@@ -44,7 +44,7 @@ const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo ,closeD
       const parsedData = await parseExcelData(file, templateData);
   
       await slowProgress(70); // Continue to 70%
-      storeWithExpiry(exportname || 'uploadedData', parsedData, 24 * 60 * 60 * 1000);
+      storeWithExpiry(exportname || 'uploadedData', parsedData, 24);
   
       await slowProgress(100); // Finish to 100%
   

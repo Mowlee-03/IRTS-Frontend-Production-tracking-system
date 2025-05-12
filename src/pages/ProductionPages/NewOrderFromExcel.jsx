@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { getWithExpiry } from '../../utils/localstorageWithExpiry';
+import { getWithExpiry, storeWithExpiry } from '../../utils/localstorageWithExpiry';
 import { Button, IconButton, Stack } from '@mui/material';
 import { buttonstyle1 } from '../../../Style';
 import Loader from '../../components/common/Loader';
 import { useProductionDialog } from '../../context/ProductionDialogContext';
 import { RefreshCcw } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SimpleDataTable from '../../components/common/SimpleDataTable';
 import RestoreIcon from '@mui/icons-material/Restore';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteConfirmationModal from '../../components/common/DeleteConfirmation';
 const NewOrderFromExcel = () => {
   const [loading, setLoading] = useState(true);
@@ -18,8 +19,11 @@ const NewOrderFromExcel = () => {
   const [rows, setRows] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // For Modal
   const [itemName, setItemName] = useState(''); // For modal item name
-  
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
+  const navigate=useNavigate()
+
   useEffect(() => {
+    localStorage.removeItem("SelectedOrderIds")
   const timer = setTimeout(() => {
     const data = getWithExpiry('Order Template');
     setOrderTemplate(data);
@@ -49,18 +53,45 @@ const NewOrderFromExcel = () => {
   }
 
     const handleReuploadClick = () => {
-    // Set the item name for the modal (or any specific item)
     setItemName('Order Template');
     setIsModalOpen(true);
   };
 
   const handleDeleteConfirm = () => {
-    // Remove local storage value and reset the state
     localStorage.removeItem('Order Template');
     setOrderTemplate(null);
     setIsModalOpen(false);
-    // Optionally, trigger any re-render or state update here
   };
+
+  const handleSelectionChange = (newSelection) => {
+    let selectedIds = [];
+    try {
+      if (newSelection && newSelection.type === 'include' && newSelection.ids instanceof Set) {
+        selectedIds = Array.from(newSelection.ids); // Convert Set to array
+      } else if (Array.isArray(newSelection)) {
+        selectedIds = newSelection; // Already an array
+      } else {
+        console.warn('Unexpected selection model:', newSelection);
+      }
+     
+      setSelectedRowIds(selectedIds);
+    } catch (error) {
+      console.error('Error in handleSelectionChange:', error);
+      setSelectedRowIds([]);
+    }
+  };
+
+  const handlePreviewSelection=()=>{
+    if (selectedRowIds.length > 0) {
+     
+      console.log('Storing selectedIds:', selectedRowIds); 
+
+      storeWithExpiry('SelectedOrderIds', selectedRowIds, 24);
+      navigate('/production/new_orders/excel_preview');
+    } else {
+      alert('Please select at least one order to preview.');
+    }
+  }
   const CustomToolbar=()=>{
     return(
       <div className=' flex justify-between items-center p-5'>
@@ -89,8 +120,11 @@ const NewOrderFromExcel = () => {
               <RestoreIcon sx={{color:""}}/>Re Upload
           </Button>
           <Button 
-          sx={buttonstyle1}
+          sx={{...buttonstyle1,display:"flex",gap:1,alignItems:"center",justifyContent:"center"}}
+          onClick={handlePreviewSelection}
+          
           >
+            <RemoveRedEyeIcon/>
             Preview Selected
           </Button>
         </Stack>
@@ -120,7 +154,8 @@ const NewOrderFromExcel = () => {
             rows={rows} 
             CustomToolbar={CustomToolbar}  
             checkboxSelection
-            disableRowSelectionOnClick
+            // disableRowSelectionOnClick
+            onRowSelectionModelChange={handleSelectionChange}
            />
         </div>
       )}

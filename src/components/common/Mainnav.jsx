@@ -11,6 +11,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/production/total_orders', title: 'Total Production Orders' },
     { path: '/production/delivered_orders', title: 'Delivered Orders' },
     { path: '/production/pending_orders', title: 'Pending Orders' },
+    { path: '/production/new_orders/via_excel', title: 'Add New Production Order' },
   ];
   
   const getHeading = () => {
@@ -55,7 +56,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
       </div>
 
       <div >
-         {['/production/total_orders', '/production/delivered_orders', '/production/pending_orders'].includes(location.pathname) && (
+         {['/production/total_orders', '/production/delivered_orders', '/production/pending_orders','/production/overview'].includes(location.pathname) && (
             <ProductionStatusCards/>
          )}
       </div>

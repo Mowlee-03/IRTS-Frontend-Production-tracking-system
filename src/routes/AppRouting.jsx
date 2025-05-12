@@ -9,6 +9,7 @@ import DeliveredOrders from '../pages/ProductionPages/DeliveredOrders'
 import PendingOrders from '../pages/ProductionPages/PendingOrders'
 import NewOrderAdding from '../layout/NewOrderAdding'
 import NewOrderFromExcel from '../pages/ProductionPages/NewOrderFromExcel'
+import ExcelPreviewPage from '../components/productionUi/ExcelPreviewPage'
 
 
 const AppRouting = () => {
@@ -25,6 +26,7 @@ const AppRouting = () => {
             <Route path='pending_orders' element={<PendingOrders/>} />
             <Route path='new_orders' element={<NewOrderAdding/>}>
                 <Route path='via_excel'element={<NewOrderFromExcel/>} />
+                <Route path='excel_preview'element={<ExcelPreviewPage/>} />
             </Route>
           </Route>
         </Route>
