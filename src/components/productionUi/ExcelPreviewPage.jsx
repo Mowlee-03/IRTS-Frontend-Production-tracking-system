@@ -29,7 +29,6 @@ const ExcelPreviewPage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editableOrder, setEditableOrder] = useState(null);
-console.log(selectedOrders);
 
   const productOptions = [
     { id: 1, name: "Steel Rod" },
@@ -262,7 +261,6 @@ console.log(selectedOrders);
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>Raw Material Details</Typography>
-
         <TableContainer component={Paper} sx={{ boxShadow: '0px 3px 6px rgba(0,0,0,0.1)', borderRadius: '0px' }}>
           <Table>
             <TableHead>

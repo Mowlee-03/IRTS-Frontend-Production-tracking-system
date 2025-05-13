@@ -4,6 +4,8 @@ import { LinearProgress } from '@mui/material';
 import ExcelTemplateGenerator from './ExcellTemplateGenartor';
 import { parseExcelData } from '../../utils/excelparser';
 import { storeWithExpiry } from '../../utils/localstorageWithExpiry';
+import { useDispatch } from 'react-redux';
+import { showSnackbar } from '../../Redux/Slice/SnackbarSlice';
 
 const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo ,closeDialog}) => {
   const fileInputRef = useRef(null);
@@ -12,7 +14,7 @@ const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo ,closeD
   const [error, setError] = useState('');
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-
+  const dispatch=useDispatch()
   const validTypes = [
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     'application/vnd.ms-excel',
@@ -52,6 +54,7 @@ const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo ,closeD
         setUploading(false);
         navigate(`${navigateTo}?refresh=`+ Date.now());
         closeDialog()
+        dispatch(showSnackbar({message:"Excel Uploaded Successfully",variant:"success"}))
       }, 500);
     } catch (err) {
       setUploading(false);
