@@ -4,12 +4,12 @@ import axios from "axios";
 import { GET_USER_INFO } from "../auth/api";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Redux/Slice/Userslice";
-// import { useSnackbar } from 'notistack'; // For user feedback
+
 
 const ProtectedRoute = ({ element }) => {
   const [userInfo, setUserInfo] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  // const { enqueueSnackbar } = useSnackbar(); // Snackbar for alerts
+
   const dispatch = useDispatch();
 
   useEffect(() => {

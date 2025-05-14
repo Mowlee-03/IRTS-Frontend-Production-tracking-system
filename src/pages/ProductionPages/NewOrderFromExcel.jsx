@@ -10,6 +10,8 @@ import SimpleDataTable from '../../components/common/SimpleDataTable';
 import RestoreIcon from '@mui/icons-material/Restore';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteConfirmationModal from '../../components/common/DeleteConfirmation';
+import { useDispatch } from 'react-redux';
+import { showSnackbar } from '../../Redux/Slice/SnackbarSlice';
 const NewOrderFromExcel = () => {
   const [loading, setLoading] = useState(true);
   const [orderTemplate, setOrderTemplate] = useState(null);
@@ -21,7 +23,7 @@ const NewOrderFromExcel = () => {
   const [itemName, setItemName] = useState(''); // For modal item name
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const navigate=useNavigate()
-
+  const dispatch=useDispatch()
   useEffect(() => {
     localStorage.removeItem("SelectedOrderIds")
   const timer = setTimeout(() => {
@@ -89,7 +91,7 @@ const NewOrderFromExcel = () => {
       storeWithExpiry('SelectedOrderIds', selectedRowIds, 24);
       navigate('/production/new_orders/excel_preview');
     } else {
-      alert('Please select at least one order to preview.');
+      dispatch(showSnackbar({message:'Please select at least one order to preview.',severity:"warning"}));
     }
   }
   const CustomToolbar=()=>{

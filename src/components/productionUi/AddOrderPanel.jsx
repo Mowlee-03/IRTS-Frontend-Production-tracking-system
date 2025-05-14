@@ -7,9 +7,23 @@ import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import { Tooltip } from "@mui/material";
 import FileUpload from "../common/ExcelFIleUpload";
 import { useProductionDialog } from "../../context/ProductionDialogContext";
+import ConfirmModal from "../common/ConfirmModal";
+import { useNavigate } from "react-router-dom";
 const AddOrderPanel = ({ isOpen, onClose}) => {
   const {entryMethod, setEntryMethod,showFileUpload, setShowFileUpload,closeDialog}=useProductionDialog()
   const [showTip,hideTip]=useState(true)
+  const [openConfirmModal, setOpenConfirmModal] = useState(false)
+  const navigate=useNavigate()
+  const handleOpen = () => {
+    setShowFileUpload(false)
+    setOpenConfirmModal(true)
+  }
+  const handleClose = () => setOpenConfirmModal(false)
+  const handleConfirm = () => {
+    navigate('/production/new_orders/single')
+    setOpenConfirmModal(false)
+    closeDialog()
+  }
   if (!isOpen) return null
   const templateData=[
     {
@@ -102,7 +116,7 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-3">
                 {/* Single Order Card */}
                 <div 
-                onClick={()=>setShowFileUpload(false)}
+                onClick={handleOpen}
                 className="border cursor-pointer border-gray-200 hover:border-[#8B5CF6] rounded-lg p-4 lg:p-6 relative group overflow-hidden">
                   <div className="flex items-start gap-4">
                     <div className="bg-gray-background-1 p-3 rounded-lg">
@@ -291,6 +305,12 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
           </div>
         )}
        
+       <ConfirmModal
+        open={openConfirmModal}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        title="Proceed Single Entry Method"
+       />
       </div>
 
   )

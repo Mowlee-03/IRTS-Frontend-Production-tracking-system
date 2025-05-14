@@ -54,7 +54,7 @@ const FileUpload = ({ exportname, showFileUpload,templateData,navigateTo ,closeD
         setUploading(false);
         navigate(`${navigateTo}?refresh=`+ Date.now());
         closeDialog()
-        dispatch(showSnackbar({message:"Excel Uploaded Successfully",variant:"success"}))
+        dispatch(showSnackbar({message:"Excel Uploaded Successfully",severity:"success"}))
       }, 500);
     } catch (err) {
       setUploading(false);
