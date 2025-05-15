@@ -43,6 +43,12 @@ export const buttonstyle1={
   py:1,
   px:2
 }
+export const buttonstyle2={
+  bgcolor:"#BB3E00",
+  color:'white',
+  py:1,
+  px:2
+}
 
 
 export const dropdownstyle1={

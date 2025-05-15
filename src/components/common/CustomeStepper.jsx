@@ -8,10 +8,6 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-// Dummy icons for illustration
-import SettingsIcon from '@mui/icons-material/Settings';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 
 // Custom connector for cleaner look
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -80,10 +76,10 @@ const CustomeStepper = ({ steps, activeStep }) => {
       alternativeLabel
       activeStep={activeStep}
       connector={<ColorlibConnector />}
-      
+      sx={{width:"100%"}}
     >
       {steps.map((step, index) => (
-        <Step key={index}>
+        <Step key={index} >
           <StepLabel
             StepIconComponent={(props) => (
               <ColorlibStepIcon {...props} icon={step.icon} />
