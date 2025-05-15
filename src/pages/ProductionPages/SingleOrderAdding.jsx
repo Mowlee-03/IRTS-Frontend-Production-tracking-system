@@ -87,62 +87,62 @@ const SingleOrderAdding = () => {
   const validateStep = useCallback((stepIndex, data) => {
     const newErrors = {};
 
-    // if (stepIndex === 0) {
-    //   const orderRequiredFields = [
-    //     'kitNo',
-    //     'poNumber',
-    //     'poDate',
-    //     'soNumber',
-    //     'proNumber',
-    //     'itemName',
-    //     'bomKitName',
-    //     'customer',
-    //     'deliveryDate',
-    //     'itemValue',
-    //     'orderQty',
-    //   ];
-    //   orderRequiredFields.forEach((field) => {
-    //     if (!data.orderDetails[field]) {
-    //       newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is required`;
-    //     } else if (field === 'itemValue' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
-    //       newErrors[field] = 'Item value must be a positive number';
-    //     } else if (field === 'orderQty' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
-    //       newErrors[field] = 'Order quantity must be a positive integer';
-    //     } else if (field === 'poDate' || field === 'deliveryDate') {
-    //       const date = new Date(data.orderDetails[field]);
-    //       if (isNaN(date.getTime())) {
-    //         newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is invalid`;
-    //       }
-    //     }
-    //   });
+    if (stepIndex === 0) {
+      const orderRequiredFields = [
+        'kitNo',
+        'poNumber',
+        'poDate',
+        'soNumber',
+        'proNumber',
+        'itemName',
+        'bomKitName',
+        'customer',
+        'deliveryDate',
+        'itemValue',
+        'orderQty',
+      ];
+      orderRequiredFields.forEach((field) => {
+        if (!data.orderDetails[field]) {
+          newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is required`;
+        } else if (field === 'itemValue' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
+          newErrors[field] = 'Item value must be a positive number';
+        } else if (field === 'orderQty' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
+          newErrors[field] = 'Order quantity must be a positive integer';
+        } else if (field === 'poDate' || field === 'deliveryDate') {
+          const date = new Date(data.orderDetails[field]);
+          if (isNaN(date.getTime())) {
+            newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is invalid`;
+          }
+        }
+      });
 
-    //   // Validate date sequence
-    //   const poDate = new Date(data.orderDetails.poDate);
-    //   const deliveryDate = new Date(data.orderDetails.deliveryDate);
-    //   if (
-    //     poDate &&
-    //     deliveryDate &&
-    //     !isNaN(poDate.getTime()) &&
-    //     !isNaN(deliveryDate.getTime()) &&
-    //     poDate > deliveryDate
-    //   ) {
-    //     newErrors.poDate = 'PO date must be before delivery date';
-    //   }
+      // Validate date sequence
+      const poDate = new Date(data.orderDetails.poDate);
+      const deliveryDate = new Date(data.orderDetails.deliveryDate);
+      if (
+        poDate &&
+        deliveryDate &&
+        !isNaN(poDate.getTime()) &&
+        !isNaN(deliveryDate.getTime()) &&
+        poDate > deliveryDate
+      ) {
+        newErrors.poDate = 'PO date must be before delivery date';
+      }
 
-    //   if (data.scheduleDetails.isBufferdaysNeed) {
-    //     if (!data.scheduleDetails.bufferDays) {
-    //       newErrors.bufferDays = 'Buffer days is required when buffer is needed';
-    //     } else if (isNaN(data.scheduleDetails.bufferDays) || data.scheduleDetails.bufferDays < 0) {
-    //       newErrors.bufferDays = 'Buffer days must be a non-negative number';
-    //     } else if (data.scheduleDetails.bufferDays > 1000) {
-    //       newErrors.bufferDays = 'Buffer days cannot exceed 1000';
-    //     }
-    //   }
+      if (data.scheduleDetails.isBufferdaysNeed) {
+        if (!data.scheduleDetails.bufferDays) {
+          newErrors.bufferDays = 'Buffer days is required when buffer is needed';
+        } else if (isNaN(data.scheduleDetails.bufferDays) || data.scheduleDetails.bufferDays < 0) {
+          newErrors.bufferDays = 'Buffer days must be a non-negative number';
+        } else if (data.scheduleDetails.bufferDays > 1000) {
+          newErrors.bufferDays = 'Buffer days cannot exceed 1000';
+        }
+      }
 
-    //   if (!data.scheduleDetails.actualDeliveredOn && data.orderDetails.deliveryDate) {
-    //     newErrors.actualDeliveredOn = 'Actual delivery date is required';
-    //   }
-    // }
+      if (!data.scheduleDetails.actualDeliveredOn && data.orderDetails.deliveryDate) {
+        newErrors.actualDeliveredOn = 'Actual delivery date is required';
+      }
+    }
 
     if (stepIndex === 1) {
       if (!data.materialDetails.length) {
@@ -173,6 +173,34 @@ const SingleOrderAdding = () => {
       }
     }
 
+    if (stepIndex === 2) {
+    if (!data.processDetails.length) {
+      newErrors.processDetails = { general: 'At least one process must be added' };
+    } else {
+      newErrors.processDetails = {};
+      data.processDetails.forEach((process, index) => {
+        const processErrors = {};
+        if (!process.processName) {
+          processErrors.processName = 'Process name is required';
+        }
+        if (!process.workCenter) {
+          processErrors.workCenter = 'Work center is required';
+        }
+        if (!process.operator) {
+          processErrors.operator = 'Operator is required';
+        }
+
+        if (Object.keys(processErrors).length > 0) {
+          newErrors.processDetails[index] = processErrors;
+        }
+      });
+
+      // Clean up if no errors in processes
+      if (Object.keys(newErrors.processDetails).length === 0) {
+        delete newErrors.processDetails;
+      }
+    }
+  }
     return newErrors;
   }, []);
 
@@ -187,8 +215,12 @@ const SingleOrderAdding = () => {
           updatedMaterials[materialIndex] = { ...updatedMaterials[materialIndex], [field]: value };
           updatedData.materialDetails = updatedMaterials;
         } else if (section === 'processDetails' && processIndex !== null) {
+        
+          
           const updatedProcesses = [...prevData.processDetails];
           updatedProcesses[processIndex] = { ...updatedProcesses[processIndex], [field]: value };
+
+          
           updatedData.processDetails = updatedProcesses;
         } else {
           updatedData[section] = { ...prevData[section], [field]: value };
@@ -291,13 +323,22 @@ const addProcess = (newProcess) => {
 };
 
 // Delete Process by index
+// Delete Process by index
 const deleteProcess = (index) => {
-  setOrderData((prev) => ({
-    ...prev,
-    processDetails: prev.processDetails.filter((_, i) => i !== index),
-  }));
-};
+  setOrderData((prev) => {
+    const updatedProcesses = prev.processDetails.filter((_, i) => i !== index);
+    const updatedData = {
+      ...prev,
+      processDetails: updatedProcesses,
+    };
 
+    // Revalidate the updated processDetails
+    const stepErrors = validateStep(activeStep, updatedData);
+    setErrors(stepErrors);
+
+    return updatedData;
+  });
+};
   // Handle step navigation
   const handleNext = () => {
     const stepErrors = validateStep(activeStep, orderData);
@@ -341,7 +382,8 @@ const deleteProcess = (index) => {
       case 2:
         return (
           <ProcessDetailsForm
-            processDetails={orderData.processDetails}
+            processDetails={orderData.processDetails||[]}
+            onUpdate={handleFormUpdate}
             onAdd={addProcess}
             onDelete={deleteProcess}
             errors={errors.processDetails || {}}

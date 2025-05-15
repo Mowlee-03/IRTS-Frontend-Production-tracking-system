@@ -56,14 +56,6 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
     mb: 0.5,
   };
 
-  const outlinedButtonStyle = {
-    borderColor: '#1976d2',
-    color: '#1976d2',
-    '&:hover': {
-      borderColor: '#115293',
-      backgroundColor: 'rgba(132, 204, 22, 0.1)',
-    },
-  };
 
   // Toggle row expansion
   const toggleExpand = (index) => {
@@ -89,7 +81,7 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
         <Button
           variant="outlined"
           onClick={handleAddMaterial}
-          sx={{ ...buttonstyle1, display: 'flex', alignSelf: 'center', gap: 1 }}
+          sx={{ ...buttonstyle1, display: 'flex', alignSelf: 'center', gap: 1 ,mb:1}}
         >
           <Add /> Add Material
         </Button>
@@ -98,7 +90,7 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
       <TableContainer component={Paper} sx={{ boxShadow: '0px 3px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <Table>
           <TableHead>
-            <TableRow sx={{ backgroundColor: 'rgba(132, 204, 22, 0.1)' }}>
+            <TableRow sx={{ backgroundColor: 'rgba(240, 248, 255, 1)' }}>
               <TableCell sx={{ fontWeight: 'bold' }}>S.No</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Material Name</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
@@ -109,7 +101,7 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
           <TableBody>
             {materialDetails.map((material, index) => (
               <React.Fragment key={index}>
-                <TableRow sx={{ backgroundColor: expandedRow === index ? 'rgba(132, 204, 22, 0.05)' : 'white' }}>
+                <TableRow sx={{ backgroundColor: expandedRow === index ? '#f9f9f9' : 'white' }}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell sx={{ color: errors[index]?.materialName ? '#d32f2f' : 'inherit' }}>
                     {material.materialName || 'Enter Material'}
@@ -158,12 +150,12 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
                 <TableRow>
                   <TableCell colSpan={6} style={{ padding: 0 }}>
                     <Collapse in={expandedRow === index} timeout="auto" unmountOnExit>
-                      <Box sx={{ padding: 2, backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
+                      <Box sx={{ padding: 2, backgroundColor: 'rgba(240, 248, 255, 1)', borderRadius: '4px' }}>
                         <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'bold', color: '#4B5563' }}>
                           Material Details
                         </Typography>
                         <Grid container spacing={2}>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item size={{xs:12,md:4}}>
                             <Typography {...labelStyle}>Material Name</Typography>
                             <TextField
                               fullWidth
@@ -175,7 +167,7 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
                               required
                             />
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item size={{xs:12,md:4}}>
                             <Typography {...labelStyle}>Quantity</Typography>
                             <TextField
                               fullWidth
@@ -195,7 +187,7 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
                               required
                             />
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item size={{xs:12,md:4}}>
                             <Typography {...labelStyle}>Unit of Measure</Typography>
                             <TextField
                               fullWidth
@@ -219,7 +211,7 @@ const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, error
       </TableContainer>
 
       {materialDetails.length === 0 && (
-        <Typography sx={{ mt: 2, color: errors?.general ? '#d32f2f' : '#757575' }}>
+        <Typography sx={{ mt: 2, color: errors?.general ? '#d32f2f' : '#757575',textAlign:"center" }}>
           {errors?.general || 'No materials added yet. Click "Add Material" to start.'}
         </Typography>
       )}

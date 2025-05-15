@@ -41,13 +41,15 @@ export const buttonstyle1={
   bgcolor:"#4318D1",
   color:'white',
   py:1,
-  px:2
+  px:2,
+  borderRadius: '8px',
 }
 export const buttonstyle2={
   bgcolor:"#BB3E00",
   color:'white',
   py:1,
-  px:2
+  px:2,
+  borderRadius: '8px',
 }
 
 
