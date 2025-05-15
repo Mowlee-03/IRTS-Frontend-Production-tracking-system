@@ -1,151 +1,229 @@
 import React, { useState } from 'react';
-import { Button, TextField, MenuItem, Collapse, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
-import { Add, Edit, Delete, ExpandMore, ExpandLess } from '@mui/icons-material';
-import { buttonstyle1, buttonstyle2 } from '../../../../Style';
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+  IconButton,
+  Collapse,
+  Paper,
+  Grid,
+} from '@mui/material';
+import { Add, Delete as DeleteIcon, ExpandMore as ExpandMoreIcon, ExpandLess as ExpandLessIcon } from '@mui/icons-material';
+import { buttonstyle1 } from '../../../../Style';
 
-const MaterialDetailsForm = ({ materialDetails, onUpdate, onAddOrUpdate, onDelete, errors }) => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [newMaterial, setNewMaterial] = useState({ materialName: '', quantity: '', uom: '' });
-  const [editIndex, setEditIndex] = useState(null);
+const MaterialDetailsForm = ({ materialDetails, onUpdate, onAdd, onDelete, errors }) => {
+  const [expandedRow, setExpandedRow] = useState(null); // Tracks which row is expanded
 
-  const uomOptions = ['kg', 'liter', 'unit', 'meter'];
-
-  const handleInputChange = (field, value) => {
-    setNewMaterial((prev) => ({ ...prev, [field]: value }));
-    onUpdate('materialDetails', field, value, editIndex !== null ? editIndex : materialDetails.length);
+  // Reusable styles
+  const textFieldStyle = {
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '8px',
+      backgroundColor: '#fff',
+      '& fieldset': {
+        borderColor: '#e0e0e0',
+      },
+      '&:hover fieldset': {
+        borderColor: '#bdbdbd',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#1976d2',
+      },
+      '&.Mui-error fieldset': {
+        borderColor: '#d32f2f',
+      },
+    },
+    '& .MuiInputBase-input': {
+      padding: '13px 14px',
+      fontSize: '0.875rem',
+    },
+    '& .MuiFormHelperText-root': {
+      fontSize: '0.75rem',
+      marginLeft: '4px',
+    },
   };
 
-  const handleSubmit = () => {
-    const success = onAddOrUpdate(newMaterial, editIndex);
-    if (success) {
-      setNewMaterial({ materialName: '', quantity: '', uom: '' });
-      setEditIndex(null);
-      setIsFormOpen(false);
-    }
+  const labelStyle = {
+    variant: 'subtitle2',
+    fontWeight: 500,
+    color: '#4B5563',
+    mb: 0.5,
   };
 
-  const handleEdit = (index) => {
-    setNewMaterial(materialDetails[index]);
-    setEditIndex(index);
-    setIsFormOpen(true);
+  const outlinedButtonStyle = {
+    borderColor: '#1976d2',
+    color: '#1976d2',
+    '&:hover': {
+      borderColor: '#115293',
+      backgroundColor: 'rgba(132, 204, 22, 0.1)',
+    },
+  };
+
+  // Toggle row expansion
+  const toggleExpand = (index) => {
+    setExpandedRow(expandedRow === index ? null : index);
+  };
+
+  const handleAddMaterial = () => {
+    const newMaterials = {
+      materialName: '',
+      quantity: null,
+      uom: '',
+    };
+    onAdd(newMaterials);
+    setExpandedRow(materialDetails.length); // Set the newly added row as expanded
   };
 
   return (
-    <div className="p-4 flex flex-col gap-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold">Material Details</h2>
+    <Box sx={{ p: 3 }}>
+      <div className="flex items-center justify-between">
+        <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', color: '#4B5563' }}>
+          Material Details
+        </Typography>
         <Button
-          variant="contained"
-          startIcon={isFormOpen ? <ExpandLess /> : <Add />}
-          onClick={() => {
-            setIsFormOpen(!isFormOpen);
-            setNewMaterial({ materialName: '', quantity: '', uom: '' });
-            setEditIndex(null);
-          }}
-          sx={buttonstyle1}
+          variant="outlined"
+          onClick={handleAddMaterial}
+          sx={{ ...buttonstyle1, display: 'flex', alignSelf: 'center', gap: 1 }}
         >
-          {isFormOpen ? 'Close Form' : 'Add Material'}
+          <Add /> Add Material
         </Button>
       </div>
 
-      <Collapse in={isFormOpen}>
-        <div className="bg-gray-50 p-4 rounded-lg shadow-sm flex flex-col gap-4">
-          <TextField
-            label="Material Name"
-            value={newMaterial.materialName}
-            onChange={(e) => handleInputChange('materialName', e.target.value)}
-            error={!!errors[editIndex]?.materialName}
-            helperText={errors[editIndex]?.materialName}
-            fullWidth
-            size="small"
-          />
-          <TextField
-            label="Quantity"
-            type="number"
-            value={newMaterial.quantity}
-            onChange={(e) => handleInputChange('quantity', e.target.value)}
-            error={!!errors[editIndex]?.quantity}
-            helperText={errors[editIndex]?.quantity}
-            fullWidth
-            size="small"
-          />
-          <TextField
-            select
-            label="Unit of Measure"
-            value={newMaterial.uom}
-            onChange={(e) => handleInputChange('uom', e.target.value)}
-            error={!!errors[editIndex]?.uom}
-            helperText={errors[editIndex]?.uom}
-            fullWidth
-            size="small"
-          >
-            {uomOptions.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-          <div className="flex gap-2">
-            <Button
-              variant="contained"
-              onClick={handleSubmit}
-              sx={buttonstyle1}
-            >
-              {editIndex !== null ? 'Update Material' : 'Add Material'}
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                setIsFormOpen(false);
-                setNewMaterial({ materialName: '', quantity: '', uom: '' });
-                setEditIndex(null);
-              }}
-              sx={buttonstyle2}
-            >
-              Cancel
-            </Button>
-          </div>
-        </div>
-      </Collapse>
-
-      <TableContainer component={Paper} className="shadow-sm">
+      <TableContainer component={Paper} sx={{ boxShadow: '0px 3px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell>Material Name</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Unit of Measure</TableCell>
-              <TableCell align="right">Actions</TableCell>
+            <TableRow sx={{ backgroundColor: 'rgba(132, 204, 22, 0.1)' }}>
+              <TableCell sx={{ fontWeight: 'bold' }}>S.No</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Material Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>UOM</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {materialDetails.length > 0 ? (
-              materialDetails.map((material, index) => (
-                <TableRow key={material.id || index}>
-                  <TableCell>{material.materialName}</TableCell>
-                  <TableCell>{material.quantity}</TableCell>
-                  <TableCell>{material.uom}</TableCell>
-                  <TableCell align="right">
-                    <IconButton onClick={() => handleEdit(index)}>
-                      <Edit />
+            {materialDetails.map((material, index) => (
+              <React.Fragment key={index}>
+                <TableRow sx={{ backgroundColor: expandedRow === index ? 'rgba(132, 204, 22, 0.05)' : 'white' }}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell sx={{ color: errors[index]?.materialName ? '#d32f2f' : 'inherit' }}>
+                    {material.materialName || 'Enter Material'}
+                    {errors[index]?.materialName && (
+                      <Typography variant="caption" color="error" display="block">
+                        {errors[index].materialName}
+                      </Typography>
+                    )}
+                  </TableCell>
+                  <TableCell sx={{ color: errors[index]?.quantity ? '#d32f2f' : 'inherit' }}>
+                    {material.quantity || '-'}
+                    {errors[index]?.quantity && (
+                      <Typography variant="caption" color="error" display="block">
+                        {errors[index].quantity}
+                      </Typography>
+                    )}
+                  </TableCell>
+                  <TableCell sx={{ color: errors[index]?.uom ? '#d32f2f' : 'inherit' }}>
+                    {material.uom || '-'}
+                    {errors[index]?.uom && (
+                      <Typography variant="caption" color="error" display="block">
+                        {errors[index].uom}
+                      </Typography>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="error"
+                      onClick={() => onDelete(index)}
+                      sx={{ '&:hover': { backgroundColor: 'rgba(211, 47, 47, 0.1)' } }}
+                    >
+                      <DeleteIcon />
                     </IconButton>
-                    <IconButton onClick={() => onDelete(index)}>
-                      <Delete />
+                    <IconButton
+                      onClick={() => toggleExpand(index)}
+                      sx={{
+                        transform: expandedRow === index ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s',
+                        '&:hover': { backgroundColor: 'rgba(132, 204, 22, 0.1)' },
+                      }}
+                    >
+                      {expandedRow === index ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                     </IconButton>
                   </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={4} align="center">
-                  No materials added yet.
-                </TableCell>
-              </TableRow>
-            )}
+                <TableRow>
+                  <TableCell colSpan={6} style={{ padding: 0 }}>
+                    <Collapse in={expandedRow === index} timeout="auto" unmountOnExit>
+                      <Box sx={{ padding: 2, backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
+                        <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'bold', color: '#4B5563' }}>
+                          Material Details
+                        </Typography>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} sm={4}>
+                            <Typography {...labelStyle}>Material Name</Typography>
+                            <TextField
+                              fullWidth
+                              value={material.materialName}
+                              onChange={(e) => onUpdate('materialDetails', 'materialName', e.target.value, index)}
+                              error={!!errors[index]?.materialName}
+                              helperText={errors[index]?.materialName}
+                              sx={textFieldStyle}
+                              required
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <Typography {...labelStyle}>Quantity</Typography>
+                            <TextField
+                              fullWidth
+                              type="number"
+                              value={material.quantity || ''}
+                              onChange={(e) =>
+                                onUpdate(
+                                  'materialDetails',
+                                  'quantity',
+                                  e.target.value === '' ? '' : parseFloat(e.target.value),
+                                  index
+                                )
+                              }
+                              error={!!errors[index]?.quantity}
+                              helperText={errors[index]?.quantity}
+                              sx={textFieldStyle}
+                              required
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <Typography {...labelStyle}>Unit of Measure</Typography>
+                            <TextField
+                              fullWidth
+                              value={material.uom}
+                              onChange={(e) => onUpdate('materialDetails', 'uom', e.target.value, index)}
+                              error={!!errors[index]?.uom}
+                              helperText={errors[index]?.uom}
+                              sx={textFieldStyle}
+                              required
+                            />
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+
+      {materialDetails.length === 0 && (
+        <Typography sx={{ mt: 2, color: errors?.general ? '#d32f2f' : '#757575' }}>
+          {errors?.general || 'No materials added yet. Click "Add Material" to start.'}
+        </Typography>
+      )}
+    </Box>
   );
 };
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import CustomeStepper from '../../components/common/CustomeStepper';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Button } from '@mui/material';
 import { Dock, Loader, MagnetIcon, PowerCircle } from 'lucide-react';
+import CustomeStepper from '../../components/common/CustomeStepper';
 import PlanDetailsForm from '../../components/productionUi/Forms/PlanDetailsForm';
 import MaterialDetailsForm from '../../components/productionUi/Forms/MaterialDetailsForm';
 import ProcessDetailsForm from '../../components/productionUi/Forms/ProcessDetailsForm';
@@ -9,9 +9,12 @@ import OverViewFormDetails from '../../components/productionUi/Forms/OverViewFor
 import { buttonstyle1, buttonstyle2 } from '../../../Style';
 
 
+
+
 const SingleOrderAdding = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const [orderData, setOrderData] = useState({
     orderDetails: {
@@ -42,6 +45,8 @@ const SingleOrderAdding = () => {
     processDetails: [],
   });
 
+  console.log(orderData);
+  
   const steps = [
     { label: 'Plan Details', icon: <Dock size={20} /> },
     { label: 'Material Details', icon: <MagnetIcon size={20} /> },
@@ -49,218 +54,256 @@ const SingleOrderAdding = () => {
     { label: 'Overview', icon: <Loader size={20} /> },
   ];
 
-  // Helper function to calculate actualDeliveredOn
-  const calculateActualDeliveredOn = (deliveryDate, isBufferdaysNeed, bufferDays) => {
-    if (!deliveryDate) return '';
+
+
+  // Calculate actualDeliveredOn
+  const calculateActualDeliveredOn = useCallback((deliveryDate, isBufferdaysNeed, bufferDays) => {
+    // Validate deliveryDate
+    if (!deliveryDate || typeof deliveryDate !== 'string' || deliveryDate.trim() === '') {
+      return '';
+    }
 
     const date = new Date(deliveryDate);
-    if (isNaN(date.getTime())) return '';
+    if (isNaN(date.getTime())) {
+      return '';
+    }
 
     if (isBufferdaysNeed && bufferDays !== null && !isNaN(bufferDays) && bufferDays >= 0) {
-      date.setDate(date.getDate() - parseInt(bufferDays));
+      const parsedBufferDays = parseInt(bufferDays);
+      // Limit bufferDays to a reasonable value (e.g., 1000 days)
+      if (parsedBufferDays > 1000) {
+        return ''; // Or set an error state if needed
+      }
+      date.setDate(date.getDate() - parsedBufferDays);
+      if (isNaN(date.getTime())) {
+        return ''; // Return empty if the resulting date is invalid
+      }
     }
 
     return date.toISOString().split('T')[0];
-  };
+  }, []);
 
-  // Shared validation logic
-  const validateForm = (data, options = { validateAll: false, field: null, section: null, materialIndex: null }) => {
-    const { validateAll, field, section, materialIndex } = options;
-    const newErrors = { ...errors };
+  // Validate step data
+  const validateStep = useCallback((stepIndex, data) => {
+    const newErrors = {};
 
-    // Validate orderDetails
-    if (!section || section === 'orderDetails') {
-      const requiredFields = [
-        'kitNo',
-        'poNumber',
-        'poDate',
-        'soNumber',
-        'proNumber',
-        'itemName',
-        'bomKitName',
-        'customer',
-        'deliveryDate',
-        'itemValue',
-        'orderQty',
-      ];
+    // if (stepIndex === 0) {
+    //   const orderRequiredFields = [
+    //     'kitNo',
+    //     'poNumber',
+    //     'poDate',
+    //     'soNumber',
+    //     'proNumber',
+    //     'itemName',
+    //     'bomKitName',
+    //     'customer',
+    //     'deliveryDate',
+    //     'itemValue',
+    //     'orderQty',
+    //   ];
+    //   orderRequiredFields.forEach((field) => {
+    //     if (!data.orderDetails[field]) {
+    //       newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is required`;
+    //     } else if (field === 'itemValue' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
+    //       newErrors[field] = 'Item value must be a positive number';
+    //     } else if (field === 'orderQty' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
+    //       newErrors[field] = 'Order quantity must be a positive integer';
+    //     } else if (field === 'poDate' || field === 'deliveryDate') {
+    //       const date = new Date(data.orderDetails[field]);
+    //       if (isNaN(date.getTime())) {
+    //         newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is invalid`;
+    //       }
+    //     }
+    //   });
 
-      const fieldsToValidate = validateAll ? requiredFields : [field].filter(Boolean);
-      fieldsToValidate.forEach((f) => {
-        if (data.orderDetails[f] === '' || data.orderDetails[f] === null) {
-          newErrors[f] = 'This field is required';
-        } else if (f === 'itemValue' && (isNaN(data.orderDetails[f]) || data.orderDetails[f] <= 0)) {
-          newErrors[f] = 'Must be a positive number';
-        } else if (f === 'orderQty' && (isNaN(data.orderDetails[f]) || data.orderDetails[f] <= 0)) {
-          newErrors[f] = 'Must be a positive integer';
-        } else {
-          delete newErrors[f];
-        }
-      });
-    }
+    //   // Validate date sequence
+    //   const poDate = new Date(data.orderDetails.poDate);
+    //   const deliveryDate = new Date(data.orderDetails.deliveryDate);
+    //   if (
+    //     poDate &&
+    //     deliveryDate &&
+    //     !isNaN(poDate.getTime()) &&
+    //     !isNaN(deliveryDate.getTime()) &&
+    //     poDate > deliveryDate
+    //   ) {
+    //     newErrors.poDate = 'PO date must be before delivery date';
+    //   }
 
-    // Validate scheduleDetails
-    if (!section || section === 'scheduleDetails') {
-      if (validateAll && data.scheduleDetails.actualDeliveredOn === '') {
-        newErrors.actualDeliveredOn = 'This field is required';
-      } else if (field === 'actualDeliveredOn') {
-        delete newErrors.actualDeliveredOn;
-      }
+    //   if (data.scheduleDetails.isBufferdaysNeed) {
+    //     if (!data.scheduleDetails.bufferDays) {
+    //       newErrors.bufferDays = 'Buffer days is required when buffer is needed';
+    //     } else if (isNaN(data.scheduleDetails.bufferDays) || data.scheduleDetails.bufferDays < 0) {
+    //       newErrors.bufferDays = 'Buffer days must be a non-negative number';
+    //     } else if (data.scheduleDetails.bufferDays > 1000) {
+    //       newErrors.bufferDays = 'Buffer days cannot exceed 1000';
+    //     }
+    //   }
 
-      if (
-        (!section || section === 'scheduleDetails') &&
-        (validateAll || field === 'bufferDays') &&
-        data.scheduleDetails.isBufferdaysNeed
-      ) {
-        if (data.scheduleDetails.bufferDays === null || data.scheduleDetails.bufferDays === '') {
-          newErrors.bufferDays = 'This field is required';
-        } else if (isNaN(data.scheduleDetails.bufferDays) || data.scheduleDetails.bufferDays < 0) {
-          newErrors.bufferDays = 'Must be a non-negative number';
-        } else {
-          delete newErrors.bufferDays;
-        }
-      } else if (field === 'isBufferdaysNeed' && !data.scheduleDetails.isBufferdaysNeed) {
-        delete newErrors.bufferDays;
-      }
-    }
+    //   if (!data.scheduleDetails.actualDeliveredOn && data.orderDetails.deliveryDate) {
+    //     newErrors.actualDeliveredOn = 'Actual delivery date is required';
+    //   }
+    // }
 
-    // Validate materialDetails
-    if (!section || section === 'materialDetails') {
-      const materialErrors = {};
-      if (validateAll) {
+    if (stepIndex === 1) {
+      if (!data.materialDetails.length) {
+        newErrors.materialDetails = { general: 'At least one material must be added' };
+      } else {
+        newErrors.materialDetails = {};
         data.materialDetails.forEach((material, index) => {
-          const errorsForMaterial = {};
-          if (!material.materialName) errorsForMaterial.materialName = 'Material Name is required';
-          if (!material.quantity || isNaN(material.quantity) || material.quantity <= 0) {
-            errorsForMaterial.quantity = 'Quantity must be a positive number';
+          const materialErrors = {};
+          if (!material.materialName) {
+            materialErrors.materialName = 'Material name is required';
           }
-          if (!material.uom) errorsForMaterial.uom = 'Unit of Measure is required';
-          if (Object.keys(errorsForMaterial).length > 0) {
-            materialErrors[index] = errorsForMaterial;
+          if (!material.quantity || isNaN(material.quantity) || material.quantity <= 0) {
+            materialErrors.quantity = 'Required quantity must be a positive number';
+          }
+          if (!material.uom) {
+            materialErrors.uom = 'Unit is required';
+          }
+
+          if (Object.keys(materialErrors).length > 0) {
+            newErrors.materialDetails[index] = materialErrors;
           }
         });
-      } else if (section === 'materialDetails' && materialIndex !== null) {
-        const material = data.materialDetails[materialIndex] || { materialName: '', quantity: '', uom: '' };
-        if (field === 'materialName' && !material.materialName) {
-          materialErrors[materialIndex] = { ...materialErrors[materialIndex], materialName: 'Material Name is required' };
-        } else if (field === 'quantity' && (!material.quantity || isNaN(material.quantity) || material.quantity <= 0)) {
-          materialErrors[materialIndex] = { ...materialErrors[materialIndex], quantity: 'Quantity must be a positive number' };
-        } else if (field === 'uom' && !material.uom) {
-          materialErrors[materialIndex] = { ...materialErrors[materialIndex], uom: 'Unit of Measure is required' };
-        } else {
-          materialErrors[materialIndex] = { ...materialErrors[materialIndex], [field]: undefined };
+
+        // Clean up if no errors in materials
+        if (Object.keys(newErrors.materialDetails).length === 0) {
+          delete newErrors.materialDetails;
         }
-      }
-      newErrors.materialDetails = materialErrors;
-      if (Object.keys(materialErrors).length === 0) {
-        delete newErrors.materialDetails;
       }
     }
 
     return newErrors;
-  };
+  }, []);
 
-  // Handle form input changes
-  const handleFormUpdate = (section, field, value, materialIndex = null) => {
-    let updatedData = { ...orderData };
+  // Handle form updates
+  const handleFormUpdate = useCallback(
+    (section, field, value, materialIndex = null, processIndex = null) => {
+      setOrderData((prevData) => {
+        let updatedData = { ...prevData };
 
-    if (section === 'materialDetails' && materialIndex !== null) {
-      const updatedMaterials = [...orderData.materialDetails];
-      updatedMaterials[materialIndex] = { ...updatedMaterials[materialIndex], [field]: value };
-      updatedData = {
-        ...orderData,
-        materialDetails: updatedMaterials,
-      };
-    } else {
-      updatedData = {
-        ...orderData,
-        [section]: {
-          ...orderData[section],
-          [field]: value,
-        },
-      };
-    }
+        if (section === 'materialDetails' && materialIndex !== null) {
+          const updatedMaterials = [...prevData.materialDetails];
+          updatedMaterials[materialIndex] = { ...updatedMaterials[materialIndex], [field]: value };
+          updatedData.materialDetails = updatedMaterials;
+        } else if (section === 'processDetails' && processIndex !== null) {
+          const updatedProcesses = [...prevData.processDetails];
+          updatedProcesses[processIndex] = { ...updatedProcesses[processIndex], [field]: value };
+          updatedData.processDetails = updatedProcesses;
+        } else {
+          updatedData[section] = { ...prevData[section], [field]: value };
+        }
 
-    // Calculate totalValue
-    if (section === 'orderDetails' && (field === 'itemValue' || field === 'orderQty')) {
-      const itemValue = field === 'itemValue' ? value : orderData.orderDetails.itemValue;
-      const orderQty = field === 'orderQty' ? value : orderData.orderDetails.orderQty;
-      updatedData.orderDetails.totalValue =
-        itemValue && orderQty && !isNaN(itemValue) && !isNaN(orderQty)
-          ? parseFloat(itemValue) * parseInt(orderQty)
-          : null;
-    }
+        // Calculate totalValue
+        if (section === 'orderDetails' && (field === 'itemValue' || field === 'orderQty')) {
+          const itemValue = field === 'itemValue' ? value : prevData.orderDetails.itemValue;
+          const orderQty = field === 'orderQty' ? value : prevData.orderDetails.orderQty;
+          updatedData.orderDetails.totalValue =
+            itemValue && orderQty && !isNaN(itemValue) && !isNaN(orderQty)
+              ? parseFloat(itemValue) * parseInt(orderQty)
+              : null;
+        }
 
-    // Handle actualDeliveredOn
-    if (
-      (section === 'orderDetails' && field === 'deliveryDate') ||
-      (section === 'scheduleDetails' && (field === 'isBufferdaysNeed' || field === 'bufferDays'))
-    ) {
-      const deliveryDate = section === 'orderDetails' && field === 'deliveryDate'
-        ? value
-        : orderData.orderDetails.deliveryDate;
-      const isBufferdaysNeed = section === 'scheduleDetails' && field === 'isBufferdaysNeed'
-        ? value
-        : orderData.scheduleDetails.isBufferdaysNeed;
-      const bufferDays = section === 'scheduleDetails' && field === 'bufferDays'
-        ? value
-        : orderData.scheduleDetails.bufferDays;
+        // Handle actualDeliveredOn
+        if (
+          (section === 'orderDetails' && field === 'deliveryDate') ||
+          (section === 'scheduleDetails' && (field === 'isBufferdaysNeed' || field === 'bufferDays'))
+        ) {
+          const deliveryDate =
+            section === 'orderDetails' && field === 'deliveryDate'
+              ? value
+              : prevData.orderDetails.deliveryDate;
+          const isBufferdaysNeed =
+            section === 'scheduleDetails' && field === 'isBufferdaysNeed'
+              ? value
+              : prevData.scheduleDetails.isBufferdaysNeed;
+          const bufferDays =
+            section === 'scheduleDetails' && field === 'bufferDays'
+              ? value
+              : prevData.scheduleDetails.bufferDays;
 
-      updatedData.scheduleDetails.actualDeliveredOn = calculateActualDeliveredOn(
-        deliveryDate,
-        isBufferdaysNeed,
-        bufferDays
-      );
-    }
+          // Validate deliveryDate before calculation
+          if (deliveryDate && typeof deliveryDate === 'string' && deliveryDate.trim() !== '') {
+            const testDate = new Date(deliveryDate);
+            if (!isNaN(testDate.getTime())) {
+              updatedData.scheduleDetails.actualDeliveredOn = calculateActualDeliveredOn(
+                deliveryDate,
+                isBufferdaysNeed,
+                bufferDays
+              );
+            } else {
+              console.warn('Invalid deliveryDate:', deliveryDate);
+              updatedData.scheduleDetails.actualDeliveredOn = '';
+            }
+          } else {
+            console.warn('Empty or invalid deliveryDate:', deliveryDate);
+            updatedData.scheduleDetails.actualDeliveredOn = '';
+          }
+        }
 
-    // Clear bufferDays when isBufferdaysNeed is false
-    if (section === 'scheduleDetails' && field === 'isBufferdaysNeed' && value === false) {
-      updatedData.scheduleDetails.bufferDays = null;
-    }
+        // Clear bufferDays when isBufferdaysNeed is false
+        if (section === 'scheduleDetails' && field === 'isBufferdaysNeed' && value === false) {
+          updatedData.scheduleDetails.bufferDays = null;
+        }
 
-    setOrderData(updatedData);
+        // Validate updated data
+        const stepErrors = validateStep(activeStep, updatedData);
+        setErrors(stepErrors);
 
-    // Validate the changed field
-    const fieldErrors = validateForm(updatedData, { field, section, materialIndex });
-    setErrors(fieldErrors);
-  };
+        return updatedData;
+      });
+    },
+    [activeStep, calculateActualDeliveredOn, validateStep]
+  );
 
-  // Handle material add/edit
-  const handleMaterialAddOrUpdate = (material, index = null) => {
-    const updatedMaterials = [...orderData.materialDetails];
-    if (index !== null) {
-      updatedMaterials[index] = material;
-    } else {
-      updatedMaterials.push({ ...material, id: index+1 });
-    }
-    const updatedData = { ...orderData, materialDetails: updatedMaterials };
-    setOrderData(updatedData);
+  // Add Material
+const addMaterial = (newMaterial) => {
+  setOrderData((prev) => ({
+    ...prev,
+    materialDetails: [ ...prev.materialDetails,newMaterial],
+  }));
+};
 
-    const fieldErrors = validateForm(updatedData, { validateAll: true, section: 'materialDetails' });
-    setErrors(fieldErrors);
-    return Object.keys(fieldErrors.materialDetails || {}).length === 0;
-  };
+// Delete Material by index
+// Delete Material by index
+const deleteMaterial = (index) => {
+  setOrderData((prev) => {
+    const updatedMaterials = prev.materialDetails.filter((_, i) => i !== index);
+    const updatedData = {
+      ...prev,
+      materialDetails: updatedMaterials,
+    };
 
-  // Handle material delete
-  const handleMaterialDelete = (index) => {
-    const updatedMaterials = orderData.materialDetails.filter((_, i) => i !== index);
-    const updatedData = { ...orderData, materialDetails: updatedMaterials };
-    setOrderData(updatedData);
-
-    const fieldErrors = validateForm(updatedData, { validateAll: true, section: 'materialDetails' });
-    setErrors(fieldErrors);
-  };
-
-  // Validate entire step
-  const validateStep = () => {
-    const stepErrors = validateForm(orderData, { validateAll: true });
+    // Revalidate the updated materialDetails
+    const stepErrors = validateStep(activeStep, updatedData);
     setErrors(stepErrors);
-    return Object.keys(stepErrors).length === 0;
-  };
 
+    return updatedData;
+  });
+};
+
+// Add Process
+const addProcess = (newProcess) => {
+  setOrderData((prev) => ({
+    ...prev,
+    processDetails: [...prev.processDetails, newProcess],
+  }));
+};
+
+// Delete Process by index
+const deleteProcess = (index) => {
+  setOrderData((prev) => ({
+    ...prev,
+    processDetails: prev.processDetails.filter((_, i) => i !== index),
+  }));
+};
+
+  // Handle step navigation
   const handleNext = () => {
-    if (validateStep()) {
+    const stepErrors = validateStep(activeStep, orderData);
+    setErrors(stepErrors);
+    if (Object.keys(stepErrors).length === 0) {
       setActiveStep((prev) => prev + 1);
-      setErrors({});
     }
   };
 
@@ -269,13 +312,18 @@ const SingleOrderAdding = () => {
     setErrors({});
   };
 
+  const handleSave = () => {
+  console.log('Saving order:', orderData);
+    // TODO: Implement API call
+  };
+
   const renderStepContent = () => {
     switch (activeStep) {
       case 0:
         return (
           <PlanDetailsForm
-            orderdetails={orderData.orderDetails}
-            scheduledetails={orderData.scheduleDetails}
+            orderDetails={orderData.orderDetails}
+            scheduleDetails={orderData.scheduleDetails}
             onUpdate={handleFormUpdate}
             errors={errors}
           />
@@ -285,19 +333,28 @@ const SingleOrderAdding = () => {
           <MaterialDetailsForm
             materialDetails={orderData.materialDetails}
             onUpdate={handleFormUpdate}
-            onAddOrUpdate={handleMaterialAddOrUpdate}
-            onDelete={handleMaterialDelete}
+            onAdd={addMaterial}
+            onDelete={deleteMaterial}
             errors={errors.materialDetails || {}}
           />
         );
       case 2:
-        return <ProcessDetailsForm />;
+        return (
+          <ProcessDetailsForm
+            processDetails={orderData.processDetails}
+            onAdd={addProcess}
+            onDelete={deleteProcess}
+            errors={errors.processDetails || {}}
+          />
+        );
       case 3:
-        return <OverViewFormDetails />;
+        return <OverViewFormDetails orderData={orderData} />;
       default:
         return null;
     }
   };
+
+
 
   return (
     <div className="flex flex-col gap-3 h-[88vh]">
@@ -308,22 +365,23 @@ const SingleOrderAdding = () => {
         {renderStepContent()}
       </div>
       <div className="p-2 bg-white rounded-xl shadow-bg-shadow-2 flex justify-between gap-4">
-        <Button
-          sx={buttonstyle2}
-          variant="contained"
-          disabled={activeStep === 0}
-          onClick={handleBack}
-        >
+        <Button sx={buttonstyle2} variant="contained" disabled={activeStep === 0} onClick={handleBack}>
           Back
         </Button>
-        <Button
-          variant="contained"
-          onClick={handleNext}
-          disabled={activeStep === steps.length - 1}
-          sx={buttonstyle1}
-        >
-          Next
-        </Button>
+        {activeStep === steps.length - 1 ? (
+          <Button variant="contained" onClick={handleSave} disabled={loading} sx={buttonstyle1}>
+            {loading ? 'Saving...' : 'Save'}
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            onClick={handleNext}
+            disabled={activeStep === steps.length - 1}
+            sx={buttonstyle1}
+          >
+            Next
+          </Button>
+        )}
       </div>
     </div>
   );
