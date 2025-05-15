@@ -45,8 +45,7 @@ const SingleOrderAdding = () => {
     processDetails: [],
   });
 
-  console.log(orderData);
-  
+
   const steps = [
     { label: 'Plan Details', icon: <Dock size={20} /> },
     { label: 'Material Details', icon: <MagnetIcon size={20} /> },
@@ -87,120 +86,120 @@ const SingleOrderAdding = () => {
   const validateStep = useCallback((stepIndex, data) => {
     const newErrors = {};
 
-    if (stepIndex === 0) {
-      const orderRequiredFields = [
-        'kitNo',
-        'poNumber',
-        'poDate',
-        'soNumber',
-        'proNumber',
-        'itemName',
-        'bomKitName',
-        'customer',
-        'deliveryDate',
-        'itemValue',
-        'orderQty',
-      ];
-      orderRequiredFields.forEach((field) => {
-        if (!data.orderDetails[field]) {
-          newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is required`;
-        } else if (field === 'itemValue' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
-          newErrors[field] = 'Item value must be a positive number';
-        } else if (field === 'orderQty' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
-          newErrors[field] = 'Order quantity must be a positive integer';
-        } else if (field === 'poDate' || field === 'deliveryDate') {
-          const date = new Date(data.orderDetails[field]);
-          if (isNaN(date.getTime())) {
-            newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is invalid`;
-          }
-        }
-      });
+  //   if (stepIndex === 0) {
+  //     const orderRequiredFields = [
+  //       'kitNo',
+  //       'poNumber',
+  //       'poDate',
+  //       'soNumber',
+  //       'proNumber',
+  //       'itemName',
+  //       'bomKitName',
+  //       'customer',
+  //       'deliveryDate',
+  //       'itemValue',
+  //       'orderQty',
+  //     ];
+  //     orderRequiredFields.forEach((field) => {
+  //       if (!data.orderDetails[field]) {
+  //         newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is required`;
+  //       } else if (field === 'itemValue' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
+  //         newErrors[field] = 'Item value must be a positive number';
+  //       } else if (field === 'orderQty' && (isNaN(data.orderDetails[field]) || data.orderDetails[field] <= 0)) {
+  //         newErrors[field] = 'Order quantity must be a positive integer';
+  //       } else if (field === 'poDate' || field === 'deliveryDate') {
+  //         const date = new Date(data.orderDetails[field]);
+  //         if (isNaN(date.getTime())) {
+  //           newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').trim()} is invalid`;
+  //         }
+  //       }
+  //     });
 
-      // Validate date sequence
-      const poDate = new Date(data.orderDetails.poDate);
-      const deliveryDate = new Date(data.orderDetails.deliveryDate);
-      if (
-        poDate &&
-        deliveryDate &&
-        !isNaN(poDate.getTime()) &&
-        !isNaN(deliveryDate.getTime()) &&
-        poDate > deliveryDate
-      ) {
-        newErrors.poDate = 'PO date must be before delivery date';
-      }
+  //     // Validate date sequence
+  //     const poDate = new Date(data.orderDetails.poDate);
+  //     const deliveryDate = new Date(data.orderDetails.deliveryDate);
+  //     if (
+  //       poDate &&
+  //       deliveryDate &&
+  //       !isNaN(poDate.getTime()) &&
+  //       !isNaN(deliveryDate.getTime()) &&
+  //       poDate > deliveryDate
+  //     ) {
+  //       newErrors.poDate = 'PO date must be before delivery date';
+  //     }
 
-      if (data.scheduleDetails.isBufferdaysNeed) {
-        if (!data.scheduleDetails.bufferDays) {
-          newErrors.bufferDays = 'Buffer days is required when buffer is needed';
-        } else if (isNaN(data.scheduleDetails.bufferDays) || data.scheduleDetails.bufferDays < 0) {
-          newErrors.bufferDays = 'Buffer days must be a non-negative number';
-        } else if (data.scheduleDetails.bufferDays > 1000) {
-          newErrors.bufferDays = 'Buffer days cannot exceed 1000';
-        }
-      }
+  //     if (data.scheduleDetails.isBufferdaysNeed) {
+  //       if (!data.scheduleDetails.bufferDays) {
+  //         newErrors.bufferDays = 'Buffer days is required when buffer is needed';
+  //       } else if (isNaN(data.scheduleDetails.bufferDays) || data.scheduleDetails.bufferDays < 0) {
+  //         newErrors.bufferDays = 'Buffer days must be a non-negative number';
+  //       } else if (data.scheduleDetails.bufferDays > 1000) {
+  //         newErrors.bufferDays = 'Buffer days cannot exceed 1000';
+  //       }
+  //     }
 
-      if (!data.scheduleDetails.actualDeliveredOn && data.orderDetails.deliveryDate) {
-        newErrors.actualDeliveredOn = 'Actual delivery date is required';
-      }
-    }
+  //     if (!data.scheduleDetails.actualDeliveredOn && data.orderDetails.deliveryDate) {
+  //       newErrors.actualDeliveredOn = 'Actual delivery date is required';
+  //     }
+  //   }
 
-    if (stepIndex === 1) {
-      if (!data.materialDetails.length) {
-        newErrors.materialDetails = { general: 'At least one material must be added' };
-      } else {
-        newErrors.materialDetails = {};
-        data.materialDetails.forEach((material, index) => {
-          const materialErrors = {};
-          if (!material.materialName) {
-            materialErrors.materialName = 'Material name is required';
-          }
-          if (!material.quantity || isNaN(material.quantity) || material.quantity <= 0) {
-            materialErrors.quantity = 'Required quantity must be a positive number';
-          }
-          if (!material.uom) {
-            materialErrors.uom = 'Unit is required';
-          }
+  //   if (stepIndex === 1) {
+  //     if (!data.materialDetails.length) {
+  //       newErrors.materialDetails = { general: 'At least one material must be added' };
+  //     } else {
+  //       newErrors.materialDetails = {};
+  //       data.materialDetails.forEach((material, index) => {
+  //         const materialErrors = {};
+  //         if (!material.materialName) {
+  //           materialErrors.materialName = 'Material name is required';
+  //         }
+  //         if (!material.quantity || isNaN(material.quantity) || material.quantity <= 0) {
+  //           materialErrors.quantity = 'Required quantity must be a positive number';
+  //         }
+  //         if (!material.uom) {
+  //           materialErrors.uom = 'Unit is required';
+  //         }
 
-          if (Object.keys(materialErrors).length > 0) {
-            newErrors.materialDetails[index] = materialErrors;
-          }
-        });
+  //         if (Object.keys(materialErrors).length > 0) {
+  //           newErrors.materialDetails[index] = materialErrors;
+  //         }
+  //       });
 
-        // Clean up if no errors in materials
-        if (Object.keys(newErrors.materialDetails).length === 0) {
-          delete newErrors.materialDetails;
-        }
-      }
-    }
+  //       // Clean up if no errors in materials
+  //       if (Object.keys(newErrors.materialDetails).length === 0) {
+  //         delete newErrors.materialDetails;
+  //       }
+  //     }
+  //   }
 
-    if (stepIndex === 2) {
-    if (!data.processDetails.length) {
-      newErrors.processDetails = { general: 'At least one process must be added' };
-    } else {
-      newErrors.processDetails = {};
-      data.processDetails.forEach((process, index) => {
-        const processErrors = {};
-        if (!process.processName) {
-          processErrors.processName = 'Process name is required';
-        }
-        if (!process.workCenter) {
-          processErrors.workCenter = 'Work center is required';
-        }
-        if (!process.operator) {
-          processErrors.operator = 'Operator is required';
-        }
+  //   if (stepIndex === 2) {
+  //   if (!data.processDetails.length) {
+  //     newErrors.processDetails = { general: 'At least one process must be added' };
+  //   } else {
+  //     newErrors.processDetails = {};
+  //     data.processDetails.forEach((process, index) => {
+  //       const processErrors = {};
+  //       if (!process.processName) {
+  //         processErrors.processName = 'Process name is required';
+  //       }
+  //       if (!process.workCenter) {
+  //         processErrors.workCenter = 'Work center is required';
+  //       }
+  //       if (!process.operator) {
+  //         processErrors.operator = 'Operator is required';
+  //       }
 
-        if (Object.keys(processErrors).length > 0) {
-          newErrors.processDetails[index] = processErrors;
-        }
-      });
+  //       if (Object.keys(processErrors).length > 0) {
+  //         newErrors.processDetails[index] = processErrors;
+  //       }
+  //     });
 
-      // Clean up if no errors in processes
-      if (Object.keys(newErrors.processDetails).length === 0) {
-        delete newErrors.processDetails;
-      }
-    }
-  }
+  //     // Clean up if no errors in processes
+  //     if (Object.keys(newErrors.processDetails).length === 0) {
+  //       delete newErrors.processDetails;
+  //     }
+  //   }
+  // }
     return newErrors;
   }, []);
 
@@ -296,7 +295,7 @@ const addMaterial = (newMaterial) => {
   }));
 };
 
-// Delete Material by index
+
 // Delete Material by index
 const deleteMaterial = (index) => {
   setOrderData((prev) => {
@@ -322,7 +321,7 @@ const addProcess = (newProcess) => {
   }));
 };
 
-// Delete Process by index
+
 // Delete Process by index
 const deleteProcess = (index) => {
   setOrderData((prev) => {
@@ -340,23 +339,23 @@ const deleteProcess = (index) => {
   });
 };
   // Handle step navigation
-  const handleNext = () => {
+const handleNext = () => {
     const stepErrors = validateStep(activeStep, orderData);
     setErrors(stepErrors);
     if (Object.keys(stepErrors).length === 0) {
       setActiveStep((prev) => prev + 1);
     }
-  };
+};
 
-  const handleBack = () => {
+const handleBack = () => {
     setActiveStep((prev) => prev - 1);
     setErrors({});
-  };
+};
 
-  const handleSave = () => {
+const handleSave = () => {
   console.log('Saving order:', orderData);
     // TODO: Implement API call
-  };
+};
 
   const renderStepContent = () => {
     switch (activeStep) {
