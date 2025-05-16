@@ -13,6 +13,7 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
   const {entryMethod, setEntryMethod,showFileUpload, setShowFileUpload,closeDialog}=useProductionDialog()
   const [showTip,hideTip]=useState(true)
   const [openConfirmModal, setOpenConfirmModal] = useState(false)
+  const [growsmartConfirm,setGrowsmartConfirm]=useState(false)
   const navigate=useNavigate()
   const handleOpen = () => {
     setShowFileUpload(false)
@@ -23,6 +24,16 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
     navigate('/production/new_orders/single')
     setOpenConfirmModal(false)
     closeDialog()
+  }
+  const handleGrowsmartConfirmOpen=()=>{
+    setShowFileUpload(false)
+    setGrowsmartConfirm(true)
+  }
+  const handleclosegrowsmartconfirm=()=>setGrowsmartConfirm(false)
+  const handleGrowsmartConfirm=()=>{
+       navigate('/production/new_orders/growsmart')
+      setGrowsmartConfirm(false)
+      closeDialog()
   }
   if (!isOpen) return null
   const templateData=[
@@ -209,7 +220,7 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
                <div className="grid grid-cols-1 gap-4 py-3">
                 {/* Sync Order Card */}
                 <div 
-                onClick={()=>setShowFileUpload(false)}
+                onClick={handleGrowsmartConfirmOpen}
                 className="border cursor-pointer border-gray-200 hover:border-[#8B5CF6] rounded-lg p-4 lg:p-6 relative group overflow-hidden">
                   <div className="flex flex-col items-center  gap-4">
                     <div className="bg-gray-background-1 p-3 rounded-lg">
@@ -310,6 +321,13 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
         onClose={handleClose}
         onConfirm={handleConfirm}
         title="Proceed Single Entry Method"
+       />
+       <ConfirmModal
+        open={growsmartConfirm}
+        onClose={handleclosegrowsmartconfirm}
+        onConfirm={handleGrowsmartConfirm}
+        title="Proceed Growsmart Syncing"
+        
        />
       </div>
 
