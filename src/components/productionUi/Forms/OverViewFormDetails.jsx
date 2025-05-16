@@ -70,9 +70,6 @@ export default function OrderOverview({ orderData }) {
           </div>
         </div>
      
-
-
-      
         <div>
           <Typography variant="h6" gutterBottom className='text-sky-600'>Schedule Details</Typography>
             <Divider sx={{mb:2}} />

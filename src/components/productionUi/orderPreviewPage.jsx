@@ -10,6 +10,8 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Plus } from 'lucide-react';
+import { GetInSessionStorage } from '../../utils/SessionStorage';
+import { GrowsmartData } from '../../Redux/Store/mockdata';
 
 const parseDateToISO = (dateStr) => {
   if (!dateStr) return "";
@@ -23,7 +25,7 @@ const parseDateToISO = (dateStr) => {
   return `${year}-${month}-${day.padStart(2, '0')}`; // e.g., "25-Apr-2025" -> "2025-04-25"
 };
 
-const ExcelPreviewPage = () => {
+const OrderPreviewPage = () => {
   const navigate = useNavigate();
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
@@ -51,7 +53,10 @@ const ExcelPreviewPage = () => {
   ];
 
   useEffect(() => {
-    const selectedIdsData = getWithExpiry('SelectedOrderIds');
+    const selectedIdsData = GetInSessionStorage('SelectedOrderIds');
+    const source = GetInSessionStorage('OrderSource')
+    console.log(source);
+    
     if (!selectedIdsData) {
       navigate('/production/new_orders/via_excel', {
         state: { error: 'No selected orders available. Please select orders to preview.' }
@@ -59,29 +64,65 @@ const ExcelPreviewPage = () => {
       return;
     }
 
-    const selectedIds = selectedIdsData.value;
-    const orderTemplate = getWithExpiry('Order Template');
+    const selectedIds = selectedIdsData;
 
-    if (orderTemplate?.value?.length > 0 && selectedIds.length > 0) {
-      const filteredOrders = orderTemplate.value
-        .map((order, index) => ({ 
-          id: index, 
-          rawMaterials: [], 
-          processDetails: [],
-          scheduleDetails: {
-            actualDeliveryDate: parseDateToISO(order.deliveryDate) || "", // Initialize from deliveryDate
-            isBufferDayNeed: false,
-            bufferDays: 0,
-            materialReqDate: "",
-            storeTargetDate: "",
-            iqcTargetDate: "",
-            purchaseTargetDate: "",
-            movedToFgDate: ""
-          }, 
-          ...order })) // Initialize rawMaterials and processDetails
-        .filter(order => selectedIds.includes(order.id));
-      setSelectedOrders(filteredOrders);
+    if (source==='excel') {
+      const orderTemplate = getWithExpiry('Order Template');
+      if (!orderTemplate) {
+        navigate('/production/new_orders/via_excel')
+        return
+      }
+      if (orderTemplate?.value?.length > 0 && selectedIds.length > 0) {
+          const filteredOrders = orderTemplate.value
+            .map((order, index) => ({ 
+              id: index, 
+              rawMaterials: [], 
+              processDetails: [],
+              scheduleDetails: {
+                actualDeliveryDate: parseDateToISO(order.deliveryDate) || "", // Initialize from deliveryDate
+                isBufferDayNeed: false,
+                bufferDays: 0,
+                materialReqDate: "",
+                storeTargetDate: "",
+                iqcTargetDate: "",
+                purchaseTargetDate: "",
+                movedToFgDate: ""
+              }, 
+              ...order })) // Initialize rawMaterials and processDetails
+            .filter(order => selectedIds.includes(order.id));
+          setSelectedOrders(filteredOrders);
+      }
+    }else if (source==='growsmart') {
+      if (!GrowsmartData) {
+        navigate('/production/new_orders/growsmart',{
+        state: { error: 'Growsmart data is not available or not synced' }
+      })
+      return
+      }
+      const filtered = GrowsmartData
+      .filter(order => selectedIds.includes(order.id))
+      .map(order => ({
+        ...order, // All data from API/mock preserved
+        scheduleDetails: {
+          actualDeliveryDate: parseDateToISO(order.deliveryDate) || "",
+          isBufferDayNeed: false,
+          bufferDays: 0,
+          materialReqDate: "",
+          storeTargetDate: "",
+          iqcTargetDate: "",
+          purchaseTargetDate: "",
+          movedToFgDate: ""
+        }
+      }));
+
+      setSelectedOrders(filtered);
+    }else{
+      navigate("/production/total_orders",{
+        state:{error:"Order Source is required"}
+      })
     }
+   
+
   }, [navigate]);
 
   const handleTabChange = (event, newValue) => {
@@ -476,7 +517,7 @@ const ExcelPreviewPage = () => {
               sx={{ flexGrow: 1 }}
             >
               {selectedOrders.map((order, index) => (
-                <Tab key={index} label={`${index + 1} - ${order.proNumber}`} />
+                <Tab key={index} label={`${order.id} - ${order.proNumber}`} />
               ))}
             </Tabs>
             {isEditMode ? (
@@ -492,10 +533,10 @@ const ExcelPreviewPage = () => {
           <Box>{renderOrderDetails()}</Box>
         </>
       ) : (
-        <Typography variant="body1">Loading selected orders...</Typography>
+        <Typography variant="body1">No Selected Data</Typography>
       )}
     </div>
   );
 };
 
-export default ExcelPreviewPage;
+export default OrderPreviewPage;

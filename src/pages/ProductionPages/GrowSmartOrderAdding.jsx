@@ -1,72 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import { getWithExpiry, storeWithExpiry } from '../../utils/localstorageWithExpiry';
 import { Button, IconButton, Stack } from '@mui/material';
-import { buttonstyle1 } from '../../../Style';
+import { buttonstyle1, SearchQuickFilter } from '../../../Style';
 import Loader from '../../components/common/Loader';
 import { useProductionDialog } from '../../context/ProductionDialogContext';
 import { RefreshCcw } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SimpleDataTable from '../../components/common/SimpleDataTable';
-import RestoreIcon from '@mui/icons-material/Restore';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import DeleteConfirmationModal from '../../components/common/DeleteConfirmation';
 import { useDispatch } from 'react-redux';
 import { showSnackbar } from '../../Redux/Slice/SnackbarSlice';
 import { RemoveFromSession, StoreInSession } from '../../utils/SessionStorage';
-const NewOrderFromExcel = () => {
+import { GrowsmartData } from '../../Redux/Store/mockdata';
+import { GridToolbarContainer, GridToolbarQuickFilter } from '@mui/x-data-grid';
+const GrowSmartOrderAdding = () => {
   const [loading, setLoading] = useState(true);
   const [orderTemplate, setOrderTemplate] = useState(null);
   const {openDialog,setEntryMethod,setShowFileUpload}=useProductionDialog()
   const location = useLocation();
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // For Modal
-  const [itemName, setItemName] = useState(''); // For modal item name
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const navigate=useNavigate()
   const dispatch=useDispatch()
-  useEffect(() => {
-    // localStorage.removeItem("SelectedOrderIds")
-    RemoveFromSession("SelectedOrderIds")
-    RemoveFromSession("OrderSource")
-    const timer = setTimeout(() => {
-    const data = getWithExpiry('Order Template');
-    setOrderTemplate(data);
-    
-    if (data?.value?.length > 0) {
-      const sample = data.value[0];
-      const generatedColumns = Object.keys(sample).map(key => ({
-        field: key,
-        headerName: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-        width:180
-      }));
-      const generatedRows = data.value
-      setColumns(generatedColumns);
-      setRows(generatedRows);
-    }
 
-    setLoading(false);
-  }, 200);
+useEffect(() => {
+  RemoveFromSession("SelectedOrderIds");
+  RemoveFromSession("OrderSource");
+
+//  const isSynced = Cookies.get('growsmart_synced') === 'true';
+    const isSynced = true
+
+    const timer = setTimeout(() => {
+        if (isSynced && GrowsmartData.length > 0) {
+        const sample = GrowsmartData[0];
+        const generatedColumns = Object.keys(sample).map(key => ({
+            field: key,
+            headerName: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
+            width: 180,
+        }));
+        setColumns(generatedColumns);
+        setRows(GrowsmartData);
+        setOrderTemplate({ value: GrowsmartData });
+        } else {
+        setOrderTemplate(null);
+        }
+
+        setLoading(false);
+    }, 200);
 
   return () => clearTimeout(timer);
 }, [location.search]);
 
   const handlefallback=()=>{
     openDialog()
-    setEntryMethod("manual")
-    setShowFileUpload(true)
+    setEntryMethod("growsmart")
+    setShowFileUpload(false)
   }
 
-    const handleReuploadClick = () => {
-    setItemName('Order Template');
-    setIsModalOpen(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    localStorage.removeItem('Order Template');
-    setOrderTemplate(null);
-    setIsModalOpen(false);
-  };
 
   const handleSelectionChange = (newSelection) => {
     let selectedIds = [];
@@ -92,7 +82,7 @@ const NewOrderFromExcel = () => {
       console.log('Storing selectedIds:', selectedRowIds); 
 
       // storeWithExpiry('SelectedOrderIds', selectedRowIds, 24);
-      StoreInSession("OrderSource",'excel')
+      StoreInSession("OrderSource",'growsmart')
       StoreInSession("SelectedOrderIds",JSON.stringify(selectedRowIds))
       navigate('/production/new_orders/preview');
     } else {
@@ -101,41 +91,31 @@ const NewOrderFromExcel = () => {
   }
   const CustomToolbar=()=>{
     return(
-      <div className=' flex justify-between items-center p-5'>
-        <p className='text-xl font-medium'>Order Preview</p>
-        <Stack
-          direction="row"
-          flexWrap="wrap"
-          justifyContent="flex-start"
-          alignItems="center"
-          sx={{ gap: 1 }}
-        > 
-        <Button 
-          onClick={handleReuploadClick}
-          sx={{
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center",
-            gap:1,
-            bgcolor:"#FFE6E6",
-            color:"#EF4444",
-            // borderRadius:2,
-            py:1,
-            px:2
-          }}
-          >
-              <RestoreIcon sx={{color:""}}/>Re Upload
-          </Button>
-          <Button 
-          sx={{...buttonstyle1,display:"flex",gap:1,alignItems:"center",justifyContent:"center"}}
-          onClick={handlePreviewSelection}
-          
-          >
-            <RemoveRedEyeIcon/>
-            Preview Selected
-          </Button>
-        </Stack>
-      </div>
+        <GridToolbarContainer 
+          sx={{ justifyContent: 'space-between', display: 'flex', padding: '16px' }}
+        >
+            <p className='text-xl font-medium'>Growsmart Orders</p>
+            <Stack
+            direction="row"
+            flexWrap="wrap"
+            justifyContent="flex-start"
+            alignItems="center"
+            sx={{ gap: 1 }}
+            > 
+                <GridToolbarQuickFilter
+                sx={SearchQuickFilter}
+                />
+            <Button 
+            sx={{...buttonstyle1,display:"flex",gap:1,alignItems:"center",justifyContent:"center"}}
+            onClick={handlePreviewSelection}
+            
+            >
+                <RemoveRedEyeIcon/>
+                Preview Selected
+            </Button>
+            </Stack>
+        </GridToolbarContainer>
+     
     )
   }
   return (
@@ -145,12 +125,12 @@ const NewOrderFromExcel = () => {
       ) : !orderTemplate ? (
         <div className="h-full flex flex-col items-center justify-center p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">No Data Available</h2>
-          <p className="text-gray-500 mb-6">Please upload an Excel file to continue.</p>
+          <p className="text-gray-500 mb-6">Please Sync Growsmart Then Get Data</p>
           <Button 
           sx={buttonstyle1}
           onClick={handlefallback}
           >
-            <RefreshCcw/> Upload Excel File
+            <RefreshCcw/> Sync
           </Button>
         </div>
       ) : (
@@ -167,15 +147,9 @@ const NewOrderFromExcel = () => {
         </div>
       )}
 
-       <DeleteConfirmationModal
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={handleDeleteConfirm}
-        itemName={itemName}
-        itemType='local value'
-      />
+
     </div>
   );
 };
 
-export default NewOrderFromExcel;
+export default GrowSmartOrderAdding;
