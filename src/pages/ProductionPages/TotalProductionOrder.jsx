@@ -4,7 +4,7 @@ import { Button, CircularProgress, IconButton, Stack, } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AddIcon from '@mui/icons-material/Add';
-import { buttonstyle1, IconButtonColors, SearchQuickFilter } from '../../../Style';
+import { buttonstyle1, ExportButtonStyle, IconButtonColors, SearchQuickFilter } from '../../../Style';
 import { GridToolbarContainer, GridToolbarQuickFilter, GridToolbarExport } from '@mui/x-data-grid';
 import { useProductionDialog } from '../../context/ProductionDialogContext';
 
@@ -260,16 +260,14 @@ const TotalProductionOrder = () => {
           <GridToolbarExport
             slotProps={{
               button: {
-                sx: {
-                  color: "gray",
-                  padding: '6px',
-                  minWidth: 'unset',
-                  minHeight: 'unset',
-                },
+                sx: ExportButtonStyle,
+                children:null
               },
             }}
           />
-          <GridToolbarQuickFilter sx={SearchQuickFilter} />
+          <div className='border rounded-lg px-1  bg-[#F9FAFB]'>
+            <GridToolbarQuickFilter sx={SearchQuickFilter} />
+          </div>
           <Button
             sx={buttonstyle1}
             onClick={openDialog}

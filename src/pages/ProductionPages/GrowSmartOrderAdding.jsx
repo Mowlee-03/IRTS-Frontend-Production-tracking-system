@@ -46,7 +46,7 @@ useEffect(() => {
         }
 
         setLoading(false);
-    }, 200);
+    }, 300);
 
   return () => clearTimeout(timer);
 }, [location.search]);
@@ -121,7 +121,9 @@ useEffect(() => {
   return (
     <div className="h-full bg-white  shadow-bg-shadow-2 rounded-xl">
       {loading ? (
-        <Loader />
+       <div className='h-full flex justify-center items-center'>
+         <Loader />
+       </div>
       ) : !orderTemplate ? (
         <div className="h-full flex flex-col items-center justify-center p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">No Data Available</h2>

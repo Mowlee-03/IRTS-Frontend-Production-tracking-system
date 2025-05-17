@@ -9,12 +9,15 @@ import FileUpload from "../common/ExcelFIleUpload";
 import { useProductionDialog } from "../../context/ProductionDialogContext";
 import ConfirmModal from "../common/ConfirmModal";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { showSnackbar } from "../../Redux/Slice/SnackbarSlice";
 const AddOrderPanel = ({ isOpen, onClose}) => {
   const {entryMethod, setEntryMethod,showFileUpload, setShowFileUpload,closeDialog}=useProductionDialog()
   const [showTip,hideTip]=useState(true)
   const [openConfirmModal, setOpenConfirmModal] = useState(false)
   const [growsmartConfirm,setGrowsmartConfirm]=useState(false)
   const navigate=useNavigate()
+  const dispatch=useDispatch()
   const handleOpen = () => {
     setShowFileUpload(false)
     setOpenConfirmModal(true)
@@ -24,6 +27,7 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
     navigate('/production/new_orders/single')
     setOpenConfirmModal(false)
     closeDialog()
+    dispatch(showSnackbar({severity:"success",message:"Single entry method selected"}))
   }
   const handleGrowsmartConfirmOpen=()=>{
     setShowFileUpload(false)
@@ -34,6 +38,7 @@ const AddOrderPanel = ({ isOpen, onClose}) => {
        navigate('/production/new_orders/growsmart')
       setGrowsmartConfirm(false)
       closeDialog()
+      
   }
   if (!isOpen) return null
   const templateData=[

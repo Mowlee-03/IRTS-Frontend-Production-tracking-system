@@ -2,7 +2,7 @@ import React from 'react'
 import SimpleDataTable from '../../components/common/SimpleDataTable'
 import { GridToolbarContainer, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import { Button, Stack ,Select, MenuItem, FormControl, InputLabel} from '@mui/material';
-import { buttonstyle1, dropdownstyle1, ExportDataBtn, SearchQuickFilter } from '../../../Style';
+import { buttonstyle1, dropdownstyle1, ExportButtonStyle, SearchQuickFilter } from '../../../Style';
 
 const PendingOrders = () => {
     const rows = [
@@ -182,13 +182,13 @@ const PendingOrders = () => {
                 <GridToolbarExport
                   slotProps={{
                     button: { 
-                      sx: ExportDataBtn,
+                      sx: ExportButtonStyle,
                     },
                   }}
                 />
-                <GridToolbarQuickFilter
-                  sx={SearchQuickFilter}
-                />
+                 <div className='border rounded-lg px-1  bg-[#F9FAFB]'>
+                            <GridToolbarQuickFilter sx={SearchQuickFilter} />
+                          </div>
                
               </div>
           </GridToolbarContainer>

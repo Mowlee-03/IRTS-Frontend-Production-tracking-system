@@ -101,8 +101,8 @@ const NewOrderFromExcel = () => {
   }
   const CustomToolbar=()=>{
     return(
-      <div className=' flex justify-between items-center p-5'>
-        <p className='text-xl font-medium'>Order Preview</p>
+      <div className=' flex justify-between md:items-center p-3 md:p-5 gap-3 md:gap-0 flex-col md:flex-row'>
+        <p className='text-xl font-medium text-start'>Excel Uploaded Order</p>
         <Stack
           direction="row"
           flexWrap="wrap"
@@ -141,7 +141,9 @@ const NewOrderFromExcel = () => {
   return (
     <div className="h-full bg-white  shadow-bg-shadow-2 rounded-xl">
       {loading ? (
-        <Loader />
+       <div className='h-full flex justify-center items-center'>
+         <Loader />
+       </div>
       ) : !orderTemplate ? (
         <div className="h-full flex flex-col items-center justify-center p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">No Data Available</h2>

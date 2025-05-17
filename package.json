@@ -27,6 +27,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.0",
+    "styled-components": "^6.1.18",
     "tailwind-scrollbar-hide": "^2.0.0",
     "xlsx": "^0.18.5"
   },

@@ -1,6 +1,7 @@
 import ArrowRed from '../../assets/Commonicons/RedArrow.png'
 import ArrowYellow from '../../assets/Commonicons/YellowArrow.png'
 import ArrowGreen from '../../assets/Commonicons/GreenArrow.png'
+import ArrowBlue from '../../assets/Commonicons/BlueIcon.png'
 import React from 'react'
 
 const ArrowIcon = ({ type }) => {
@@ -10,8 +11,11 @@ const ArrowIcon = ({ type }) => {
       iconSrc = ArrowRed
     } else if (type === "deadline") {
       iconSrc = ArrowYellow
-    } else {
+    } else if(type ==="onschedule"){
       iconSrc = ArrowGreen
+    }
+    else{
+      iconSrc=ArrowBlue
     }
   
     return (

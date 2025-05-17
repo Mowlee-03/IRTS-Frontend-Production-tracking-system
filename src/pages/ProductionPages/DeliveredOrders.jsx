@@ -3,7 +3,7 @@ import SimpleDataTable from '../../components/common/SimpleDataTable';
 import { Button, Chip, IconButton, Stack, useMediaQuery } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { GridToolbarContainer, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
-import { ExportDataBtn, IconButtonColors, SearchQuickFilter } from '../../../Style';
+import { ExportButtonStyle, IconButtonColors, SearchQuickFilter } from '../../../Style';
 import OrderDetailsCard from '../../components/productionUi/OrderDetailCard';
 const DeliveredOrders = () => {
   const isSmallScreen = useMediaQuery('(max-width:1024px)');
@@ -182,13 +182,13 @@ const CustomToolbar = () => {
           <GridToolbarExport
             slotProps={{
               button: { 
-                sx: ExportDataBtn,
+                sx: ExportButtonStyle,
               },
             }}
           />
-          <GridToolbarQuickFilter
-            sx={SearchQuickFilter}
-          />
+          <div className='border rounded-lg px-1  bg-[#F9FAFB]'>
+                     <GridToolbarQuickFilter sx={SearchQuickFilter} />
+                   </div>
         </div>
     </GridToolbarContainer>
   );
