@@ -5,6 +5,7 @@ import ProductionStatusCards from '../productionUi/ProductionStatusCard';
 import { useLocation } from 'react-router-dom';
 import AccountProfileBtn from '../assets/AccountProfileBtn';
 import Notification from '../assets/Notification';
+import InProgressTable from '../productionUi/InProgressTable';
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
   
@@ -14,6 +15,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/production/delivered_orders', title: 'Delivered Orders' },
     { path: '/production/pending_orders', title: 'Pending Orders' },
     { path: '/production/new_orders', title: 'Add New Production Order' },
+    { path: '/production/in-progress', title: 'Production Line Status(In-Progress)' },
   ];
   
   const getHeading = () => {
@@ -25,7 +27,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div 
     className="flex flex-col  bg-white shadow-bg-shadow-1 
-    px-5 py-4 rounded-2xl mt-4">
+    px-5 pt-4 rounded-2xl mt-4">
       <div className='w-full flex items-center justify-between'>
         <div className="flex items-center gap-1">
           <button 
@@ -44,7 +46,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
             <Notification/>
             <AccountProfileBtn/>
         </div>
@@ -53,6 +55,9 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
       <div >
          {['/production/total_orders', '/production/delivered_orders', '/production/pending_orders','/production/overview'].includes(location.pathname) && (
             <ProductionStatusCards/>
+         )}
+         {['/production/in-progress'].includes(location.pathname) && (
+              <InProgressTable/>
          )}
       </div>
       

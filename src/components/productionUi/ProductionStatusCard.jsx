@@ -10,7 +10,7 @@ const ProductionStatusCards = () => {
 
   const isActive = (path) => location.pathname === path;
     return (
-      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-14 px-10 pt-2 xl:px-0 xl:pt-2">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-14 px-10 pt-2 xl:px-0 xl:pt-2 pb-4">
         <Link to="/production/total_orders">
           <div 
           style={{ 

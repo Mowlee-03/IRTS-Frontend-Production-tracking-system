@@ -12,6 +12,7 @@ import NewOrderFromExcel from '../pages/ProductionPages/NewOrderFromExcel'
 import OrderPreviewPage from '../components/productionUi/orderPreviewPage'
 import SingleOrderAdding from '../pages/ProductionPages/SingleOrderAdding'
 import GrowSmartOrderAdding from '../pages/ProductionPages/GrowSmartOrderAdding'
+import InProgressOverview from '../pages/ProductionPages/InProgressOverview'
 
 
 const AppRouting = () => {
@@ -32,6 +33,7 @@ const AppRouting = () => {
                 <Route path='single'element={<SingleOrderAdding/>} />
                 <Route path='growsmart' element={<GrowSmartOrderAdding/>} />
             </Route>
+            <Route path='in-progress' element={<InProgressOverview/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/production/overview" />} />

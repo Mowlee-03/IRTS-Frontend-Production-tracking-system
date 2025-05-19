@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     const menuItems = [
         { icon: PersonIcon, label: "Production manager", to: "/production/overview" },
         { icon: PaperIcon, label: "Total production", to: "/production/total_orders" },
-        { icon: SettingMsgIcon, label: "Production in progress", to: "o" },
+        { icon: SettingMsgIcon, label: "Production in progress", to: "/production/in-progress" },
         { icon: SettingHintIcon, label: "Production NOT Started", to: "o" },
     ];
     
