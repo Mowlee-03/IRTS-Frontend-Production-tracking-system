@@ -14,6 +14,7 @@ import SingleOrderAdding from '../pages/ProductionPages/SingleOrderAdding'
 import GrowSmartOrderAdding from '../pages/ProductionPages/GrowSmartOrderAdding'
 import InProgressOverview from '../pages/ProductionPages/InProgressOverview'
 import WorkInProgressTable from '../pages/ProductionPages/WorkInProgressTable'
+import ProgressView from '../pages/ProductionPages/ProgressView'
 
 
 const AppRouting = () => {
@@ -36,6 +37,7 @@ const AppRouting = () => {
             </Route>
             <Route path='in-progress' element={<InProgressOverview/>} />
             <Route path='in-progress/data' element={<WorkInProgressTable/>} />
+            <Route path='in-progress/view' element={<ProgressView/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/production/overview" />} />
