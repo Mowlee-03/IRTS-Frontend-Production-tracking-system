@@ -2,7 +2,7 @@
 import { ArrowLeft, Menu } from 'lucide-react';
 import React from 'react';
 import ProductionStatusCards from '../productionUi/ProductionStatusCard';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AccountProfileBtn from '../assets/AccountProfileBtn';
 import Notification from '../assets/Notification';
 import InProgressTable from '../productionUi/InProgressTable';
@@ -57,7 +57,9 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <ProductionStatusCards/>
          )}
          {['/production/in-progress'].includes(location.pathname) && (
+          <Link to='/production/in-progress/data'>
               <InProgressTable/>
+          </Link>
          )}
       </div>
       

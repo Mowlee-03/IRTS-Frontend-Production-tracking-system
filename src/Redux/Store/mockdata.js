@@ -67,3 +67,61 @@ export const GrowsmartData=[
 
     }
 ]
+
+
+export const ModelProductionData= [
+    {
+      id: 1,
+      kitNo:20,
+      poNumber: '4700064991',
+      poDate: '26-Mar-2025',
+      soNumber: 'SO/0001/25-26',
+      proNumber: 'PROD/0001/25-26',
+      customer: 'RMCL',
+      itemName: '558510111-A1 CONTROL BOARD-RB100',
+      orderQty: 50,
+      pendingQty: 50,
+      materialRequiredDate: '25-Apr-2025',
+      bom: '100%',
+      days: 23,
+      value: '₹3500',
+      total: '₹175000',
+      deliveryDate: '25-Apr-2025',
+      steps: [
+        { label: 'KIT Init', date: '27-Mar-2024', status: 'completed' },
+        { label: 'PO', date: '13-May-2024', status: 'completed' },
+        { label: 'Inward', date: '14-May-2024', status: 'completed' },
+        { label: 'KIT', date: '15-May-2024', status: 'completed' },
+        { label: 'BOM', date: '16-May-2024', status: 'completed' },
+        { label: 'Production', date: '25-May-2024', status: 'in-progress' },
+        { label: 'FG', date: '26-May-2024', status: 'pending' },
+      ],
+    },
+    {
+      id: 2,
+        kitNo:120,
+      poNumber: 'PO-2407',
+      poDate: '14-Mar-2025',
+      soNumber: 'SO/0003/25-26',
+      proNumber: 'PROD/0002/25-26',
+      customer: 'MWS',
+      itemName: 'Analog Level sensor (4-20mA)',
+      orderQty: 22,
+      pendingQty: 22,
+      materialRequiredDate: '20-Apr-2025',
+      bom: '50%',
+      days: 18,
+      value: '₹5400',
+      total: '₹118800',
+      deliveryDate: '25-Apr-2025',
+      steps: [
+        { label: 'KIT Init', date: '15-Mar-2024', status: 'completed' },
+        { label: 'PO', date: '16-Mar-2024', status: 'completed' },
+        { label: 'Inward', date: '17-Mar-2024', status: 'completed' },
+        { label: 'KIT', date: '18-Mar-2024', status: 'in-progress' },
+        { label: 'BOM', date: '19-Mar-2024', status: 'pending' },
+        { label: 'Production', date: '20-Mar-2024', status: 'pending' },
+        { label: 'FG', date: '21-Mar-2024', status: 'pending' },
+      ],
+    },
+  ];
