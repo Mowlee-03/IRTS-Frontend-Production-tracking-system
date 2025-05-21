@@ -20,15 +20,12 @@ const Layout = () => {
       </div>
       
       
-      <div className="flex-1 flex flex-col overflow-auto  px-2 lg:pr-3  ">
-        {/* <div className=""> */}
+      <div className="flex-1 flex flex-col overflow-auto h-full px-2 lg:pr-3 py-4">
           <MainNav 
             isSidebarOpen={isSidebarOpen} 
             setIsSidebarOpen={setIsSidebarOpen} 
           />
           <Outlet/>
-
-        {/* </div> */}
       </div>
     </div>
   );

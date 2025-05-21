@@ -505,9 +505,10 @@ const OrderPreviewPage = () => {
   };
 
   return (
-    <div className="h-full bg-white shadow-bg-shadow-2 py-4 px-4 md:px-8 rounded-xl">
+    <div className=" py-4">
       {selectedOrders.length > 0 ? (
         <>
+        <div className='bg-white shadow-bg-shadow-2 py-4 px-4 md:px-8 rounded-xl'>
           <Box display="flex" alignItems="center" justifyContent="space-between">
             <Tabs
               value={tabIndex}
@@ -531,6 +532,8 @@ const OrderPreviewPage = () => {
             )}
           </Box>
           <Box>{renderOrderDetails()}</Box>
+        </div>
+      
         </>
       ) : (
         <Typography variant="body1">No Selected Data</Typography>

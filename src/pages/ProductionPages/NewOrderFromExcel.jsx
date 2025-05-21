@@ -139,7 +139,7 @@ const NewOrderFromExcel = () => {
     )
   }
   return (
-    <div className="h-full bg-white  shadow-bg-shadow-2 rounded-xl">
+    <div className="h-full py-4 rounded-xl">
       {loading ? (
        <div className='h-full flex justify-center items-center'>
          <Loader />

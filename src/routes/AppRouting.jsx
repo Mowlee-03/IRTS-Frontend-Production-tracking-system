@@ -15,6 +15,8 @@ import GrowSmartOrderAdding from '../pages/ProductionPages/GrowSmartOrderAdding'
 import InProgressOverview from '../pages/ProductionPages/InProgressOverview'
 import WorkInProgressTable from '../pages/ProductionPages/WorkInProgressTable'
 import ProgressView from '../pages/ProductionPages/ProgressView'
+import AdminMain from '../layout/AdminMain'
+import AdminDashboard from '../pages/Admin/AdminDashboard'
 
 
 const AppRouting = () => {
@@ -23,6 +25,12 @@ const AppRouting = () => {
         <Route path="/login" element={<Login />} />
         <Route element={<Layout/>} >
           <Route index element={<Navigate to="/production" replace />} />
+
+          <Route path='admin' element={<AdminMain/>}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path='dashboard' element={<AdminDashboard/>} />
+          </Route>
+
           <Route path='production' element={<ProductionMain/>} >
             <Route index element={<Navigate to="overview" replace />} />
             <Route path='overview' element={<ProductionOverview/>} />
@@ -39,6 +47,7 @@ const AppRouting = () => {
             <Route path='in-progress/data' element={<WorkInProgressTable/>} />
             <Route path='in-progress/view' element={<ProgressView/>} />
           </Route>
+
         </Route>
         <Route path="*" element={<Navigate to="/production/overview" />} />
     </Routes>

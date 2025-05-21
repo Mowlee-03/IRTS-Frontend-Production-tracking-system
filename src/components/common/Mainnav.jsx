@@ -26,8 +26,8 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
   return (
     <div 
-    className="flex flex-col  bg-white shadow-bg-shadow-1 
-    px-5 rounded-2xl mt-4">
+    className="flex flex-col bg-white shadow-bg-shadow-1 
+    px-5 rounded-2xl">
       <div className='w-full flex items-center justify-between py-4 '>
         <div className="flex items-center gap-1">
           <button 

@@ -195,7 +195,7 @@ const PendingOrders = () => {
         );
       };
   return (
-    <div className='pt-4 h-[74vh] '>
+    <div className='py-4 h-full '>
         <SimpleDataTable columns={columns} rows={rows} CustomToolbar={CustomToolbar} />
     </div>
   )

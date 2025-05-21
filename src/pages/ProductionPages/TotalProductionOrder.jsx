@@ -280,7 +280,7 @@ const TotalProductionOrder = () => {
   };
 
   return (
-    <div className="w-full h-auto lg:h-[75vh] pt-4">
+    <div className="w-full h-auto lg:h-full py-4">
       <div className="h-full">
         <MainDataTable
           columns={columns}

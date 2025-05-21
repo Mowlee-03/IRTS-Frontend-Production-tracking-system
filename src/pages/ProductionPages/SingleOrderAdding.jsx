@@ -398,11 +398,11 @@ const handleSave = () => {
 
 
   return (
-    <div className="flex flex-col gap-3 h-[88vh]">
-      <div className="bg-white rounded-xl py-3 h-[15%] flex items-center justify-center shadow-bg-shadow-2">
+    <div className="flex flex-col gap-3 h-full py-4">
+      <div className="bg-white rounded-xl py-3 flex items-center justify-center shadow-bg-shadow-2">
         <CustomeStepper steps={steps} activeStep={activeStep} />
       </div>
-      <div className="bg-white flex-1 overflow-auto rounded-xl shadow-bg-shadow-2">
+      <div className="bg-white flex-1  overflow-y-auto rounded-xl shadow-bg-shadow-2">
         {renderStepContent()}
       </div>
       <div className="p-2 bg-white rounded-xl shadow-bg-shadow-2 flex justify-between gap-4">

@@ -194,7 +194,7 @@ const CustomToolbar = () => {
   );
 };
   return (
-    <div className='pt-4 h-[75vh] '>
+    <div className='py-4 h-full '>
      {!selectedOrder ? (
         <SimpleDataTable columns={columns} rows={filteredRows} CustomToolbar={CustomToolbar} />
       ) : (
