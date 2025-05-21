@@ -1,13 +1,13 @@
-import { Card, CardContent, CardHeader, Grid } from "@mui/material"
+import {Grid } from "@mui/material"
 import { FileText, Truck, Package, Clock } from "lucide-react"
 
 const StatCard = ({ icon, color, title, value, subtitle }) => {
   return (
-    <div className={`bg-${color}-500 rounded-lg p-4 text-white flex flex-col h-full`}>
-      <div className="flex items-center mb-2">
-        <div className={`bg-${color}-400 p-2 rounded-full`}>{icon}</div>
+    <div className={`bg-${color}-500 rounded-lg p-2 xl:p-4 text-white flex flex-col items-start h-full`}>
+      <div className="flex items-center mb-2 bg-[#ffffff67] rounded-full">
+        <div className={`bg-${color}-400 p-2 rounded-full `}>{icon}</div>
       </div>
-      <div className="text-3xl font-bold">{value}</div>
+      <div className="2xl:text-3xl font-bold">{value}</div>
       <div className="text-lg">{title}</div>
       <div className="mt-auto text-sm text-${color}-100">{subtitle}</div>
     </div>
@@ -16,11 +16,15 @@ const StatCard = ({ icon, color, title, value, subtitle }) => {
 
 const SalesOverview = () => {
   return (
-    <Card className="h-full shadow-md">
-      <CardHeader title="Sales Overview" className="pb-0" />
-      <CardContent>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={3}>
+    <div className="w-full h-full px-4 py-5">
+        <p>Sales Overview</p>
+        <Grid container columnSpacing={2} 
+        sx={{
+          width:"100%",
+          height:"90%" ,
+          // bgcolor:"greenyellow"
+          }}>
+          <Grid sx={{height :"100%"}}  size={{xl:2.5}}>
             <StatCard
               icon={<FileText size={24} />}
               color="blue"
@@ -29,7 +33,7 @@ const SalesOverview = () => {
               subtitle="+10 for Month"
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+         <Grid sx={{height :"100%"}}  size={{xl:2.5}}>
             <StatCard
               icon={<Truck size={24} />}
               color="orange"
@@ -38,7 +42,7 @@ const SalesOverview = () => {
               subtitle="+10 for yesterday"
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+        <Grid sx={{height :"100%"}}  size={{xl:2.5}}>
             <StatCard
               icon={<Package size={24} />}
               color="green"
@@ -47,34 +51,56 @@ const SalesOverview = () => {
               subtitle="+10 for Today"
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <div className="h-full flex flex-col gap-2">
-              <div className="bg-red-500 rounded-lg p-3 text-white">
-                <div className="flex items-center">
-                  <Clock size={20} className="mr-2" />
+          <Grid sx={{
+            height :"100%",
+            // bgcolor:"yellow",
+            p:1,
+            display:"flex",
+            flexDirection:"column",
+            justifyContent:"space-between"}}  
+            size={{xl:4.5}}
+            >
+           
+              <div className="w-4/5 bg-[#EF4444] rounded-lg p-1 flex items-center gap-2">
+                <span className="bg-white p-2 rounded-lg">
+                    <Clock size={20}  />
+                </span>
+               
+                <div className="text-sm text-white">
                   <span>Overdue Order</span>
+                  <div className="font-semibold">40</div>
+
                 </div>
-                <div className="text-xl font-bold">40</div>
               </div>
-              <div className="bg-orange-400 rounded-lg p-3 text-white">
-                <div className="flex items-center">
-                  <Clock size={20} className="mr-2" />
-                  <span>Orders Near Deadline</span>
+
+              <div className="ml-auto w-4/5 bg-[#eea826] rounded-lg p-1 flex items-center gap-2">
+                <span className="bg-white p-2 rounded-lg">
+                    <Clock size={20}  />
+                </span>
+               
+                <div className="text-sm text-white">
+                  <span>Orders Near Deadline </span>
+                  <div className="font-semibold">40</div>
+
                 </div>
-                <div className="text-xl font-bold">20</div>
               </div>
-              <div className="bg-green-500 rounded-lg p-3 text-white">
-                <div className="flex items-center">
-                  <Clock size={20} className="mr-2" />
+              <div className="w-4/5 bg-[#84CC16] rounded-lg p-1 flex items-center gap-2">
+                <span className="bg-white p-2 rounded-lg">
+                    <Clock size={20}  />
+                </span>
+               
+                <div className="text-sm">
                   <span>Order on schedule</span>
+                  <div className="font-semibold">40</div>
+
                 </div>
-                <div className="text-xl font-bold">20</div>
               </div>
-            </div>
+
+           
           </Grid>
         </Grid>
-      </CardContent>
-    </Card>
+    </div>
+
   )
 }
 

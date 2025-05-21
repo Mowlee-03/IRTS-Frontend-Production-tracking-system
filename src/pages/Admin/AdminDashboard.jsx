@@ -1,21 +1,64 @@
 import React from 'react'
-import SalesOverview from 'c:/Users/RTSLAP-PF57DAH4/Downloads/admin-dashboard/src/components/dashboard/SalesOverview'
-import FinishedGoods from '../../components/admin/dashboard/FinishedGoods'
-import IQCOverview from 'c:/Users/RTSLAP-PF57DAH4/Downloads/admin-dashboard/src/components/dashboard/IQCOverview'
-import AccountsSummary from 'c:/Users/RTSLAP-PF57DAH4/Downloads/admin-dashboard/src/components/dashboard/AccountsSummary'
-import StorePerformance from 'c:/Users/RTSLAP-PF57DAH4/Downloads/admin-dashboard/src/components/dashboard/StorePerformance'
-import PurchaseOverview from 'c:/Users/RTSLAP-PF57DAH4/Downloads/admin-dashboard/src/components/dashboard/PurchaseOverview'
+
 import { Grid } from '@mui/material'
+import SalesOverview from '../../components/admin/dashboard/SalesOverview'
+import FinishedGoods from '../../components/admin/dashboard/FinishedGoods'
+import IQCOverview from '../../components/admin/dashboard/IQCOverview'
+import AccountsSummary from '../../components/admin/dashboard/AccountsSummary'
+import StorePerformance from '../../components/admin/dashboard/StorePerformance'
+import ProductionView from '../../components/admin/dashboard/ProductionView'
 
 const AdminDashboard = () => {
   return (
-    <div className="h-full bg-green-200">
-      <Grid container direction='column' sx={{height:"100%", bgcolor:"yellow"}}>
-            <Grid  sx={{height:"65%",bgcolor:"gray"}}>
-               <Grid container sx={{height:"100%", bgcolor:"yellow"}}>
-                    <Grid sx={{width:"60%",bgcolor:"gray"}}>
-                        <Grid container sx={{height:"40%",bgcolor:"blue"}}>
+    <div className="h-full ">
+      <Grid container direction='column' 
+      sx={{
+        height:"100%",
+        //  bgcolor:"yellow"
+         }}>
+            <Grid  
+            sx={{
+                height:"65%",
+                // bgcolor:"gray"
+                }}>
+               <Grid container 
+               sx={{
+                height:"100%", 
+                bgcolor:"yellow",
+                }} >
+                    <Grid 
+                    sx={{
+                        width:"60%",
+                        bgcolor:"gray",
+                        }}>
+                        <Grid container
+                        sx={{
+                            height:"40%",
+                            mb:2,
+                            bgcolor:"white",
+                            borderRadius:3,
+                            boxShadow:"0px 4px 4px 0px #00000040"
+                            }}>
                               <SalesOverview />
+                        </Grid>
+                        <Grid container 
+                        // columnSpacing={4}
+                        sx={{
+                            height:"57%",
+                            bgcolor:"white",
+                            borderRadius:3,
+                            boxShadow:"0px 4px 4px 0px #00000040"
+                            }}>
+                             <Grid 
+                             sx={{
+                                bgcolor:"gray"
+                                }} 
+                            size={{xl:7}}>
+                                <ProductionView/>
+                             </Grid>
+                             <Grid size={{xl:5}}>
+                                 <FinishedGoods />
+                             </Grid>
                         </Grid>
                     </Grid>
                </Grid>
@@ -25,7 +68,7 @@ const AdminDashboard = () => {
             </Grid>
           
        
-          {/* <FinishedGoods /> */}
+         
           {/* <IQCOverview />
         
           <AccountsSummary />
@@ -36,6 +79,43 @@ const AdminDashboard = () => {
       </Grid>
     </div>
   )
+
+//   return (
+//     <div className="h-full">
+//       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+//       <Grid container spacing={3} className="h-[calc(100%-60px)]">
+//         {/* First row */}
+//         <Grid item xs={12} md={6}>
+//           <SalesOverview />
+//         </Grid>
+//         <Grid item xs={12} md={6}>
+//           {/* <PerformanceStatus /> */}
+//         </Grid>
+
+//         {/* Second row */}
+//         <Grid item xs={12} md={6} lg={4}>
+//           <ProductionView />
+//         </Grid>
+//         <Grid item xs={12} md={6} lg={4}>
+//           <FinishedGoods />
+//         </Grid>
+//         <Grid item xs={12} lg={4}>
+//           <IQCOverview />
+//         </Grid>
+
+//         {/* Third row */}
+//         <Grid item xs={12} md={6} lg={4}>
+//           <AccountsSummary />
+//         </Grid>
+//         <Grid item xs={12} md={6} lg={4}>
+//           <StorePerformance />
+//         </Grid>
+//         <Grid item xs={12} lg={4}>
+//           {/* <PurchaseOverview /> */}
+//         </Grid>
+//       </Grid>
+//     </div>
+//   )
 }
 
 export default AdminDashboard

@@ -1,3 +1,22 @@
+// theme.js or theme.ts
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 640,    // Tailwind's sm
+      md: 768,    // Tailwind's md
+      lg: 1024,   // Tailwind's lg
+      xl: 1280,   // Tailwind's xl
+      '2xl': 1536
+    },
+  },
+});
+
+export default theme;
+
+
 export const IconButtonColors={
     border: 1,
     borderColor: '#edf0f0',
