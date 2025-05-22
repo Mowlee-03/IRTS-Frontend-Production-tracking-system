@@ -24,7 +24,7 @@ const AppRouting = () => {
     <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<Layout/>} >
-          <Route index element={<Navigate to="/production" replace />} />
+          <Route index element={<Navigate to="/admin" replace />} />
 
           <Route path='admin' element={<AdminMain/>}>
               <Route index element={<Navigate to="dashboard" replace />} />
@@ -49,7 +49,7 @@ const AppRouting = () => {
           </Route>
 
         </Route>
-        <Route path="*" element={<Navigate to="/production/overview" />} />
+        <Route path="*" element={<Navigate to="/admin/dashboard" />} />
     </Routes>
   )
 }

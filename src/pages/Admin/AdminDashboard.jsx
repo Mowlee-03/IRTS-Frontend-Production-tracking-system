@@ -24,39 +24,43 @@ const AdminDashboard = () => {
                <Grid container 
                sx={{
                 height:"100%", 
-                bgcolor:"yellow",
+                // bgcolor:"yellow",
                 }} >
                     <Grid 
                     sx={{
                         width:"60%",
-                        bgcolor:"gray",
+                        // bgcolor:"gray",
                         }}>
                         <Grid container
                         sx={{
                             height:"40%",
-                            mb:2,
-                            bgcolor:"white",
-                            borderRadius:3,
-                            boxShadow:"0px 4px 4px 0px #00000040"
+                            // bgcolor:"green",
+                            pb:1,pr:1
                             }}>
                               <SalesOverview />
                         </Grid>
                         <Grid container 
-                        // columnSpacing={4}
+                        
                         sx={{
-                            height:"57%",
-                            bgcolor:"white",
-                            borderRadius:3,
-                            boxShadow:"0px 4px 4px 0px #00000040"
+                            height:"60%",
+                            // bgcolor:"white",
                             }}>
                              <Grid 
                              sx={{
-                                bgcolor:"gray"
+                                // bgcolor:"gray",
+                                py:1,
+                                pr:1
                                 }} 
                             size={{xl:7}}>
                                 <ProductionView/>
                              </Grid>
-                             <Grid size={{xl:5}}>
+                             <Grid 
+                             sx={{
+                              py:1,
+                              pl:1,
+                              // bgcolor:"gray"
+                             }}
+                             size={{xl:5}}>
                                  <FinishedGoods />
                              </Grid>
                         </Grid>

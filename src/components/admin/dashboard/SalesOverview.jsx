@@ -16,7 +16,7 @@ const StatCard = ({ icon, color, title, value, subtitle }) => {
 
 const SalesOverview = () => {
   return (
-    <div className="w-full h-full px-4 py-5">
+    <div className="w-full h-full px-4 py-5 bg-white rounded-xl shadow-bg-shadow-1">
         <p>Sales Overview</p>
         <Grid container columnSpacing={2} 
         sx={{
@@ -53,7 +53,8 @@ const SalesOverview = () => {
           </Grid>
           <Grid sx={{
             height :"100%",
-            // bgcolor:"yellow",
+            bgcolor:"#D6DDE5",
+            borderRadius:2,
             p:1,
             display:"flex",
             flexDirection:"column",

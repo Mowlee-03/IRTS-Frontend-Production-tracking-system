@@ -20,6 +20,7 @@ export default {
         "bg-shadow-1":'0px 4px 4px 0px #00000040',
         "bg-shadow-2":'2px 2px 4px 0px #00000040',  
         "bg-shadow-3":'0px 4px 4px 0px #00000040',
+        "bg-shadow-4":"0px 0px 4px 0px #00000040"
   
       },
       backgroundImage: {
