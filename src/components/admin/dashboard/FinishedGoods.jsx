@@ -41,7 +41,7 @@ const FinishedGoods = () => {
             sx={{
               "& .MuiChartsLegend-root": {
                 m:0,
-                width:"150px",
+                width:"130px",
                 bgcolor:"#7EFFF980",
                 p:1,
                 borderRadius:2

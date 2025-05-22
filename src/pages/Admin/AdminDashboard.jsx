@@ -7,6 +7,7 @@ import IQCOverview from '../../components/admin/dashboard/IQCOverview'
 import AccountsSummary from '../../components/admin/dashboard/AccountsSummary'
 import StorePerformance from '../../components/admin/dashboard/StorePerformance'
 import ProductionView from '../../components/admin/dashboard/ProductionView'
+import PerformanceStatus from '../../components/admin/dashboard/PerformanceStatus'
 
 const AdminDashboard = () => {
   return (
@@ -57,13 +58,21 @@ const AdminDashboard = () => {
                              <Grid 
                              sx={{
                               py:1,
-                              pl:1,
+                              px:1,
                               // bgcolor:"gray"
                              }}
                              size={{xl:5}}>
                                  <FinishedGoods />
                              </Grid>
                         </Grid>
+                    </Grid>
+                    <Grid sx={{
+                      width:"40%",
+                      pl:1,
+                      pb:1
+                      // bgcolor:"yellow"
+                    }}>
+                      <PerformanceStatus/>
                     </Grid>
                </Grid>
             </Grid>
