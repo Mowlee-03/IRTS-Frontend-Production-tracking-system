@@ -13,11 +13,11 @@ const StorePerformance = () => {
   ]
 
   return (
-    <Card className="h-full shadow-md">
-      <CardHeader title="Store Performance" className="pb-0" />
-      <CardContent>
-        <div className="flex flex-col items-center">
-          <div className="h-[250px] w-full">
+        <div className="h-full flex flex-col justify-between p-4 bg-white rounded-xl shadow-bg-shadow-4"> 
+          <div className="flex items-center">
+            <p className="font-medium"> Store Performance</p>
+          </div>
+          <div className="h-[150px] w-full">
             <PieChart
               series={[
                 {
@@ -26,21 +26,16 @@ const StorePerformance = () => {
                   outerRadius: 120,
                   paddingAngle: 1,
                   cornerRadius: 5,
-                  startAngle: -180,
-                  endAngle: 0,
-                  cx: 150,
+                  startAngle: -90,
+                  endAngle: 90,
+                  cx: 130,
                   cy: 125,
                 },
               ]}
-              width={300}
-              height={250}
-              slotProps={{
-                legend: {
-                  hidden: true,
-                },
-              }}
+              hideLegend
             />
           </div>
+
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs mt-4">
             {data.map((item) => (
               <div key={item.id} className="flex items-center">
@@ -52,8 +47,7 @@ const StorePerformance = () => {
             ))}
           </div>
         </div>
-      </CardContent>
-    </Card>
+
   )
 }
 

@@ -15,67 +15,91 @@ const IQCOverview = () => {
   ]
 
   return (
-    <Card className="h-full shadow-md">
-      <CardHeader
-        title="IQC Overview"
-        className="pb-0"
-        action={
-          <FormControl size="small" className="min-w-[100px]">
-            <InputLabel id="month-select-label">Month</InputLabel>
-            <Select
-              labelId="month-select-label"
-              id="month-select"
-              value={timeFrame}
-              label="Month"
-              onChange={(e) => setTimeFrame(e.target.value)}
-            >
-              <MenuItem value="month">Month</MenuItem>
-              <MenuItem value="quarter">Quarter</MenuItem>
-              <MenuItem value="year">Year</MenuItem>
-            </Select>
-          </FormControl>
-        }
-      />
-      <CardContent>
-        <div className="h-[250px] relative">
-          <PieChart
-            series={[
-              {
-                data,
-                innerRadius: 80,
-                outerRadius: 120,
-                paddingAngle: 1,
-                cornerRadius: 5,
-                startAngle: -90,
-                endAngle: 270,
-                cx: 150,
-                cy: 125,
-              },
-            ]}
-            width={300}
-            height={250}
-            slotProps={{
-              legend: {
-                hidden: true,
-              },
-            }}
-          />
-          <div className="absolute top-[125px] left-[150px] transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div className="text-sm text-gray-500">50 in progress</div>
+   
+      <div className="h-full bg-white flex flex-col justify-between p-4 rounded-xl shadow-bg-shadow-4">
+
+          <div className=" flex justify-between items-center">
+            <p className="font-medium">IQC Overview</p>
+            
+          <div className="flex gap-2">
+                <FormControl size="small">
+                  <Select
+                    id="year-select"
+                    value=""
+                    displayEmpty
+                    sx={{
+                      borderRadius: '8px',
+                      minHeight: '32px',
+                      fontSize: '0.75rem',
+                      '.MuiSelect-select': {
+                        padding: '4px 8px',
+                      },
+                    }}
+                  >
+                    <MenuItem value="" disabled>
+                      Year
+                    </MenuItem>
+                    <MenuItem value="2023">2023</MenuItem>
+                    <MenuItem value="2022">2022</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <FormControl size="small">
+                  <Select
+                    id="month-select"
+                    value=""
+                    displayEmpty
+                    sx={{
+                      borderRadius: '8px',
+                      minHeight: '32px',
+                      fontSize: '0.75rem',
+                      '.MuiSelect-select': {
+                        padding: '4px 8px',
+                      },
+                    }}
+                  >
+                    <MenuItem value="" disabled>
+                      Month
+                    </MenuItem>
+                    <MenuItem value="december">December</MenuItem>
+                    <MenuItem value="november">November</MenuItem>
+                  </Select>
+                </FormControl>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-between mt-4">
-          <div className="flex items-center bg-indigo-100 px-2 py-1 rounded-md">
-            <div className="w-3 h-3 bg-indigo-500 rounded-full mr-1"></div>
-            <span className="text-xs">Inward Progress</span>
+          <div className=" h-[85%] ">
+            <PieChart
+              sx={{
+                height:"100%",
+                width:"100%"
+              }}
+              series={[
+                {
+                  data,
+                  innerRadius: 60,
+                  outerRadius: 110,
+                  paddingAngle: 1,
+                  cornerRadius: 5,
+                  startAngle: -90,
+                  endAngle: 270,
+                  highlightScope: { fade: 'global', highlight: 'item' },
+                  faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+                  arcLabel:(item)=>`${item.value}`
+                },
+              ]}
+
+              slotProps={{
+                legend: {
+                  direction:"horizontal",
+                  position:{vertical:"top",horizontal:"center"},
+                  hidden: true,
+                },
+              }}
+            />
           </div>
-          <div className="flex items-center bg-yellow-100 px-2 py-1 rounded-md">
-            <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
-            <span className="text-xs">In Outward Progress</span>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+      </div>
+
+
   )
 }
 

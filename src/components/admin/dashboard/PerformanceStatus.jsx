@@ -42,7 +42,7 @@ const onScheduleData = [6, 9, 9, 10, 11, 14, 16, 5, 8]
                 scaleType: "band", 
                 width:100
               }]}
-              margin={{ top: 10, bottom: 30, left: 0, right: 10 }}
+              margin={{ top: 10, bottom: 0, left: 0, right: 10 }}
               slotProps={{
                 legend: {
                   hidden: true,

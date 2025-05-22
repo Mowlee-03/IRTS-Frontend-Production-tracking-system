@@ -13,9 +13,7 @@ const PurchaseOverview = () => {
   ]
 
   return (
-    <Card className="h-full shadow-md">
-      <CardHeader title="Purchase Overview" className="pb-0" />
-      <CardContent>
+      <div className="h-full overflow-hidden bg-white rounded-xl shadow-bg-shadow-4">
         <div className="h-[250px]">
           {/* <ScatterChart
             series={[
@@ -48,7 +46,7 @@ const PurchaseOverview = () => {
             }}
           /> */}
         </div>
-        <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs mt-2">
+        {/* <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs mt-2">
           {purchaseData.map((item) => (
             <div key={item.id} className="flex items-center">
               <div className="w-3 h-3 bg-red-500 rounded-full mr-1 opacity-70"></div>
@@ -57,9 +55,10 @@ const PurchaseOverview = () => {
               </span>
             </div>
           ))}
-        </div>
-      </CardContent>
-    </Card>
+        </div> */}
+      </div>
+
+
   )
 }
 

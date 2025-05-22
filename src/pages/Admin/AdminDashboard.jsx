@@ -8,6 +8,7 @@ import AccountsSummary from '../../components/admin/dashboard/AccountsSummary'
 import StorePerformance from '../../components/admin/dashboard/StorePerformance'
 import ProductionView from '../../components/admin/dashboard/ProductionView'
 import PerformanceStatus from '../../components/admin/dashboard/PerformanceStatus'
+import PurchaseOverview from '../../components/admin/dashboard/PurchaseOverview'
 
 const AdminDashboard = () => {
   return (
@@ -76,18 +77,65 @@ const AdminDashboard = () => {
                     </Grid>
                </Grid>
             </Grid>
-            <Grid sx={{height:"35%",bgcolor:"black"}}>
-               
+            <Grid 
+            sx={{
+              height:"35%",
+              // bgcolor:"black"
+
+              }}>
+               <Grid 
+                container
+                sx={{
+                  height:"100%",
+                  // bgcolor:"orange"
+                }}
+               >
+                  <Grid 
+                  size={{xl:4.2}}
+                  // bgcolor="purple"
+                  pr={1}
+                  pt={1}
+                  >
+                    <AccountsSummary />
+                  </Grid>
+
+                  <Grid 
+                  size={{xl:3}}
+                  // bgcolor='lavender'
+                  pt={1}
+                  px={1}
+                  >
+                     <IQCOverview />
+                  </Grid>
+
+                  <Grid 
+                  size={{xl:2.4}}
+                  // bgcolor='peachpuff'
+                  pt={1}
+                  px={1}
+                  >
+                    <StorePerformance />
+                  </Grid>
+
+                  <Grid 
+                  size={{xl:2.4}}
+                  // bgcolor='green'
+                  pt={1}
+                  pl={1}
+                  >
+                     <PurchaseOverview />
+                  </Grid>
+               </Grid>
             </Grid>
           
        
          
-          {/* <IQCOverview />
+         
         
-          <AccountsSummary />
-          <StorePerformance />
+          
+          
 
-          <PurchaseOverview /> */}
+         
 
       </Grid>
     </div>

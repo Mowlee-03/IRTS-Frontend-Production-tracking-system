@@ -10,10 +10,11 @@ const FinishedGoods = () => {
   ]
 
   return (
-    <div className="bg-white h-full rounded-xl shadow-bg-shadow-4 pt-4 pl-4 flex flex-col">
+    <div className="relative bg-white h-full rounded-xl shadow-bg-shadow-4 pt-4 pl-4 flex flex-col justify-between">
         <p className="font-medium ">Finished Goods</p>
-        <div className=" flex justify-center flex-1">
+        <div className=" h-[80%]">
           <PieChart
+          hideLegend
             series={[
               {
                 arcLabel:(item)=>`${item.value}`,
@@ -21,33 +22,28 @@ const FinishedGoods = () => {
                 arcLabelRadius: '60%',
                 data,
                 innerRadius: 60,
-                outerRadius: 100,
+                outerRadius: 110,
                 paddingAngle: 1,
                 cornerRadius: 5,
                 startAngle: -90,
                 endAngle: 270,
-                cx: 100,
-                cy: 125,
-                
+                cx:160,
+                cy:120
               },
             ]}
-            width={220}
-            height={250}
-            slotProps={{
-              legend: {
-                hidden: true,
-              },
-            }}
             sx={{
-              "& .MuiChartsLegend-root": {
-                m:0,
-                width:"130px",
-                bgcolor:"#7EFFF980",
-                p:1,
-                borderRadius:2
-            },
+              width:"100%",
+              height:"100%",
             }}
           />
+        </div>
+        <div className="absolute right-3 bg-[#7EFFF980] p-1 rounded-lg ">
+          {data.map((item) => (
+            <div key={item.id} className="flex items-center mb-1">
+              <div className="w-3 h-3 rounded-full mr-1" style={{ backgroundColor: item.color }}></div>
+              <span className="text-sm">{item.label}</span>
+            </div>
+          ))}
         </div>
     </div>
 
