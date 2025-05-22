@@ -53,5 +53,5 @@ const FinishedGoods = () => {
 
   )
 }
-
+ 
 export default FinishedGoods
