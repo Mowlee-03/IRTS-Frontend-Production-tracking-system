@@ -77,7 +77,7 @@ const IQCOverview = () => {
                 {
                   data,
                   innerRadius: 60,
-                  outerRadius: 110,
+                  outerRadius: 100,
                   paddingAngle: 1,
                   cornerRadius: 5,
                   startAngle: -90,

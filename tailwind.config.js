@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+       screens: {
+        'sm-plus': '641px',     // >640px
+        'md-plus': '769px',     // >768px
+        'lg-plus': '1025px',    // >1024px
+        'xl-plus': '1281px',    // >1280px
+        '2xl-plus': '1537px',   // >1536px
+      },
       colors:{
         "app-background":"#F8FAFC",
         "primary-background":"#FFFFFF",

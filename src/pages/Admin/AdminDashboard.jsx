@@ -12,7 +12,7 @@ import PurchaseOverview from '../../components/admin/dashboard/PurchaseOverview'
 
 const AdminDashboard = () => {
   return (
-    <div className="h-full ">
+    <div className="2xl-plus:h-full pb-4 2xl-plus:pb-0">
       <Grid container direction='column' 
       sx={{
         height:"100%",
@@ -20,8 +20,11 @@ const AdminDashboard = () => {
          }}>
             <Grid  
             sx={{
-                height:"65%",
-                // bgcolor:"gray"
+                height:{
+                  xl:"auto",
+                  '2xl':"65%"
+                },
+                // bgcolor:"gray",
                 }}>
                <Grid container 
                sx={{
@@ -29,96 +32,182 @@ const AdminDashboard = () => {
                 // bgcolor:"yellow",
                 }} >
                     <Grid 
+                    size={{
+                      xs:12,
+                      '2xl':7
+                    }}
                     sx={{
-                        width:"60%",
+                        // width:"60%",
+                        height:"100%",
                         // bgcolor:"gray",
                         }}>
                         <Grid container
                         sx={{
-                            height:"40%",
+                            height:{
+                              xl:"200px",
+                              "2xl":"40%"
+                            },
                             // bgcolor:"green",
-                            pb:1,pr:1
+                            pb:1,pr:{
+                              '2xl':1
+                            }
                             }}>
-                              <SalesOverview />
+                              <Grid 
+                              sx={{
+                                height:"100%"
+                              }}
+                              size={12}>
+                                 <SalesOverview />
+                              </Grid>
+                             
                         </Grid>
                         <Grid container 
                         
                         sx={{
-                            height:"60%",
-                            // bgcolor:"white",
+                            height:{
+                              xl:"400px",
+                              "2xl":"60%"
+                            },
+                            // bgcolor:"yellow",
                             }}>
                              <Grid 
                              sx={{
+                              height:{
+                                xs:"400px",
+                                xl:"100%"
+                              },
                                 // bgcolor:"gray",
                                 py:1,
-                                pr:1
+                                pr:1,
+                               
                                 }} 
-                            size={{xl:7}}>
+                            size={{
+                              xs:12,
+                              lg:7
+                              }}>
                                 <ProductionView/>
                              </Grid>
                              <Grid 
                              sx={{
+                              height:{
+                                xs:"400px",
+                                xl:"100%"
+                              },
                               py:1,
-                              px:1,
+                              pl:1,
+                              pr:{
+                                '2xl':1
+                              }
                               // bgcolor:"gray"
                              }}
-                             size={{xl:5}}>
+                             size={{
+                              xs:12,
+                              lg:5
+                              }}>
                                  <FinishedGoods />
                              </Grid>
                         </Grid>
                     </Grid>
-                    <Grid sx={{
-                      width:"40%",
-                      pl:1,
-                      pb:1
+                    <Grid 
+                     size={{
+                      xl:12,
+                      '2xl':5
+                    }}
+                    sx={{
+                      // width:"40%",
+                      height:{
+                        xs:"600px",
+                        "2xl":"100%"
+                      },
+                      pl:{
+                        "2xl":1
+                      },
+                      py:1,
+                      pt:{
+                        "2xl":0
+                      }
                       // bgcolor:"yellow"
                     }}>
                       <PerformanceStatus/>
                     </Grid>
                </Grid>
             </Grid>
+
             <Grid 
             sx={{
-              height:"35%",
+              height:{
+                xl:'auto',
+                '2xl':"35%"},
               // bgcolor:"black"
 
               }}>
                <Grid 
                 container
                 sx={{
-                  height:"100%",
+                  height:{
+                    xs:"auto",
+                    lg:"700px",
+                  '2xl':"100%",
+                },
                   // bgcolor:"orange"
                 }}
                >
                   <Grid 
-                  size={{xl:4.2}}
+                  size={{
+                    
+                    lg:6,
+                    '2xl':4.1
+                  }}
                   // bgcolor="purple"
                   pr={1}
-                  pt={1}
+                  py={1}
+                  pb={{
+                    '2xl':0
+                  }}
                   >
                     <AccountsSummary />
                   </Grid>
 
                   <Grid 
-                  size={{xl:3}}
+                  size={{
+                    
+                    lg:6,
+                    '2xl':2.9
+                  }}
                   // bgcolor='lavender'
-                  pt={1}
-                  px={1}
+                  py={1}
+                  pb={{
+                    '2xl':0
+                  }}
+                  pl={1}
+                  pr={{
+                    '2xl':1
+                  }}
+                  
                   >
                      <IQCOverview />
                   </Grid>
 
                   <Grid 
-                  size={{xl:2.4}}
+                  size={{
+                     lg:6,
+                    '2xl':2.5,
+                  }}
                   // bgcolor='peachpuff'
                   pt={1}
-                  px={1}
+                  pr={1}
+                  pl={{
+                    '2xl':1
+                  }}
                   >
                     <StorePerformance />
                   </Grid>
 
                   <Grid 
-                  size={{xl:2.4}}
+                  size={{
+                     lg:6,
+                    '2xl':2.5,
+                  }}
                   // bgcolor='green'
                   pt={1}
                   pl={1}
@@ -127,16 +216,6 @@ const AdminDashboard = () => {
                   </Grid>
                </Grid>
             </Grid>
-          
-       
-         
-         
-        
-          
-          
-
-         
-
       </Grid>
     </div>
   )

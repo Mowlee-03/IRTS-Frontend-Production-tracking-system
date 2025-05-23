@@ -19,7 +19,7 @@ const AccountCard = ({ icon, title, value, bgColor, iconBgColor }) => {
 const AccountsSummary = () => {
 
   return (
-    <div className="h-full bg-white p-4 rounded-xl shadow-bg-shadow-4 flex flex-col justify-between">
+    <div className="md:h-full bg-white p-4 rounded-xl shadow-bg-shadow-4 flex flex-col justify-between">
       <div className=" flex justify-between items-center">
           <p className="font-medium">Accounts summary</p>
           
@@ -73,7 +73,7 @@ const AccountsSummary = () => {
         height:"80%",
         // bgcolor:"gray"
         }}>
-        <Grid size={{xl:6}}>
+        <Grid size={{xs:12,md:6}}>
           <AccountCard
           icon={<FileText size={15} className="text-white" />}
           title="Total Order Value"
@@ -82,7 +82,7 @@ const AccountsSummary = () => {
           iconBgColor="bg-red-500"
         />
         </Grid>
-        <Grid size={{xl:6}}>
+        <Grid size={{xs:12,md:6}}>
           <AccountCard
            icon={<CreditCard size={20} className="text-white" />}
            title="Received Bill Amount"
@@ -91,7 +91,7 @@ const AccountsSummary = () => {
            iconBgColor="bg-green-500"
           />
         </Grid>
-        <Grid size={{xl:6}}>
+        <Grid size={{xs:12,md:6}}>
           <AccountCard
             icon={<DollarSign size={20} className="text-white" />}
             title="Outstanding Bill Amount"
@@ -100,7 +100,7 @@ const AccountsSummary = () => {
             iconBgColor="bg-purple-500"
           />
         </Grid>
-        <Grid size={{xl:6}}>
+        <Grid size={{xs:12,md:6}}>
           <AccountCard
             icon={<Truck size={20} className="text-white" />}
             title="Total Delivery Value"
@@ -109,7 +109,7 @@ const AccountsSummary = () => {
             iconBgColor="bg-blue-500"
           />
         </Grid>
-        <Grid size={{xl:6}}>
+        <Grid size={{xs:12,md:6}}>
            <AccountCard
           icon={<Truck size={20} className="text-white" />}
           title="Need To Delivery"
@@ -118,7 +118,7 @@ const AccountsSummary = () => {
           iconBgColor="bg-orange-500"
         />
         </Grid>
-        <Grid size={{xl:6}}>
+        <Grid size={{xs:12,md:6}}>
                <AccountCard
           icon={<DollarSign size={20} className="text-white" />}
           title="Total Spending"

@@ -5,11 +5,11 @@ const theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 640,    // Tailwind's sm
-      md: 768,    // Tailwind's md
-      lg: 1024,   // Tailwind's lg
-      xl: 1280,   // Tailwind's xl
-      '2xl': 1536
+      sm: 641,    // Tailwind's sm
+      md: 769,    // Tailwind's md
+      lg: 1025,   // Tailwind's lg
+      xl: 1281,   // Tailwind's xl
+      '2xl': 1537
     },
   },
 });
