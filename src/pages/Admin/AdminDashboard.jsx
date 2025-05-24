@@ -12,7 +12,7 @@ import PurchaseOverview from "../../components/admin/dashboard/PurchaseOverview"
 
 const AdminDashboard = () => {
   return (
-    <div className="2xl-plus:h-full pb-4 2xl-plus:pb-0">
+    <div className="2xl-plus:h-full pb-4 2xl-plus:pb-2">
       <Grid
         container
         direction="column"
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
         <Grid
           sx={{
             height: {
-              xl: "auto",
+              xs: "auto",
               "2xl": "65%",
             },
             // bgcolor:"gray",
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
                 container
                 sx={{
                   height: {
-                    xl: "200px",
+                    lg: "200px",
                     "2xl": "40%",
                   },
                   // bgcolor:"green",
@@ -149,7 +149,7 @@ const AdminDashboard = () => {
         <Grid
           sx={{
             height: {
-              xl: "auto",
+              xs: "auto",
               "2xl": "35%",
             },
             // bgcolor:"black"
@@ -168,16 +168,19 @@ const AdminDashboard = () => {
           >
             <Grid
               size={{
-                lg: 6,
+                xs:12,
+                xl: 6,
                 "2xl": 4.1,
               }}
               // bgcolor="purple"
               height={{
-                // xs:"0px",
-                lg:"400px",
+                xs:"auto",
+                md:"400px",
                 '2xl':"auto",
               }}
-              pr={1}
+              pr={{
+                xl:1
+              }}
               py={1}
               pb={{
                 "2xl": 0,
@@ -189,11 +192,11 @@ const AdminDashboard = () => {
             <Grid
               height={{
                 // xs:"0px",
-                lg:"400px",
+                xs:"400px",
                 '2xl':"auto",
               }}
               size={{
-                lg: 6,
+                xl: 6,
                 "2xl": 2.9,
               }}
               // bgcolor='lavender'
@@ -201,7 +204,11 @@ const AdminDashboard = () => {
               pb={{
                 "2xl": 0,
               }}
-              pl={1}
+              pl={
+                {
+                  xl:1
+                }
+              }
               pr={{
                 "2xl": 1,
               }}
@@ -211,17 +218,20 @@ const AdminDashboard = () => {
 
             <Grid
             height={{
-                // xs:"0px",
-                lg:"600px",
+                xs:"650px",
+                md:"600px",
                 '2xl':"auto",
               }}
               size={{
-                lg: 6,
+                xs:12,
+                md: 6,
                 "2xl": 2.5,
               }}
               // bgcolor='peachpuff'
               pt={1}
-              pr={1}
+              pr={{
+                md:1
+              }}
               pl={{
                 "2xl": 1,
               }}
@@ -231,17 +241,20 @@ const AdminDashboard = () => {
 
             <Grid
             height={{
-                // xs:"0px",
-                lg:"600px",
+                // xs:"700px",
+                md:"600px",
                 '2xl':"auto",
               }}
               size={{
-                lg: 6,
+                xs:12,
+                md: 6,
                 "2xl": 2.5,
               }}
               // bgcolor='green'
               pt={1}
-              pl={1}
+              pl={{
+                md:1
+              }}
             >
               <PurchaseOverview />
             </Grid>
@@ -251,42 +264,7 @@ const AdminDashboard = () => {
     </div>
   );
 
-  //   return (
-  //     <div className="h-full">
-  //       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-  //       <Grid container spacing={3} className="h-[calc(100%-60px)]">
-  //         {/* First row */}
-  //         <Grid item xs={12} md={6}>
-  //           <SalesOverview />
-  //         </Grid>
-  //         <Grid item xs={12} md={6}>
-  //           {/* <PerformanceStatus /> */}
-  //         </Grid>
 
-  //         {/* Second row */}
-  //         <Grid item xs={12} md={6} lg={4}>
-  //           <ProductionView />
-  //         </Grid>
-  //         <Grid item xs={12} md={6} lg={4}>
-  //           <FinishedGoods />
-  //         </Grid>
-  //         <Grid item xs={12} lg={4}>
-  //           <IQCOverview />
-  //         </Grid>
-
-  //         {/* Third row */}
-  //         <Grid item xs={12} md={6} lg={4}>
-  //           <AccountsSummary />
-  //         </Grid>
-  //         <Grid item xs={12} md={6} lg={4}>
-  //           <StorePerformance />
-  //         </Grid>
-  //         <Grid item xs={12} lg={4}>
-  //           {/* <PurchaseOverview /> */}
-  //         </Grid>
-  //       </Grid>
-  //     </div>
-  //   )
 };
 
 export default AdminDashboard;

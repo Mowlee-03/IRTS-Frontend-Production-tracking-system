@@ -19,7 +19,7 @@ const AccountCard = ({ icon, title, value, bgColor, iconBgColor }) => {
 const AccountsSummary = () => {
 
   return (
-    <div className="md:h-full bg-white p-4 rounded-xl shadow-bg-shadow-4 flex flex-col justify-between">
+    <div className="h-full bg-white p-4 rounded-xl shadow-bg-shadow-4 flex flex-col gap-5 md-plus:gap-0 md-plus:justify-between">
       <div className=" flex justify-between items-center">
           <p className="font-medium">Accounts summary</p>
           
@@ -75,7 +75,7 @@ const AccountsSummary = () => {
         }}>
         <Grid size={{xs:12,md:6}}>
           <AccountCard
-          icon={<FileText size={15} className="text-white" />}
+          icon={<FileText size={20} className="text-white" />}
           title="Total Order Value"
           value="INR 91,00,000"
           bgColor="bg-red-100"

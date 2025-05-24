@@ -5,13 +5,13 @@ const StatCard = ({ icon, color, title, value, subtitle }) => {
   return (
     <div 
     style={{backgroundColor:color}}
-    className={`rounded-lg p-2 2xl-plus:p-4 text-white flex flex-col items-start h-full`}>
-      <div className="flex items-center mb-2 bg-[#ffffff67] rounded-full">
+    className={`rounded-lg p-2 2xl-plus:p-4 text-white flex flex-row md-plus:flex-col items-center md-plus:items-start gap-2 md-plus:gap-0 h-full`}>
+      <div className="flex items-center md-plus::mb-2 bg-[#ffffff67] rounded-full">
         <div className={`p-2 rounded-full `}>{icon}</div>
       </div>
       <div className="text-lg 2xl-plus:text-3xl font-bold">{value}</div>
       <div className="text-sm 2xl-plus:text-base ">{title}</div>
-      <div className="mt-auto text-xs 2xl-plus:text-sm text-${color}-100">{subtitle}</div>
+      <div className="ml-auto md-plus:ml-0 mt-auto text-xs 2xl-plus:text-sm text-${color}-100">{subtitle}</div>
     </div>
   )
 }
@@ -56,7 +56,7 @@ const SalesOverview = () => {
             />
           </Grid>
          <Grid sx={{
-           mt:{xs:1,lg:0},
+           mt:{xs:1,md:0},
           height :"100%"}}  
          size={{
            xs:12,
@@ -73,10 +73,10 @@ const SalesOverview = () => {
             />
           </Grid>
         <Grid sx={{
-           mt:{xs:1,lg:0},
+           mt:{xs:1,md:0},
           height :"100%"}}  
         size={{
-           xs:12,
+          xs:12,
           md:4,
           lg:2.5
           }}>
@@ -150,15 +150,12 @@ const SalesOverview = () => {
                      backgroundColor:"#F1F5F9"
                  }}
                />
-               <p className="absolute z-30 top-3 left-2 font-medium">{item.value}</p>
+               <p className="absolute top-3 left-2 font-medium text-sm md-plus:text-base">{item.value}</p>
                 </div>
              
                
               )})
-              
             }
-           
-          
            </div>
            
           </Grid>

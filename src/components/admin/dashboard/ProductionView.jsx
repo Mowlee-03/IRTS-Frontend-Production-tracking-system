@@ -4,8 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, Select, MenuItem, FormControl, InputLabel } from "@mui/material"
 import { BarChart } from "@mui/x-charts/BarChart"
 
-const ProductionView = () => {
-  const [timeFrame, setTimeFrame] = useState("month")
+const ProductionView = () => {  const [timeFrame, setTimeFrame] = useState("month")
 
   // Mock data
   const productionData = {
@@ -27,18 +26,18 @@ const ProductionView = () => {
           <p className=" flex items-center font-medium text-sm 2xl-plus:text-base">Production Overview</p>
           <div className="flex  gap-2 h-[15%] ">
 
-            <div className="bg-blue-100 rounded-lg px-1 2xl-plus:px-2 pt-1 flex-1 text-center 2xl-plus:text-start">
+            <div className="bg-blue-100 rounded-lg px-1 2xl-plus:px-2 pt-1 flex-1 flex text-center 2xl-plus:text-start flex-col items-center justify-between 2xl-plus:items-start">
               <div className="text-xs 2xl-plus:text-sm text-blue-800">Awaiting Production</div>
               <div className=" text-base 2xl-plus:text-lg font-bold text-blue-600">{productionData.awaiting}</div>
             </div>
 
-            <div className="bg-green-100 rounded-lg px-1 2xl-plus:px-2 pt-1 flex-1 text-center 2xl-plus:text-start">
+            <div className="bg-green-100 rounded-lg px-1 2xl-plus:px-2 pt-1 flex-1 text-center 2xl-plus:text-start flex flex-col items-center justify-between 2xl-plus:items-start">
               <div className="text-xs 2xl-plus:text-sm text-green-800">In Progress</div>
-              <div className="text-base 2xl-plus:text-lg font-bold text-green-600">{productionData.inProgress}</div>
+              <div className="text-base 2xl-plus:text-lg font-bold text-green-600 text-">{productionData.inProgress}</div>
             </div>
 
-            <div className="bg-yellow-100 rounded-lg  px-1 2xl-plus:px-2 pt-1 flex-1 text-center 2xl-plus:text-start">
-              <div className="text-[11px] 2xl-plus:text-sm text-yellow-800">Completed Production</div>
+            <div className="bg-yellow-100 rounded-lg  px-1 2xl-plus:px-2 pt-1 flex-1 text-center 2xl-plus:text-start flex flex-col items-center justify-between 2xl-plus:items-start ">
+              <div className="text-[11px] 2xl-plus:text-xs  text-yellow-800">Completed Production</div>
               <div className="text-base 2xl-plus:text-lg font-bold text-yellow-600">{productionData.completed}</div>
             </div>
 
