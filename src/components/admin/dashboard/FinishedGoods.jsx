@@ -4,12 +4,12 @@ import { PieChart } from "@mui/x-charts/PieChart"
 const FinishedGoods = () => {
   
   const data = [
-    { id: 0, value: 40, label: "Flow Meter", color: "#3b82f6" },
+    { id: 0, value: 40, label: "Flow Meter", color: "#FFAAAA" },
     { id: 1, value: 30, label: "Motor valve", color: "#22c55e" },
     { id: 2, value: 20, label: "Autodell", color: "#f97316" },
     { id: 3, value: 10, label: "GPS", color: "#ef4444" },
-    { id: 3, value: 10, label: "SMB", color: "#5409DA" },
-    { id: 3, value: 100, label: "Others", color: "#FFAAAA" },
+    { id: 4, value: 10, label: "SMB", color: "#5409DA" },
+    { id: 5, value: 100, label: "Others", color: "#3b82f6" },
   ]
 
   
@@ -33,11 +33,11 @@ const FinishedGoods = () => {
             legend:{
               sx:{
                 p:0.7,m:0,
-                bgcolor:"#7EFFF980",
+                // bgcolor:"#7EFFF980",
                 borderRadius:2,
               },
               direction:'horizontal',
-              position:{vertical:'bottom'}
+              position:{vertical:'bottom',}
             }
           }}
             series={[

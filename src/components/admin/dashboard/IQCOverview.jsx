@@ -10,8 +10,8 @@ const IQCOverview = () => {
   // Mock data
   const data = [
     { id: 0, value: 40, label: "Inward", color: "#6366f1" },
-    { id: 1, value: 35, label: "In progress", color: "#ec4899" },
-    { id: 2, value: 25, label: "outward", color: "#facc15" },
+    { id: 1, value: 35, label: "In progress", color: "#FFA55D" },
+    { id: 2, value: 25, label: "outward", color: "#B0DB9C" },
   ]
 
   return (

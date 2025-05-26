@@ -38,7 +38,7 @@ const SalesOverview = () => {
         <Grid container columnSpacing={2} 
         sx={{
           width:"100%",
-          height:"90%" ,
+          height:"90%",
           // bgcolor:"greenyellow"
           }}>
           <Grid sx={{height :"100%"}}  
@@ -49,7 +49,7 @@ const SalesOverview = () => {
             }}>
             <StatCard
               icon={<FileText size={24} />}
-              color="#3B82F6"
+              color="#124076"
               title="Total Orders"
               value="160"
               subtitle="+10 for Month"
@@ -66,7 +66,7 @@ const SalesOverview = () => {
          }}>
             <StatCard
               icon={<Truck  size={24} />}
-              color="#FFB95A"
+              color="#FF9B50"
               title="Need to Deliver"
               value="80"
               subtitle="+10 for yesterday"
@@ -82,7 +82,7 @@ const SalesOverview = () => {
           }}>
             <StatCard
               icon={<Package size={24} />}
-              color="#84CC16"
+              color="#40A578"
               title="Delivered Product"
               value="80"
               subtitle="+10 for Today"
@@ -137,7 +137,7 @@ const SalesOverview = () => {
               Ordersteps.map((item)=>{
                 const percent = (item.value / orderSubData.totalOrders) * 100;
                 return(
-                <div className="h-[33%] relative">
+                <div key={item.label} className="h-[33%] relative">
                  <LinearProgress
                 variant="determinate" 
                  value={percent} 

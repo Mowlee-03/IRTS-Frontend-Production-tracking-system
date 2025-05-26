@@ -37,6 +37,7 @@ const onScheduleData = [6, 9, 9, 10, 11, 14, 16, 5, 8]
                 { data: onScheduleData, label: "On Schedule", color: "#22c55e", stack: "breakdown" },
               ]}
                barLabel="value"
+               
               yAxis={[{ 
                 data: departments, 
                 scaleType: "band", 
