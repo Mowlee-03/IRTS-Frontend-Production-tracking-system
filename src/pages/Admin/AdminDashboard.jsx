@@ -168,18 +168,18 @@ const AdminDashboard = () => {
           >
             <Grid
               size={{
-                xs:12,
+                xs: 12,
                 xl: 6,
                 "2xl": 4.1,
               }}
               // bgcolor="purple"
               height={{
-                xs:"auto",
-                md:"400px",
-                '2xl':"auto",
+                xs: "auto",
+                md: "400px",
+                "2xl": "auto",
               }}
               pr={{
-                xl:1
+                xl: 1,
               }}
               py={1}
               pb={{
@@ -192,8 +192,8 @@ const AdminDashboard = () => {
             <Grid
               height={{
                 // xs:"0px",
-                xs:"400px",
-                '2xl':"auto",
+                xs: "400px",
+                "2xl": "auto",
               }}
               size={{
                 xl: 6,
@@ -204,11 +204,9 @@ const AdminDashboard = () => {
               pb={{
                 "2xl": 0,
               }}
-              pl={
-                {
-                  xl:1
-                }
-              }
+              pl={{
+                xl: 1,
+              }}
               pr={{
                 "2xl": 1,
               }}
@@ -217,20 +215,20 @@ const AdminDashboard = () => {
             </Grid>
 
             <Grid
-            height={{
-                xs:"650px",
-                md:"600px",
-                '2xl':"auto",
+              height={{
+                xs: "650px",
+                md: "600px",
+                "2xl": "auto",
               }}
               size={{
-                xs:12,
+                xs: 12,
                 md: 6,
                 "2xl": 2.5,
               }}
               // bgcolor='peachpuff'
               pt={1}
               pr={{
-                md:1
+                md: 1,
               }}
               pl={{
                 "2xl": 1,
@@ -240,20 +238,20 @@ const AdminDashboard = () => {
             </Grid>
 
             <Grid
-            height={{
+              height={{
                 // xs:"700px",
-                md:"600px",
-                '2xl':"auto",
+                md: "600px",
+                "2xl": "auto",
               }}
               size={{
-                xs:12,
+                xs: 12,
                 md: 6,
                 "2xl": 2.5,
               }}
               // bgcolor='green'
               pt={1}
               pl={{
-                md:1
+                md: 1,
               }}
             >
               <PurchaseOverview />
@@ -263,8 +261,6 @@ const AdminDashboard = () => {
       </Grid>
     </div>
   );
-
-
 };
 
 export default AdminDashboard;

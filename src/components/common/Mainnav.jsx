@@ -16,11 +16,12 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/production/pending_orders', title: 'Pending Orders' },
     { path: '/production/new_orders', title: 'Add New Production Order' },
     { path: '/production/in-progress', title: 'Production Line Status(In-Progress)' },
+    { path: '/admin/dashboard', title: 'Admin Dashboard' },
   ];
   
   const getHeading = () => {
     const match = headings.find(item => location.pathname.startsWith(item.path));
-    return match ? match.title : 'Production Dashboard';
+    return match ? match.title : 'Application';
   };
   
 
