@@ -18,6 +18,7 @@ import ProgressView from '../pages/ProductionPages/ProgressView'
 import AdminMain from '../layout/AdminMain'
 import AdminDashboard from '../pages/Admin/AdminDashboard'
 import ModuleAndResources from '../pages/Admin/ModuleAndResources'
+import RoleManagement from '../pages/Admin/Rolemangement'
 
 
 
@@ -32,6 +33,7 @@ const AppRouting = () => {
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path='dashboard' element={<AdminDashboard/>} />
               <Route path='manage/module' element={<ModuleAndResources/>} />
+              <Route path='manage/roles' element={<RoleManagement/>} />
           </Route>
 
           <Route path='production' element={<ProductionMain/>} >
