@@ -13,12 +13,21 @@ import ProductionMainIcon from '../../assets/sidebarIcons/ProductionMainIcon.png
 import SalesMainIcon from '../../assets/sidebarIcons/SalesmainIcon.png'
 import PurchaseMainIcon from '../../assets/sidebarIcons/PurchasemainIcon.png'
 import AccountsMainIcon from '../../assets/sidebarIcons/Accounts-MainIcon.png'
+import ManagementIcon from '../../assets/sidebarIcons/ManageMentIcon.png'
+import ModuleAndResourcesIcon from '../../assets/sidebarIcons/ModuleAndResourcesIcon.png'
 
 const menuItems = {
   admin: {
     label: 'Admin',
     icon: PersonIcon,
-    links: [{ icon: AdminDashboardIcon, label: 'Dashboard', to: '/admin/dashboard' }],
+    links: [
+      { icon: AdminDashboardIcon, label: 'Dashboard', to: '/admin/dashboard' },
+      { icon: ManagementIcon, label: 'Management', 
+        children:[
+         { icon: ModuleAndResourcesIcon, label: 'Resources', to: '/admin/manage/module' },
+        ]
+       },
+    ],
   },
   production: {
     label: 'Production',

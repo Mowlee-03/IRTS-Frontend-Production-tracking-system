@@ -17,6 +17,8 @@ import WorkInProgressTable from '../pages/ProductionPages/WorkInProgressTable'
 import ProgressView from '../pages/ProductionPages/ProgressView'
 import AdminMain from '../layout/AdminMain'
 import AdminDashboard from '../pages/Admin/AdminDashboard'
+import ModuleAndResources from '../pages/Admin/ModuleAndResources'
+
 
 
 const AppRouting = () => {
@@ -29,6 +31,7 @@ const AppRouting = () => {
           <Route path='admin' element={<AdminMain/>}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path='dashboard' element={<AdminDashboard/>} />
+              <Route path='manage/module' element={<ModuleAndResources/>} />
           </Route>
 
           <Route path='production' element={<ProductionMain/>} >
