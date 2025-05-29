@@ -18,6 +18,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/production/in-progress', title: 'Production Line Status(In-Progress)' },
     { path: '/admin/dashboard', title: 'IRTS Dashboard' },
     { path: '/admin/manage/modules_resources', title: 'Modules and Resources' },
+    { path: '/admin/manage/roles', title: 'Roles And Permissions' },
   ];
   
   const getHeading = () => {

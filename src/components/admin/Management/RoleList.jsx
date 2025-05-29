@@ -29,7 +29,7 @@ export default function RoleList({ roles, modules, onEdit, onDelete }) {
           </div>
           <div>
             <div className="font-medium text-gray-900">{row.name}</div>
-            <div className="text-sm text-gray-500">{row.description}</div>
+            {/* <div className="text-sm text-gray-500">{row.description}</div> */}
           </div>
         </div>
       ),
@@ -44,7 +44,11 @@ export default function RoleList({ roles, modules, onEdit, onDelete }) {
       width: 100,
       renderCell: ({ row }) => (
         <div className="flex items-center justify-center gap-4 h-full w-full">
-          <button onClick={() => onEdit(row)} className="text-blue-600 hover:text-blue-900">
+          <button onClick={() => {
+  const fullRole = roles.find(r => r.id === row.id)
+  onEdit(fullRole)
+}} className="text-blue-600 hover:text-blue-900">
+
             <Edit3 className="h-4 w-4" />
           </button>
           <button onClick={() => onDelete(row.id)} className="text-red-600 hover:text-red-900">
@@ -56,13 +60,14 @@ export default function RoleList({ roles, modules, onEdit, onDelete }) {
   ]
 
   return (
-    <div style={{ backgroundColor: "white", borderRadius: "12px", overflow: "hidden" }}>
+    <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200" >
       <DataGrid
         rows={rows}
         columns={columns}
-        autoHeight
+
         density="comfortable"
         sx={{
+          height:'800px',
         textAlign:"center",
           border: 0,
           '& .MuiDataGrid-columnHeaders': {

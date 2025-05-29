@@ -1,11 +1,13 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Factory, Package, ShoppingCart, Store } from "lucide-react"
+import { Factory, Package, Plus, ShoppingCart, Store } from "lucide-react"
 import RoleFilter from "../../components/admin/Management/RoleFilter"
 import RoleGrid from "../../components/admin/Management/RoleGrid"
 import RoleList from "../../components/admin/Management/RoleList"
 import RoleModal from "../../components/admin/Management/RoleModal"
+import { motion } from "framer-motion"
+
 const mockModules = [
   {
     id: "production",
@@ -298,6 +300,10 @@ export default function RoleManagement({ modules=mockModules, initialRoles=mockR
     })
   }, [roles, searchTerm, selectedModule, sortBy, sortOrder])
 
+  const handleCreateNewRole = () => {
+    setSelectedRole(null)
+    setIsCreatingRole(true)
+  }
   const handleEditRole = (role) => {
     setSelectedRole(role)
     setIsCreatingRole(true)
@@ -308,35 +314,55 @@ export default function RoleManagement({ modules=mockModules, initialRoles=mockR
   }
 
   return (
-    <div className="space-y-6">
-      <RoleFilter
-        modules={modules}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        selectedModule={selectedModule}
-        onModuleChange={setSelectedModule}
-        sortBy={sortBy}
-        onSortByChange={setSortBy}
-        sortOrder={sortOrder}
-        onSortOrderChange={setSortOrder}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-        resultCount={filteredRoles.length}
-      />
+    <div className="space-y-4">
+      {
+        isCreatingRole?(
+                <RoleModal
+                  onClose={() => setIsCreatingRole(false)}
+                  selectedRole={selectedRole}
+                  modules={modules}
+                  setRoles={setRoles}
+                />
+        ):(
+          <>
+              <div className="flex items-center justify-between  px-3 py-2 rounded-xl shadow-sm border bg-white border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900">Manage Roles</h2>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleCreateNewRole}
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-green-700 transition-colors"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span>Add New Role</span>
+                </motion.button>
+              </div>
+              <RoleFilter
+                modules={modules}
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+                selectedModule={selectedModule}
+                onModuleChange={setSelectedModule}
+                sortBy={sortBy}
+                onSortByChange={setSortBy}
+                sortOrder={sortOrder}
+                onSortOrderChange={setSortOrder}
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
+                resultCount={filteredRoles.length}
+              />
 
-      {viewMode === "grid" ? (
-        <RoleGrid roles={filteredRoles} modules={modules} onEdit={handleEditRole} onDelete={handleDeleteRole} />
-      ) : (
-        <RoleList roles={filteredRoles} modules={modules} onEdit={handleEditRole} onDelete={handleDeleteRole} />
-      )}
+              {viewMode === "grid" ? (
+                <RoleGrid roles={filteredRoles} modules={modules} onEdit={handleEditRole} onDelete={handleDeleteRole} />
+              ) : (
+                <RoleList roles={filteredRoles} modules={modules} onEdit={handleEditRole} onDelete={handleDeleteRole} />
+              )}
+          </>
+        )
+      }
 
-      <RoleModal
-        isOpen={isCreatingRole}
-        onClose={() => setIsCreatingRole(false)}
-        selectedRole={selectedRole}
-        modules={modules}
-        setRoles={setRoles}
-      />
+
+
     </div>
   )
 }
