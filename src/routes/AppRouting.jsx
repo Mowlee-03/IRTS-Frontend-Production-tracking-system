@@ -32,7 +32,7 @@ const AppRouting = () => {
           <Route path='admin' element={<AdminMain/>}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path='dashboard' element={<AdminDashboard/>} />
-              <Route path='manage/module' element={<ModuleAndResources/>} />
+              <Route path='manage/modules_resources' element={<ModuleAndResources/>} />
               <Route path='manage/roles' element={<RoleManagement/>} />
           </Route>
 

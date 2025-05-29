@@ -15,6 +15,7 @@ import PurchaseMainIcon from '../../assets/sidebarIcons/PurchasemainIcon.png'
 import AccountsMainIcon from '../../assets/sidebarIcons/Accounts-MainIcon.png'
 import ManagementIcon from '../../assets/sidebarIcons/ManageMentIcon.png'
 import ModuleAndResourcesIcon from '../../assets/sidebarIcons/ModuleAndResourcesIcon.png'
+import RolesManageIcon from '../../assets/sidebarIcons/RolesManageIcon.png'
 
 const menuItems = {
   admin: {
@@ -24,7 +25,8 @@ const menuItems = {
       { icon: AdminDashboardIcon, label: 'Dashboard', to: '/admin/dashboard' },
       { icon: ManagementIcon, label: 'Management', 
         children:[
-         { icon: ModuleAndResourcesIcon, label: 'Resources', to: '/admin/manage/module' },
+         { icon: ModuleAndResourcesIcon, label: 'Resources', to: '/admin/manage/modules_resources' },
+         { icon: RolesManageIcon, label: 'Roles', to: '/admin/manage/roles' },
         ]
        },
     ],
