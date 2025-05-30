@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { X, Save, Plus } from "lucide-react"
-import { Dialog } from "@mui/material"
+import { Autocomplete, Chip, Dialog, TextField } from "@mui/material"
 
 export default function ResourceModal({ isOpen, onClose, selectedResource, modules, setModules }) {
   const [resourceForm, setResourceForm] = useState({
@@ -142,56 +142,43 @@ export default function ResourceModal({ isOpen, onClose, selectedResource, modul
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Actions</label>
-              <div className="space-y-3">
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="Add new action"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        addAction(e.target.value)
-                        e.target.value = ""
-                      }
-                    }}
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={(e) => {
-                      const input = e.target.closest('div').querySelector("input")
-                      addAction(input.value)
-                      input.value = ""
-                    }}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </motion.button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {resourceForm.actions.map((action) => (
-                    <motion.span
-                      key={action}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                    >
-                      {action}
-                      <motion.button
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.8 }}
-                        onClick={() => removeAction(action)}
-                        className="text-blue-600 hover:text-blue-800"
-                      >
-                        <X className="h-3 w-3" />
-                      </motion.button>
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </div>
+           <div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">Actions</label>
+  <Autocomplete
+    size="small"
+    multiple
+    freeSolo
+    options={Array.from(new Set(modules.flatMap((m) => m.resources.flatMap((r) => r.actions))))}
+    value={resourceForm.actions}
+    onChange={(_, newValue) => {
+      setResourceForm((prev) => ({
+        ...prev,
+        actions: [...new Set(newValue.map((val) => val.trim()).filter(Boolean))],
+      }))
+    }}
+    renderTags={(value, getTagProps) =>
+      value.map((option, index) => (
+        <Chip
+          variant="outlined"
+          label={option}
+          {...getTagProps({ index })}
+          onDelete={() => removeAction(option)}
+        />
+      ))
+    }
+    renderInput={(params) => (
+      <TextField
+       sx={{
+    borderRadius:9
+  }}
+        {...params}
+        variant="outlined"
+        placeholder="Type or select actions"
+      />
+    )}
+  />
+</div>
+
           </div>
         </div>
 

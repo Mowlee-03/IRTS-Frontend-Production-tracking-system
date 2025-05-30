@@ -36,29 +36,17 @@ const menuItems = {
     icon: ProductionMainIcon,
     links: [
       { icon: PersonIcon, label: 'Production Manager', to: '/production/overview' },
-      {
-        icon: PaperIcon,
-        label: 'Total Production',
-        to: '/production/total_orders',
-        // children: [
-        //   { icon: PaperIcon, label: 'Pending Orders', to: '/production/total_orders/pending' },
-        //   {
-        //     icon: PaperIcon, // Placeholder for undefined `Icon`
-        //     label: 'Delivered Orders',
-        //     to: '/production/total_orders/delivered',
-        //     children: [
-        //       {
-        //         icon: PaperIcon, // Placeholder for undefined `icon`
-        //         label: 'Overdue Orders',
-        //         to: '/production/total_orders/delivered/overdue',
-        //       },
-        //     ],
-        //   },
-        // ],
-      },
+      { icon: PaperIcon,label: 'Total Production',to: '/production/total_orders'},
       { icon: SettingMsgIcon, label: 'Production in Progress', to: '/production/in-progress' },
     ],
   },
+  store:{
+    label:"Store",
+    icon:PaperIcon,
+    links:[
+      {icon:SettingMsgIcon,label:"Overview",to:"/sales/overview"}
+    ]
+  }
   // Add more departments...
 };
 
