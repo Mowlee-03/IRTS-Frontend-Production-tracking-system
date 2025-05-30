@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AccountProfileBtn from '../assets/AccountProfileBtn';
 import Notification from '../assets/Notification';
 import InProgressTable from '../productionUi/InProgressTable';
+import ProductionMetrics from '../StoreUi/MetricCards';
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
   
@@ -19,6 +20,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/admin/dashboard', title: 'IRTS Dashboard' },
     { path: '/admin/manage/modules_resources', title: 'Modules and Resources' },
     { path: '/admin/manage/roles', title: 'Roles And Permissions' },
+    { path: '/sales/overview', title: 'Overall Store Performance Status' },
   ];
   
   const getHeading = () => {
@@ -64,6 +66,11 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
               <InProgressTable/>
           </Link>
          )}
+         {
+          ['/sales/overview'].includes(location.pathname)&&(
+            <ProductionMetrics/>
+          )
+         }
       </div>
       
     </div>
