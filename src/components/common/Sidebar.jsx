@@ -16,6 +16,8 @@ import AccountsMainIcon from '../../assets/sidebarIcons/Accounts-MainIcon.png'
 import ManagementIcon from '../../assets/sidebarIcons/ManageMentIcon.png'
 import ModuleAndResourcesIcon from '../../assets/sidebarIcons/ModuleAndResourcesIcon.png'
 import RolesManageIcon from '../../assets/sidebarIcons/RolesManageIcon.png'
+import StoreMainIcon from '../../assets/sidebarIcons/StoreMainIcon.png'
+import OverviewIcon from '../../assets/sidebarIcons/OverviewIcon.png'
 
 const menuItems = {
   admin: {
@@ -35,16 +37,16 @@ const menuItems = {
     label: 'Production',
     icon: ProductionMainIcon,
     links: [
-      { icon: PersonIcon, label: 'Production Manager', to: '/production/overview' },
+      { icon: OverviewIcon, label: 'Prod-Overview', to: '/production/overview' },
       { icon: PaperIcon,label: 'Total Production',to: '/production/total_orders'},
       { icon: SettingMsgIcon, label: 'Production in Progress', to: '/production/in-progress' },
     ],
   },
   store:{
     label:"Store",
-    icon:PaperIcon,
+    icon:StoreMainIcon,
     links:[
-      {icon:SettingMsgIcon,label:"Overview",to:"/sales/overview"}
+      {icon:OverviewIcon,label:"Store-Overview",to:"/sales/overview"}
     ]
   }
   // Add more departments...

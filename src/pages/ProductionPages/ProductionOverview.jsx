@@ -5,9 +5,10 @@ import ProductionLineProgressOverviewTable from '../../components/productionUi/P
 import AssignedLineChart from '../../components/productionUi/AssignedLineChart';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 const ProductionOverview = () => {
-    const [viewMode, setViewMode] = useState('tiles'); 
+    const [viewMode, setViewMode] = useState('tiles');
+     
     return (
-      <div className="mt-3 mb-3 h-full pt-2">
+      <div className=" lg:h-full pb-3 md:pb-0 pt-4">
         <div
         className='bg-main-background rounded-2xl shadow-bg-shadow-2 min-h-[380px] px-4 sm:px-6 pt-4'
         >
