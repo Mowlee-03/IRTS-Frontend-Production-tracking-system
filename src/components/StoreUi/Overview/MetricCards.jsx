@@ -77,7 +77,7 @@ const ProductionMetrics = () => {
   ]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 pb-7">
+    <div className="grid grid-cols-1 sm-plus:grid-cols-2 lg-plus:grid-cols-3 2xl-plus:grid-cols-5 gap-4 sm:gap-6 pb-7">
       {metrics.map((metric, index) => (
         <MetricCard key={index} {...metric} />
       ))}

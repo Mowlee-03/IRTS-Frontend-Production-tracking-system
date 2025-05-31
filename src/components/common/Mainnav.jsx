@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AccountProfileBtn from '../assets/AccountProfileBtn';
 import Notification from '../assets/Notification';
 import InProgressTable from '../productionUi/InProgressTable';
-import ProductionMetrics from '../StoreUi/MetricCards';
+import ProductionMetrics from '../StoreUi/Overview/MetricCards';
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
   
