@@ -16,12 +16,15 @@ const MetricCard = ({ icon: Icon, title, subtitle, value, bgColor, iconColor, bo
           <div className="flex-1">
             <div className="flex items-start gap-3 mb-2">
               <div className={`p-2 rounded-lg ${bgColor}`}>
-                <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${iconColor}`} />
+                <Icon className={`w-4 h-4 2xl-plus:w-5 2xl-plus:h-5 ${iconColor}`} />
               </div>
               <div>
-                <h3 className="font-medium text-gray-900 text-sm sm:text-base">{title}</h3>
-                <p className="text-xs sm:text-sm text-gray-500">{subtitle}</p>
-                <p className="text-2xl sm:text-3xl font-bold text-blue-600">{value}</p>
+               <h3 className={`font-medium text-gray-900 ${title === "Total Production Order" ? 'text-xs 2xl-plus:text-base' : 'text-sm 2xl-plus:text-base'}`}>
+                {title}
+              </h3>
+
+                <p className="text-xs 2xl-plus:text-sm text-gray-500">{subtitle}</p>
+                <p className="text-2xl 2xl-plus:text-3xl font-bold text-blue-600">{value}</p>
               </div>
             </div>
           </div>
@@ -88,7 +91,7 @@ const ProductionMetrics = () => {
   ]
 
   return (
-    <div className="grid grid-cols-1 sm-plus:grid-cols-2 lg-plus:grid-cols-3 2xl-plus:grid-cols-5 gap-4 sm:gap-6 pb-7">
+    <div className="grid grid-cols-1 sm-plus:grid-cols-2 lg-plus:grid-cols-3 xl-plus:grid-cols-5 gap-4 sm:gap-6 pb-7">
       {metrics.map((metric, index) => (
         <MetricCard
           key={index}
