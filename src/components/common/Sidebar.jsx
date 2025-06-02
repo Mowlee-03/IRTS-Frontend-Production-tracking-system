@@ -18,6 +18,8 @@ import ModuleAndResourcesIcon from '../../assets/sidebarIcons/ModuleAndResources
 import RolesManageIcon from '../../assets/sidebarIcons/RolesManageIcon.png'
 import StoreMainIcon from '../../assets/sidebarIcons/StoreMainIcon.png'
 import OverviewIcon from '../../assets/sidebarIcons/OverviewIcon.png'
+import { logoutUser } from '../../Redux/Slice/LogoutSlice';
+import { useDispatch } from 'react-redux';
 
 const menuItems = {
   admin: {
@@ -58,7 +60,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   const [openDepartments, setOpenDepartments] = useState({}); // Track expanded departments
   const [openLinks, setOpenLinks] = useState({}); // Track expanded nested links
   const userdepartment = 'admin'; // Change to 'production' to test
-
+  const dispatch=useDispatch()
   const toggleDepartment = (department) => {
     
     setOpenDepartments((prev) => ({
@@ -282,6 +284,7 @@ const renderHeader = () => {
           } pb-10`}
         >
           <button
+          onClick={()=>dispatch(logoutUser(true))}
             className={`p-4 hover:bg-gray-50 flex items-center text-gray-700 text-[14px] font-medium rounded-xl ${
               isCollapsed ? 'justify-center' : ''
             }`}

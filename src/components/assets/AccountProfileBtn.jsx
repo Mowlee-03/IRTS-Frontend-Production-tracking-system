@@ -1,7 +1,10 @@
 import React from 'react'
 import profileimage from '../../assets/Commonicons/person-holding-a-glass-of-milk-svgrepo-com.svg'
 import { LogOut, User } from 'lucide-react'
+import { useDispatch } from 'react-redux'
+import { logoutUser } from '../../Redux/Slice/LogoutSlice'
 const AccountProfileBtn = () => {
+  const dispatch=useDispatch()
     const user={
         name:"Mowlee",
         email:"mowleemm@gmail.com"
@@ -27,7 +30,7 @@ const AccountProfileBtn = () => {
                   <p className="text-xs text-gray-500 truncate">{user?.email}</p>
                 </div>
                 <button
-                  onClick={() => setShowLogoutModal(true)}
+                  onClick={() => dispatch(logoutUser(true))}
                   className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200"
                 >
                   <LogOut size={16} className="mr-2" />
