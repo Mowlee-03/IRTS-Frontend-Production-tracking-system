@@ -5,18 +5,19 @@ const SimpleDataTable = ({columns,rows,CustomToolbar,...props}) => {
   return (
     <>  
         <DataGrid
-        
+        autoHeight={false}
             rows={rows}
             columns={columns}
             showToolbar
             slots={{ toolbar: CustomToolbar }}
             pageSizeOptions={[5, 10, 20]}
             initialState={{
-            pagination: { paginationModel: { pageSize: 10 } },
+            pagination: { paginationModel: { pageSize: 5 } },
             }}
             columnHeaderHeight={65}
             rowHeight={65}
             sx={{
+            height:"100%",
             textAlign: 'center',
             border: 'none',
             borderRadius:"1rem",

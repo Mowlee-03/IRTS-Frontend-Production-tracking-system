@@ -21,6 +21,11 @@ import ModuleAndResources from '../pages/Admin/ModuleAndResources'
 import RoleManagement from '../pages/Admin/Rolemangement'
 import StoreMain from '../layout/StoreMain'
 import StoreOverviewPage from '../pages/StorePages/StoreOverviewPage'
+import TotalProductionOrdersForStore from '../pages/StorePages/TotalProductionOrdersForStore'
+import PendingOrdersForStores from '../pages/StorePages/PendingOrderForStores'
+import InitialKitting from '../pages/StorePages/InitialKitting'
+import KittingCompleted from '../pages/StorePages/KittingCompleted'
+import BomOutDetails from '../pages/StorePages/BomOutDetails'
 
 
 
@@ -55,9 +60,14 @@ const AppRouting = () => {
             <Route path='in-progress/view' element={<ProgressView/>} />
           </Route>
 
-          <Route path='sales' element={<StoreMain/>}>
+          <Route path='store' element={<StoreMain/>}>
           <Route index element={<Navigate to="overview" replace />} />
             <Route path='overview' element={<StoreOverviewPage/>}/> 
+            <Route path='total/production_orders'  element={<TotalProductionOrdersForStore/>} />
+            <Route path='pending/production_orders'  element={<PendingOrdersForStores/>} />
+            <Route path='initial-kitting'  element={<InitialKitting/>} />
+            <Route path='kitting-complete'  element={<KittingCompleted/>} />
+            <Route path='bom-out'  element={<BomOutDetails/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/admin/dashboard" />} />

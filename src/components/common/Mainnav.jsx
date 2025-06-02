@@ -20,7 +20,12 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/admin/dashboard', title: 'IRTS Dashboard' },
     { path: '/admin/manage/modules_resources', title: 'Modules and Resources' },
     { path: '/admin/manage/roles', title: 'Roles And Permissions' },
-    { path: '/sales/overview', title: 'Overall Store Performance Status' },
+    { path: '/store/overview', title: 'Overall Store Performance Status' },
+    { path: '/store/total/production_order', title: 'Production orders' },
+    { path: '/store/pending/production_order', title: 'Pending orders' },
+    { path: '/store/initial-kitting', title: 'Initial Kitting' },
+    { path: '/store/kitting-complete', title: 'Kitting Completed' },
+    { path: '/store/bom-out', title: 'BOM OUT' },
   ];
   
   const getHeading = () => {
@@ -67,7 +72,14 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </Link>
          )}
          {
-          ['/sales/overview'].includes(location.pathname)&&(
+          [
+            '/store/overview',
+            '/store/total/production_orders',
+            '/store/pending/production_orders',
+            '/store/initial-kitting',
+            '/store/kitting-complete',
+            '/store/bom-out'
+          ].includes(location.pathname)&&(
             <ProductionMetrics/>
           )
          }
