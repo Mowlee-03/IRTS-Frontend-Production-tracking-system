@@ -27,6 +27,7 @@ import InitialKitting from '../pages/StorePages/InitialKitting'
 import KittingCompleted from '../pages/StorePages/KittingCompleted'
 import BomOutDetails from '../pages/StorePages/BomOutDetails'
 import AssignedWorksMain from '../pages/StorePages/AssignedWorksMain'
+import TaskDetails from '../pages/StorePages/TaskDetails'
 
 
 
@@ -70,6 +71,7 @@ const AppRouting = () => {
             <Route path='kitting-complete'  element={<KittingCompleted/>} />
             <Route path='bom-out'  element={<BomOutDetails/>} />
             <Route path='workers-status'  element={<AssignedWorksMain/>} />
+            <Route path='task/details'  element={<TaskDetails/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/admin/dashboard" />} />

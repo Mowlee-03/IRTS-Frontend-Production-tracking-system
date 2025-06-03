@@ -5,6 +5,7 @@ import { IconButtonColors } from '../../../Style';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 const InitialKitting = () => {
+  
   const Rows= [
     {
       id: 1,
