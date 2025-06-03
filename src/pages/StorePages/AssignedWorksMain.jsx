@@ -509,7 +509,7 @@ const teamMembers = [
                 ))}
             </div>
         </div>
-        <div className='flex-1 overflow-hidden rounded-xl shadow-md border'>
+        <div className='h-[700px] lg-plus:h-auto lg-plus:flex-1 overflow-hidden rounded-xl shadow-md border'>
             <SimpleDataTable columns={columns} rows={Rows} />
         </div>
     </div>
