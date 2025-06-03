@@ -48,7 +48,8 @@ const menuItems = {
     label:"Store",
     icon:StoreMainIcon,
     links:[
-      {icon:OverviewIcon,label:"Store-Overview",to:"/store/overview"}
+      {icon:OverviewIcon,label:"Store-Overview",to:"/store/overview"},
+      {icon:OverviewIcon,label:"Store Staffs",to:"/store/workers-status"},
     ]
   }
   // Add more departments...

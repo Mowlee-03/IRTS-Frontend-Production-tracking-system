@@ -26,6 +26,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/store/initial-kitting', title: 'Initial Kitting' },
     { path: '/store/kitting-complete', title: 'Kitting Completed' },
     { path: '/store/bom-out', title: 'BOM OUT' },
+    { path: '/store/workers-status', title: 'Store Staffs' },
   ];
   
   const getHeading = () => {

@@ -5,7 +5,7 @@ const MetricCard = ({ icon: Icon, title, subtitle, value, bgColor, iconColor, bo
   return (
     <Link to={path} className="block">
       <div
-        className={`bg-white rounded-xl p-3 transition-all duration-300 `}
+        className={`bg-white rounded-xl p-3 transition-all duration-300 min-h-20`}
         style={{
           boxShadow: isActive
             ? `${boxShadow}, 5px 5px 0 0px #babbbd` // ring-blue-600

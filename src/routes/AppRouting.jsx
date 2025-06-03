@@ -26,6 +26,7 @@ import PendingOrdersForStores from '../pages/StorePages/PendingOrderForStores'
 import InitialKitting from '../pages/StorePages/InitialKitting'
 import KittingCompleted from '../pages/StorePages/KittingCompleted'
 import BomOutDetails from '../pages/StorePages/BomOutDetails'
+import AssignedWorksMain from '../pages/StorePages/AssignedWorksMain'
 
 
 
@@ -68,6 +69,7 @@ const AppRouting = () => {
             <Route path='initial-kitting'  element={<InitialKitting/>} />
             <Route path='kitting-complete'  element={<KittingCompleted/>} />
             <Route path='bom-out'  element={<BomOutDetails/>} />
+            <Route path='workers-status'  element={<AssignedWorksMain/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/admin/dashboard" />} />

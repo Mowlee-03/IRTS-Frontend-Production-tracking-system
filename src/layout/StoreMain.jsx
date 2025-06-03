@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material'
 const StoreMain = () => {
   return (
     <ThemeProvider theme={theme}>
-      <div className='h-full pt-3'>
+      <div className='grow min-h-0 pt-3'>
         <Outlet />
       </div>
     </ThemeProvider>
