@@ -500,8 +500,8 @@ const teamMembers = [
 
 
   return (
-    <div className='h-auto md-plus:h-full flex flex-col gap-5'>
-        <div className='p-4 shadow-md border bg-white rounded-xl flex flex-col gap-5'>
+    <div className='h-auto md-plus:h-full flex flex-col gap-3'>
+        <div className='p-4 shadow-md border bg-white rounded-xl flex flex-col gap-2'>
             <h2 className="text-xl font-semibold text-gray-800 ">Assigned Work Status</h2>
             <div className="w-full grid  gap-4 lg-plus:gap-10 grid-cols-1 sm-plus:grid-cols-2 lg-plus:grid-cols-4">
                 {teamMembers.map((member, idx) => (
