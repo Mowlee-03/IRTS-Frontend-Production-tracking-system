@@ -238,11 +238,12 @@ const InitialKitting = () => {
     },
   ];
 
-    const columns=[
+  const columns=[
             {
               field: 'id',
               headerName: 'KIT NO',
-              width: 120,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => (
                 <div style={{ paddingLeft: '20px' }}>{params.value}</div>
               ),
@@ -250,55 +251,64 @@ const InitialKitting = () => {
             {
               field: 'poNumber',
               headerName: 'PO Number',
-              width: 130,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'poDate',
               headerName: 'PO Date',
-              width: 120,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'soNumber',
               headerName: 'S/O NUM',
-              width: 130,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'proNumber',
               headerName: 'PRO NUM',
-              width: 130,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'customer',
               headerName: 'Customer',
-              width: 120,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'itemName',
               headerName: 'Item Name',
-              width: 200,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'orderQty',
               headerName: 'Order Qty',
-              width: 120,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
             {
               field: 'pendingQty',
               headerName: 'Pending Qty',
-              width: 140,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },        
             {
             field: 'bom',
             headerName: 'BOM %',
-            width: 200,
+            minWidth: 120,
+              flex:1,
             renderCell: (params) => {
                 const value = Number(params.value.replace('%', ''));
 
@@ -345,7 +355,8 @@ const InitialKitting = () => {
             {
             field: 'status',
             headerName: 'Status',
-            width: 160,
+            minWidth: 120,
+            flex:1,
             renderCell: (params) => {
                 const status = params.value;
                 let color = 'default';
@@ -384,14 +395,16 @@ const InitialKitting = () => {
              {
               field: 'deliveredQty',
               headerName: 'Delivered Quantity',
-              width: 140,
+             minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },
                         
             {
               field: 'deliveredStatus',
               headerName: 'Delivered',
-              width: 110,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => (
                 <Checkbox checked={params.value} disabled />
               ),
@@ -399,7 +412,8 @@ const InitialKitting = () => {
             {
               field: 'initialKitting',
               headerName: 'Initial Kitting',
-              width: 140,
+             minWidth: 120,
+              flex:1,
               renderCell: (params) => (
                 <Checkbox checked={params.value} disabled />
               ),
@@ -407,7 +421,8 @@ const InitialKitting = () => {
             {
               field: 'inLine',
               headerName: 'In-Line',
-              width: 110,
+             minWidth: 120,
+              flex:1,
               renderCell: (params) => (
                 <Checkbox checked={params.value} disabled />
               ),
@@ -415,13 +430,15 @@ const InitialKitting = () => {
             {
               field: 'total',
               headerName: 'Total',
-              width: 140,
+              minWidth: 120,
+              flex:1,
               renderCell: (params) => params.value,
             },  
             {
             field: 'actions',
             headerName: 'Actions',
-            width: 120,
+            minWidth: 120,
+            flex:1,
             sortable: false,
             filterable: false,
             disableColumnMenu: true,
@@ -443,7 +460,7 @@ const InitialKitting = () => {
 
             ),
             },
-    ]
+  ]
   return (
     <div className='h-screen md-plus:h-full  bg-yellow-100'>
         <div className='h-full'>

@@ -18,6 +18,7 @@ import ModuleAndResourcesIcon from '../../assets/sidebarIcons/ModuleAndResources
 import RolesManageIcon from '../../assets/sidebarIcons/RolesManageIcon.png'
 import StoreMainIcon from '../../assets/sidebarIcons/StoreMainIcon.png'
 import OverviewIcon from '../../assets/sidebarIcons/OverviewIcon.png'
+import StoreStaffIcon from '../../assets/sidebarIcons/StoreStaffIcon.png'
 import { logoutUser } from '../../Redux/Slice/LogoutSlice';
 import { useDispatch } from 'react-redux';
 
@@ -49,7 +50,7 @@ const menuItems = {
     icon:StoreMainIcon,
     links:[
       {icon:OverviewIcon,label:"Store-Overview",to:"/store/overview"},
-      {icon:OverviewIcon,label:"Store Staffs",to:"/store/workers-status"},
+      {icon:StoreStaffIcon,label:"Store Staffs",to:"/store/workers-status"},
     ]
   }
   // Add more departments...
@@ -223,7 +224,7 @@ const renderHeader = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-2 px-3">
+        <nav className="flex-1 overflow-y-auto py-2 px-3  scrollbar-hide">
           {userdepartment === 'admin' ? (
             <>
               {/* Admin links directly */}

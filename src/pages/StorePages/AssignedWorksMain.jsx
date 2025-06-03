@@ -1,8 +1,10 @@
-import { Checkbox, Chip, LinearProgress } from '@mui/material';
-import React from 'react'
+import { Breadcrumbs, Checkbox, Chip, LinearProgress } from '@mui/material';
+import React, { useState } from 'react'
 import SimpleDataTable from '../../components/common/SimpleDataTable';
+import { AlertTriangle, CheckCircle, Clock, XCircle } from 'lucide-react';
 
 const AssignedWorksMain = () => {
+    const [selectedMember, setSelectedMember] = useState(null);
     const Rows= [
     {
       id: 1,
@@ -236,7 +238,6 @@ const AssignedWorksMain = () => {
     },
  
     ];
-
     const columns=[
             {
               field: 'id',
@@ -443,70 +444,152 @@ const AssignedWorksMain = () => {
             // ),
             // },
     ]
-
-
-const AssignedWorkStatusCard = ({ name, role, tasks, avatar }) => {
-  return (
-    <div className="bg-white shadow-md border rounded-xl p-4 flex flex-col  w-full ">
-      <div className='flex gap-4 items-center'>
-        <img
-            src={avatar}
-            alt={name}
-            className="w-12 h-12 rounded-xl object-cover mb-3"
-        />
-        <div>
-            <div className="font-semibold text-gray-800">{name}</div>
-            <div className="text-sm text-gray-500 mb-2">{role}</div>
+    const teamMembers = [
+        {
+            id:1,
+            name: "Sarah Miller",
+            role: "Production Lead",
+            tasks: 4,
+            avatar: "https://i.pravatar.cc/150?img=12",
+            taskDatas:[
+                {name:'Initial Kitting',status:"in-progress",count:10},
+                {name:'Kitting Completed',status:"in-progress",count:10},
+                {name:'BOM Out',status:"completed",count:10},
+                {name:'Inward Completed',status:"in-progress",count:10},
+            ]
+        },
+        {
+            id:2,
+            name: "James Chan",
+            role: "Store Manager",
+            tasks: 2,
+            avatar: "https://i.pravatar.cc/150?img=3",
+            taskDatas:[
+                {name:'Kitting Completed',status:"in-progress",count:10},
+                {name:'BOM Out',status:"completed",count:10},
+            ]
+        },
+        {
+            id:3,
+            name: "Alex Kumar",
+            role: "Inventory Lead",
+            tasks: 3,
+            avatar: "https://i.pravatar.cc/150?img=1",
+            taskDatas:[
+                {name:'Initial Kitting',status:"in-progress",count:10},
+                {name:'Kitting Completed',status:"in-progress",count:10},
+                {name:'BOM Out',status:"completed",count:10},
+            ]
+        },
+        {
+            id:4,
+            name: "Kumar",
+            role: "Purchase Lead",
+            tasks: 4,
+            avatar: "https://i.pravatar.cc/150?img=8",
+            taskDatas:[
+                {name:'Initial Kitting',status:"in-progress",count:10},
+                {name:'Kitting Completed',status:"in-progress",count:10},
+                {name:'BOM Out',status:"completed",count:10},
+                {name:'Inward Completed',status:"in-progress",count:10},
+            ]
+        },
+    ];
+    const handleViewTasks = (member) => {
+        setSelectedMember(member);
+    };
+    const handleBack = () => {
+        setSelectedMember(null);
+    };
+    const AssignedWorkStatusCard = ({ name, role, tasks, avatar,onclick }) => {
+    return (
+        <div className="bg-white shadow-md border rounded-xl p-4 flex flex-col  w-full ">
+        <div className='flex gap-4 items-center'>
+            <img
+                src={avatar}
+                alt={name}
+                className="w-12 h-12 rounded-xl object-cover mb-3"
+            />
+            <div>
+                <div className="font-semibold text-gray-800">{name}</div>
+                <div className="text-sm text-gray-500 mb-2">{role}</div>
+            </div>
         </div>
-      </div>
-      
+        
 
-      <div className="text-sm text-gray-600 mb-4 flex justify-between items-center">
-        <span>Assigned Tasks: </span>
-        <span className="font-medium">{tasks}</span>
-      </div>
-      <button className="bg-[#4f15bb] text-white px-4 py-2 text-sm rounded-lg hover:bg-indigo-700 transition">
-        View Tasks
-      </button>
-    </div>
-  );
-};
-const teamMembers = [
-  {
-    name: "Sarah Miller",
-    role: "Production Lead",
-    tasks: 4,
-    avatar: "https://i.pravatar.cc/150?img=12",
-  },
-  {
-    name: "James Chan",
-    role: "Store Manager",
-    tasks: 4,
-    avatar: "https://i.pravatar.cc/150?img=3",
-  },
-  {
-    name: "Alex Kumar",
-    role: "Inventory Lead",
-    tasks: 3,
-    avatar: "https://i.pravatar.cc/150?img=1",
-  },
-  {
-    name: "Kumar",
-    role: "Purchase Lead",
-    tasks: 4,
-    avatar: "https://i.pravatar.cc/150?img=8",
-  },
-];
+        <div className="text-sm text-gray-600 mb-4 flex justify-between items-center">
+            <span>Assigned Tasks: </span>
+            <span className="font-medium">{tasks}</span>
+        </div>
+        <button 
+        onClick={onclick}
+        className="bg-[#4f15bb] text-white px-4 py-2 text-sm rounded-lg hover:bg-indigo-700 transition">
+            View Tasks
+        </button>
+        </div>
+    );
+    };
+    const statusIcons = {
+    'completed': <CheckCircle size={35} className="text-green-500 border-green-600 border-2 rounded-lg p-2" />,
+    'failed': <XCircle size={35} className="text-red-500 border-red-600 border-2 rounded-lg p-2" />,
+    'pending': <Clock size={35} className="text-yellow-500 border-yellow-600 border-2 rounded-lg p-2" />,
+    'in-progress': <AlertTriangle size={35} className="text-orange-500 border-orange-600 border-2 rounded-lg p-2" />,
+    };
+    const statusBgClasses = {
+    'completed': 'bg-green-50',
+    'failed': 'bg-red-100',
+    'pending': 'bg-yellow-100',
+    'in-progress': 'bg-orange-100',
+    };
+    const Workcards = ({ name, status, count }) => {
+        const bgcolor=statusBgClasses[status]
+    return (
+        <div className="px-4 py-2 border rounded-xl shadow flex items-center justify-center gap-4 md-plus:gap-2 xl-plus:gap-4">
+        <div>{statusIcons[status] || <AlertTriangle className="text-gray-400" />}</div>
+        <div className="flex-1 text-ellipsis">
+            <p className="font-medium text-sm text-ellipsis">{name}</p>
+            <span className="text-xs text-gray-600 capitalize">{status}</span>
+        </div>
+        <span className={`text-base font-medium min-w-7 min-h-7 flex items-center justify-center rounded-md ${bgcolor}`}>{count}</span>
+        </div>
+    );
+    };
 
-
-  return (
+return (
     <div className='h-auto md-plus:h-full flex flex-col gap-3'>
         <div className='p-4 shadow-md border bg-white rounded-xl flex flex-col gap-2'>
             <h2 className="text-xl font-semibold text-gray-800 ">Assigned Work Status</h2>
+            {
+                selectedMember && (
+                    <Breadcrumbs >
+                        <button
+                        className='hover:border-b text-sm border-blue-500'
+                        onClick={handleBack}
+                        >
+                            
+                            Back</button>
+                        <span className='text-gray-400 text-sm'>{selectedMember.name}</span>
+                    </Breadcrumbs>
+                )
+            }
             <div className="w-full grid  gap-4 lg-plus:gap-10 grid-cols-1 sm-plus:grid-cols-2 lg-plus:grid-cols-4">
-                {teamMembers.map((member, idx) => (
-                <AssignedWorkStatusCard key={idx} {...member} />
-                ))}
+                {
+                    selectedMember 
+                    ?
+                    (
+                        selectedMember?.taskDatas?.map((data)=>(
+                            <Workcards {...data} />
+                        ))
+                    )
+                    :(
+                        <>
+                        {teamMembers.map((member, idx) => (
+                        <AssignedWorkStatusCard key={idx} {...member} onclick={()=>handleViewTasks(member)} />
+                        ))}
+                        </>
+                    )
+                }
+                
             </div>
         </div>
         <div className='h-[700px] lg-plus:h-auto lg-plus:flex-1 overflow-hidden rounded-xl shadow-md border'>
