@@ -1,9 +1,12 @@
-import { Breadcrumbs, Checkbox, Chip, LinearProgress } from '@mui/material';
+import { Breadcrumbs, Checkbox, Chip, IconButton, LinearProgress } from '@mui/material';
 import React, { useState } from 'react'
 import SimpleDataTable from '../../components/common/SimpleDataTable';
 import { AlertTriangle, CheckCircle, Clock, XCircle } from 'lucide-react';
-
+import { IconButtonColors } from '../../../Style';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useNavigate } from 'react-router-dom';
 const AssignedWorksMain = () => {
+  const navigate=useNavigate()
     const [selectedMember, setSelectedMember] = useState(null);
     const Rows= [
     {
@@ -239,6 +242,27 @@ const AssignedWorksMain = () => {
  
     ];
     const columns=[
+           {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 120,
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params) => (
+                <>
+                 <IconButton
+                 onClick={handleTaskClick}
+                sx={{...IconButtonColors,backgroundColor:"#EBF5FF",p:1}}
+                >
+                    <VisibilityIcon fontSize="small" sx={{fontSize:"18px"}} />
+                    
+                </IconButton>
+
+                </>
+
+            ),
+            },
             {
               field: 'id',
               headerName: 'KIT NO',
@@ -418,31 +442,7 @@ const AssignedWorksMain = () => {
               width: 140,
               renderCell: (params) => params.value,
             },  
-            // {
-            // field: 'actions',
-            // headerName: 'Actions',
-            // width: 120,
-            // sortable: false,
-            // filterable: false,
-            // disableColumnMenu: true,
-            // renderCell: (params) => (
-            //     <>
-            //      <IconButton
-            //     sx={{...IconButtonColors,backgroundColor:"#EBF5FF",p:1}}
-            //     >
-            //         <VisibilityIcon fontSize="small" sx={{fontSize:"18px"}} />
-                    
-            //     </IconButton>
-            //     <IconButton
-            //     sx={{...IconButtonColors,backgroundColor:"#FDF2F8",p:1,ml:1}}
-            //     >
-            //         <ModeEditOutlinedIcon fontSize="small" sx={{fontSize:"18px"}} />
-                    
-            //     </IconButton>
-            //     </>
-
-            // ),
-            // },
+       
     ]
     const teamMembers = [
         {
@@ -495,6 +495,9 @@ const AssignedWorksMain = () => {
             ]
         },
     ];
+    const handleTaskClick=()=>{
+      navigate("/store/task/details")
+    }
     const handleViewTasks = (member) => {
         setSelectedMember(member);
     };
