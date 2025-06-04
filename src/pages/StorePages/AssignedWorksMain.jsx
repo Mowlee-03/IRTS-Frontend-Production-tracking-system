@@ -1,12 +1,12 @@
 import { Breadcrumbs, Checkbox, Chip, IconButton, LinearProgress } from '@mui/material';
 import React, { useState } from 'react'
 import SimpleDataTable from '../../components/common/SimpleDataTable';
-import { AlertTriangle, CheckCircle, Clock, XCircle } from 'lucide-react';
+import { AlertTriangle, CheckCircle, ChevronLeft, Clock, Undo, XCircle } from 'lucide-react';
 import { IconButtonColors } from '../../../Style';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 const AssignedWorksMain = () => {
-  const navigate=useNavigate()
+    const navigate=useNavigate()
     const [selectedMember, setSelectedMember] = useState(null);
     const Rows= [
     {
@@ -566,10 +566,10 @@ return (
                 selectedMember && (
                     <Breadcrumbs >
                         <button
-                        className='hover:border-b text-sm border-blue-500'
+                        className='hover:bg-red-500 hover:text-white transition-all  border text-blue-700 text-base font-medium flex items-center  pr-2 rounded-lg'
                         onClick={handleBack}
                         >
-                            
+                            <ChevronLeft size={20}/>
                             Back</button>
                         <span className='text-gray-400 text-sm'>{selectedMember.name}</span>
                     </Breadcrumbs>
