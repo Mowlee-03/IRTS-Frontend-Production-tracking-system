@@ -7,6 +7,7 @@ import AccountProfileBtn from '../assets/AccountProfileBtn';
 import Notification from '../assets/Notification';
 import InProgressTable from '../productionUi/InProgressTable';
 import StoreTabs from '../StoreUi/Overview/StoreTabs';
+import FGtabs from '../fgUi/FGtabs';
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
   
@@ -83,6 +84,12 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
             '/store/bom-out'
           ].includes(location.pathname)&&(
             <StoreTabs/>
+          )
+         }
+
+         {
+          ["/fg/overview"].includes(location.pathname)&&(
+            <FGtabs/>
           )
          }
       </div>
