@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AccountProfileBtn from '../assets/AccountProfileBtn';
 import Notification from '../assets/Notification';
 import InProgressTable from '../productionUi/InProgressTable';
-import ProductionMetrics from '../StoreUi/Overview/MetricCards';
+import StoreTabs from '../StoreUi/Overview/StoreTabs';
 const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
   
@@ -27,6 +27,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
     { path: '/store/kitting-complete', title: 'Kitting Completed' },
     { path: '/store/bom-out', title: 'BOM OUT' },
     { path: '/store/workers-status', title: 'Store Staffs' },
+    { path: '/fg/overview', title: 'Finished Goods Performance Status' },
   ];
   
   const getHeading = () => {
@@ -81,7 +82,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
             '/store/kitting-complete',
             '/store/bom-out'
           ].includes(location.pathname)&&(
-            <ProductionMetrics/>
+            <StoreTabs/>
           )
          }
       </div>

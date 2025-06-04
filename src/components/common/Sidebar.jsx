@@ -52,6 +52,13 @@ const menuItems = {
       {icon:OverviewIcon,label:"Store-Overview",to:"/store/overview"},
       {icon:StoreStaffIcon,label:"Store Staffs",to:"/store/workers-status"},
     ]
+  },
+  fg:{
+    label:"FG",
+    icon:StoreMainIcon,
+    links:[
+      {icon:OverviewIcon,label:"FG Overview",to:"/fg/overview"}
+    ]
   }
   // Add more departments...
 };

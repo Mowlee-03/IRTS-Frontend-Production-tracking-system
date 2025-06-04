@@ -28,7 +28,9 @@ import KittingCompleted from '../pages/StorePages/KittingCompleted'
 import BomOutDetails from '../pages/StorePages/BomOutDetails'
 import AssignedWorksMain from '../pages/StorePages/AssignedWorksMain'
 import TaskDetails from '../pages/StorePages/TaskDetails'
-
+import FGMain from '../layout/FGMain'
+import FGoverView from '../pages/FG/FGoverView'
+ 
 
 
 const AppRouting = () => {
@@ -63,7 +65,7 @@ const AppRouting = () => {
           </Route>
 
           <Route path='store' element={<StoreMain/>}>
-          <Route index element={<Navigate to="overview" replace />} />
+            <Route index element={<Navigate to="overview" replace />} />
             <Route path='overview' element={<StoreOverviewPage/>}/> 
             <Route path='total/production_orders'  element={<TotalProductionOrdersForStore/>} />
             <Route path='pending/production_orders'  element={<PendingOrdersForStores/>} />
@@ -72,6 +74,11 @@ const AppRouting = () => {
             <Route path='bom-out'  element={<BomOutDetails/>} />
             <Route path='workers-status'  element={<AssignedWorksMain/>} />
             <Route path='task/details'  element={<TaskDetails/>} />
+          </Route>
+
+          <Route path='fg' element={<FGMain/>}> 
+            <Route index element={<Navigate to='overview' />} />
+            <Route path='overview' element={<FGoverView/>} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/admin/dashboard" />} />
