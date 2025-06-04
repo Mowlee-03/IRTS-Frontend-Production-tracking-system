@@ -53,7 +53,7 @@ const MainNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
           <h2 className="text-md md:text-xl font-medium">
             {getHeading()}
-            </h2>
+          </h2>
 
         </div>
         

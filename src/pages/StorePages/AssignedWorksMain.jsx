@@ -566,12 +566,12 @@ return (
                 selectedMember && (
                     <Breadcrumbs >
                         <button
-                        className='hover:bg-red-500 hover:text-white transition-all  border text-blue-700 text-base font-medium flex items-center  pr-2 rounded-lg'
+                        className='bg-red-500 text-white transition-all hover:bg-gray-50  border hover:text-blue-700 text-base font-medium flex items-center  pr-2 rounded-lg'
                         onClick={handleBack}
                         >
                             <ChevronLeft size={20}/>
                             Back</button>
-                        <span className='text-gray-400 text-sm'>{selectedMember.name}</span>
+                        <span className='text-gray-400 text-sm font-medium'>{selectedMember.name}</span>
                     </Breadcrumbs>
                 )
             }

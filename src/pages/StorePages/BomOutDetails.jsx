@@ -127,7 +127,7 @@ const BomOutDetails = () => {
                 {
                 field: 'itemName',
                 headerName: 'Item Name',
-                minWidth: 120,
+                minWidth: 200,
                 flex:1,
                 renderCell: (params) => params.value,
                 },
@@ -148,7 +148,7 @@ const BomOutDetails = () => {
                 {
                 field: 'bom',
                 headerName: 'BOM %',
-                minWidth: 120,
+                minWidth: 180,
                 flex:1,
                 renderCell: (params) => {
                     const value = Number(params.value.replace('%', ''));
@@ -196,7 +196,7 @@ const BomOutDetails = () => {
                 {
                 field: 'status',
                 headerName: 'Status',
-                minWidth: 120,
+                minWidth: 160,
                 flex:1,
                 renderCell: (params) => {
                     const status = params.value;
