@@ -22,9 +22,9 @@ const FGtabs = () => {
       title: "Partial FG REC",
       subtitle: "Partially received",
       value: "125",
-      bgColor: "bg-red-50",
-      iconColor: "#EF4444",
-      boxShadow: '0px 2px 10px 0px #EF44441F, 0px 20px 40px 0px #EF444426',
+      bgColor: "bg-orange-50",
+      iconColor: "#F59E0B",
+      boxShadow: '0px 2px 10px 0px #F59E0B26, 0px 20px 40px 0px #F59E0B1F',
       path:  "/store/pending/production_orders"
     },
     {
@@ -32,9 +32,9 @@ const FGtabs = () => {
       title: "Fully FG REC",
       subtitle: "Fully received",
       value: "230",
-      bgColor: "bg-yellow-50",
-      iconColor: "#F59E0B",
-      boxShadow:"0px 2px 10px 0px #F59E0B1F, 0px 20px 40px 0px #F59E0B26",
+      bgColor: "bg-green-50",
+      iconColor: "#22C55E",
+      boxShadow:"0px 2px 10px 0px #22C55E26, 0px 20px 40px 0px #22C55E1F",
       path: "/store/initial-kitting"
     },
     {
@@ -42,9 +42,9 @@ const FGtabs = () => {
       title: "Pending Qty",
       subtitle: "Awaiting receipt",
       value: "95",
-      bgColor: "bg-purple-50",
-      iconColor: "#D000FF",
-      boxShadow:" 0px 2px 10px 0px #D000FF1F ,0px 20px 40px 0px #D000FF26",
+      bgColor: "bg-red-50",
+      iconColor: "#EF4444",
+      boxShadow:" 0px 2px 10px 0px #EF444426 ,0px 20px 40px 0px #EF44441F",
       path: "/store/kitting-complete"
     },
     {
@@ -52,9 +52,9 @@ const FGtabs = () => {
       title: "FG Delivered",
       subtitle: "Completed delivery",
       value: "178",
-      bgColor: "bg-indigo-50",
-      iconColor: "#6366F1",
-      boxShadow:" 0px 2px 10px 0px #6366F11F,0px 20px 40px 0px #3FDFFF33",
+      bgColor: "bg-purple-50",
+      iconColor: "#D000FF",
+      boxShadow:" 0px 2px 10px 0px #D000FF26,0px 20px 40px 0px #D000FF1F",
       path: "/store/bom-out"
     },
   ]

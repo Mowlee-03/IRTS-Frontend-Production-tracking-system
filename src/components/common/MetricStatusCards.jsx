@@ -27,7 +27,7 @@ const MetricCard = ({ icon: Icon, title, subtitle, value, bgColor, iconColor, bo
               </h3>
 
                 <p className="text-xs 2xl-plus:text-sm text-gray-500">{subtitle}</p>
-                <p className="text-2xl 2xl-plus:text-3xl font-bold text-blue-600">{value}</p>
+                <p style={{color:iconColor}} className="text-2xl 2xl-plus:text-3xl font-bold ">{value}</p>
               </div>
             </div>
           </div>

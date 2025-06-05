@@ -19,6 +19,8 @@ import RolesManageIcon from '../../assets/sidebarIcons/RolesManageIcon.png'
 import StoreMainIcon from '../../assets/sidebarIcons/StoreMainIcon.png'
 import OverviewIcon from '../../assets/sidebarIcons/OverviewIcon.png'
 import StoreStaffIcon from '../../assets/sidebarIcons/StoreStaffIcon.png'
+import FGMainIcon from '../../assets/sidebarIcons/FGMainIcon.png'
+import FGOverviewIcon from '../../assets/sidebarIcons/FGOverviewIcon.png'
 import { logoutUser } from '../../Redux/Slice/LogoutSlice';
 import { useDispatch } from 'react-redux';
 
@@ -54,8 +56,8 @@ const menuItems = {
     ]
   },
   fg:{
-    label:"FG",
-    icon:StoreMainIcon,
+    label:"Finished Goods",
+    icon:FGMainIcon,
     links:[
       {icon:OverviewIcon,label:"FG Overview",to:"/fg/overview"}
     ]
