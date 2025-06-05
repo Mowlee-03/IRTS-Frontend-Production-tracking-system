@@ -43,6 +43,23 @@ const yearlyMonthlyData = [
       { month: "DEC", products: 220, value: 15500 },
     ],
   },
+  {
+    year: "2024",
+    monthly: [
+      { month: "JAN", products: 120, value: 1000 },
+      { month: "FEB", products: 150, value: 15000 },
+      { month: "MAR", products: 80, value: 2000 },
+      { month: "APR", products: 60, value: 5000 },
+      { month: "MAY", products: 80, value: 30000 },
+      { month: "JUN", products: 150, value: 3500 },
+      { month: "JUL", products: 120, value: 40000 },
+      { month: "AUG", products: 190, value: 45000 },
+      { month: "SEP", products: 200, value: 30000 },
+      { month: "OCT", products: 120, value: 2500 },
+      { month: "NOV", products: 400, value: 2000 },
+      { month: "DEC", products: 220, value: 1550 },
+    ],
+  },
 ];
 
 const MonthlyDeliveryStatusFG = () => {
@@ -105,6 +122,7 @@ const MonthlyDeliveryStatusFG = () => {
         },
     },
     y: {
+        beginAtZero: true,
         // grid: {
         // display: false,
         // },

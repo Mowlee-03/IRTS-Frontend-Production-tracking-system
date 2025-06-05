@@ -4,6 +4,7 @@ import { buttonstyle1, buttonstyle2 } from '../../../Style'
 import SafetyStockLevel from '../../components/StoreUi/Overview/SafetyStockLevel'
 import MaterialDetails from '../../components/StoreUi/Overview/MaterialDetails'
 import MonthlyDeliveryStatusFG from '../../components/fgUi/MonthlyDeliveryStatusFG'
+import ProductHeatmap from '../../components/fgUi/ProductDetailsChart'
 
 const FGoverView = () => {
   const [ViewPage,setViewPage]=useState('Overview')
@@ -117,7 +118,7 @@ const FGoverView = () => {
                         // bgcolor:"green"
                       }}
                       >
-                        
+                        <ProductHeatmap/>
                       </Grid>
 
                     </Grid>
